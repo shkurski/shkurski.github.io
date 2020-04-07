@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width">
     <style>
       html, body {
+	    font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
         position: relative;
         height: 100%;
         margin: 0;
@@ -14,10 +15,9 @@
       main {
         position: relative;
         top: 40%;
-        transform: translateY(-50%);
         text-align: center;
       }
-      h1 {
+      h1 {	    
         margin: 0;
         display: inline;
       }
@@ -28,15 +28,180 @@
       a:hover {
         text-decoration: underline;
       }
+	    table.cvTable {
+        /* display:none; */
+        margin-left:5%;
+        max-width: 800px;
+        border-style: hidden;
+        border-collapse: collapse;
+        overflow: hidden;
+        display: flex;
+	    }
+      table.cvTable td {
+        padding-bottom: 5px;
+        vertical-align: top;
+        text-align: left;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        flex: 100 1 auto;
+      }
+      table.cvTable td.spacer {
+        background-color:green;
+        max-width: 6%;
+        width: 6%;
+        flex: 1 100 auto;
+      }
+      table.cvTable tr.sectionStart td {
+        padding-bottom: 15px;
+      }
+      table.cvTable tr.sectionEnd td {
+        padding-bottom: 20px;
+      }
+      .tbl {
+        max-width: 800px;
+        display: flex;
+        flex-direction: column;
+      }
+      
+      .row {
+        display: flex;
+        min-height: 50px;
+      }
+      
+      .cell {
+        flex: 4;
+        border: 1px solid red;
+      }
+      
+      .cell:nth-child(1) {
+        flex: 1;
+      }
+      
+      .cell:nth-child(2) {
+        flex: 2;
+      }
+      
+      .cell.span4-5 {
+        flex: 8 12px;                    /*  match 2 border/padding  */
+      }
+      
+      .cell.span3-4 {
+        flex: 8 12px;                    /*  match 2 border/padding  */
+      }
+      
+      .cell.span3-5 {
+        flex: 12 24px;                   /*  match 3 border/padding  */
+      }
+      
+      .row:first-child .cell {
+        display: flex;
+        justify-content: left;           /*  center horiz. */
+        align-items: up;             /*  center vert. */
+      }
+      
+      .row .cell {
+        padding: 5px;
+        box-sizing: border-box;
+      }
     </style>
   </head>
   <body>
     <main>
       <h1>Dmitri Shkurski</h1>
       <br>
-      <a href="mailto:dmitri@shkur.ski" title="dmitri@shkur.ski">dmitri@shkur.ski</a>
-      <br>
-      <a href="tel:+380999628959" title="+380 99 962 89 59">+380 99 962 89 59</a>
+      <a href="mailto:dmitri@shkur.ski" title="dmitri@shkur.ski">&#x2709 dmitri@shkur.ski</a>
+	    <br><br>
+    <div class="tbl">
+		  <div class="row">
+        <div class="cell"><b>Summary</b></div>
+      </div>
+      <div class="row">
+        <div class="cell" style="background-color:green;"></div>
+        <div class="cell" colspan="5">Computer engineer with 8+ years of professional experience, solid knowledge of C/C++, x86 assembly and binary code analysis. Participated in development of code coverage / analysis tools, malware unpackers and deobfuscators. Have consistent understanding of concepts on various abstraction levels: from low-level development and optimization to general software design principles.</div>
+      </div>
+      <div class="row"><div class="cell" colspan="7"></div></div>
+      <div class="row">
+        <div class="cell" colspan="7"><b>Skills</b></div>
+      </div>
+      <div class="row">
+        <div class="cell" style="background-color:green;"></div>
+        <div class="cell" colspan="3">
+          &#8226; x86 assembly, C<br>
+          &#8226; C++<br>
+          &#8226; STL, Qt Core, Boost<br>
+          &#8226; PE, COFF<br>
+          &#8226; WinNT (ring3), WinAPI<br>
+          &#8226; IDA Pro<br>
+          &#8226; reverse engineering and low-level debugging<br>
+          &#8226; application security<br>
+        </div>
+        <div style="min-width: 10px;"></div>
+        <div class="cell">
+          &#8226; OOP, OOD, design patterns<br>
+          &#8226; asynchronous programming<br>
+          &#8226; network programming<br>
+          &#8226; algorightms and data structures<br>
+          &#8226; control flow graph analysis<br>
+          &#8226; compiler theory basics<br>
+          &#8226; knowledge of malware detection methods<br>
+          &#8226; development experience for Windows, MacOS and Linux<br>
+        </div>
+      </div>
+      <div class="row"><div class="cell" colspan="7"></div></div>
+      <div class="row">
+        <div class="cell" colspan="7"><b>Experience</b></div>
+      </div>
+      <div class="row">
+        <div class="cell" colspan="2">
+          <b>[2019 .. ]</b><br>
+          Software Engineer, Contractor<br>
+          @ Logitech
+        </div>
+        <div></div>
+        <div class="cell" colspan="4">
+          &#8226; design, implementation and maintenance of a low-level device controller library which purpose is the interaction with various hardware products via unified interface;<br>
+          &#8226; worked on the design and implemented the key back-end part to support a transactional migration process between significantly diverged software versions;<br>
+          &#8226; ported a firmware updater from Python to a native C++ application with support of Windows, MacOS and Linux (ChromeOS) systems.
+        </div>
+      </div>
+      <div class="row">
+        <div class="cell" colspan="2">
+          <b>[2017 .. 2019]</b><br>
+          Software Engineer, Reverse Engineer<br>
+          @ COMODO Group
+        </div>
+        <div></div>
+        <div class="cell" colspan="4">
+          &#8226; participated in the development of antiviral scan engine (malware unpacker, virtual machine, dynamic code translator);<br>
+          &#8226; reverse engineering, design and implementation of a low-level system monitoring library;<br>
+          &#8226; worked closely with the security team on detecting an attempts to exploit security vulnerabilities;<br>
+          &#8226; worked on a runtime unpacker of Windows executable modules.
+        </div>
+      </div>
+      <div class="row">
+        <div class="cell" colspan="2">
+          <b>[2014 .. 2016]</b><br>
+          Independent Contractor, Freelancer<br>
+        </div>
+        <div></div>
+        <div class="cell" colspan="4">
+          &#8226; dozens of projects at VWorker, Elance, Freelancer.com; mostly in system programming and security fields;<br>
+          &#8226; algorithmic programming; participated in ACM/ICPC contests;<br>
+        </div>
+      </div>
+      <div class="row">
+        <div class="cell" colspan="2">
+          <b>[2012 .. 2014]</b><br>
+          Software Engineer<br>
+          @ HeuLab
+        </div>
+        <div></div>
+        <div class="cell" colspan="4">
+          &#8226; development of a network traffic analysis / filtration system, including implementation of a WinSock/LSP proxifier; desined and implemented the entire client-side part of Parental Control System for Windows.
+        </div>
+      </div>
+      <div class="sectionEnd"><div colspan="7"/></div>
+    </div>
     </main>
   </body>
 </html>
