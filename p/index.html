@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>pastebin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+  <meta name="description" content="">
+
+  <!--
+  <link rel="icon" href="static/img/favicon.ico" />
+  <link rel="apple-touch-icon" href="static/img/apple-touch-icon.png" />
+  -->
+  <link href="static/css/style.min.css?1.0.5" rel="stylesheet" />
+
+</head>
+
+<body>
+
+  <div id="app" :class="{ 'reader-mode-bg': readerMode}">
+
+    <noscript class="container noscript">
+      <p>This pastebin uses client-side encryption. Therefore, it needs JavaScript enabled.</p>
+      <p>It seems like your browser doesn't have JavaScript enable.</p>
+      <p>Please enable JavaScript for this website or use a JavaScript-capable web browser.</p>
+    </noscript>
+
+    <div class="container-md" id="wrap-content">
+
+      <p :class="'alert alert-' + msg.type" v-for="msg in messages">
+        <a class="close" data-dismiss="alert" href="#" @click.prevent="$event.target.parentNode.remove()">×</a>
+        <strong class="title" v-if="msg.title" v-html="msg.title"></strong>
+        <span class="message" v-html="msg.content"></span>
+        <a v-if="msg.action.message" href="#"
+          @click.once.prevent="msg.action.callback($event)">{% msg.action.message %}</a>
+      </p>
+
+      <div id='main'><form class="well" method="post" action="/paste/create" @submit.prevent="encryptAndSendPaste()">
+  <div class="d-flex justify-content-between">
+
+    <!--
+    <div>
+      <div class="file-upload" v-if="support.fileUpload">
+        <label type="button" class="btn btn-primary upload-file"
+          :disabled="isUploading">{% isUploading ? 'Uploading...': 'Upload file' %}
+          <input type="file" class="hide-upload" id="file-upload" @change="handleUpload($event.target.files)">
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group select-date paste-option">
+      <div class="input-group">
+        <select id="expiration" name="expiration" class="custom-select" v-model="newPaste.expiration">
+          <option value="burn_after_reading">Burn after reading</option>
+          <option selected value="1_day">Expire in 1 day</option>
+          <option value="1_month">Expire in 1 month</option>
+          <option value="never">Never expire</option>
+        </select>
+        <div class="input-group-append">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+    </div>
+    -->
+
+  </div>
+
+  <div class="pre-wrapper">
+
+    <div class="progress" v-show="isLoading">
+      <div class="progress-bar progress-bar-striped" role="progressbar"></div>
+    </div>
+
+    <textarea rows="20" style="width:100%;" class="form-control" id="content" name="content" autofocus
+      @keydown.ctrl.enter="encryptAndSendPaste()"></textarea>
+
+    <div class="paste-options">
+      <h6>Optional fields (<em>not</em> encrypted):</h6>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Title</span>
+        </div>
+        <input type="text" class="form-control paste-excerpt" name="paste-excerpt"
+          v-model="newPaste.title" maxlength="60">
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- <div class="form-group select-date paste-option down" v-if="displayBottomToolBar">
+    <div class="input-group">
+      <select id="expiration" name="expiration" class="custom-select" v-model="newPaste.expiration">
+        <option value="burn_after_reading">Burn after reading</option>
+        <option selected value="1_day">Expire in 1 day</option>
+        <option value="1_month">Expire in 1 month</option>
+        <option value="never">Never expire</option>
+      </select>
+      <div class="input-group-append">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </div> -->
+
+</form>
+
+
+</div>
+    </div>
+
+  </div>
+
+  <script src="static/js/main.min.js?1.0.5"></script>
+  <script src="https://togetherjs.com/togetherjs-min.js"></script>
+
+  <script type="text/javascript">
+    zerobin.max_size = 1024000;
+  </script>
+
+  <p id="alert-template" class="alert-primary">
+    <a class="close" data-dismiss="alert" href="#">×</a>
+    <strong class="title"></strong>
+    <span class="message"></span>
+  </p>
+
+  <button onclick="TogetherJS(this); return false;">Start TogetherJS</button>
+
+</body>
+
+</html>

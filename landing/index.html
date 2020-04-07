@@ -1,0 +1,363 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Chronocatch</title>
+    <meta name="viewport" content="width=device-width">
+    <style>
+      html, body {
+	    font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+        position: relative;
+        height: 100%;
+        -webkit-overflow-scrolling: touch;
+        overflow: auto;
+        background-color: white;
+        border: none;
+        margin: 0px;
+        padding: 0px;
+      }
+      .input-email {
+          background-color: #1f1f1f;
+          color: rgba(210, 210, 210, 0.85);
+          margin-top: 10px;
+          border: 1px solid rgba(190, 190, 190, 0.5);
+          border-radius: 0;
+          font-size: 20px;
+          line-height: 30px;
+          position: relative;
+          font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+          outline: none;
+          text-align: start;
+          height: 48px;
+          width: 30%;
+          letter-spacing: 3px;          
+      }
+      .button {
+            display: inline-block;
+            user-select: none;
+            height: 36px;
+            position: relative;
+            padding: 15.5px 28px 0;
+            line-height: 1;
+            text-align: center;
+            background: #50b0e5;
+            border-radius: 2px;
+            font-size: 20px;
+      }
+      .flex-container {
+          border: none;
+          padding: 0px;
+          margin: 0px;
+          background-color: white;
+          display: flex;
+          flex-direction: row;
+          overflow: hidden;
+      }
+      .flex-item {
+          /* border: 1px solid red; */
+          border: none;
+          padding: 0px;
+          margin: 0px;
+          background-color: white;
+          color: black;
+          display: block;
+          overflow: hidden;
+      }
+      .float-container {
+        display: block;
+        border: none;
+        padding: 0px;
+      }
+      .float-item {
+        float: left;
+        padding: 0px;
+        margin: 0px;
+        border: none;
+      }
+      .header {
+        background-color: #1f1f1f;
+        color: white;
+        text-align: center;
+        border-image-width: 0;
+      }
+      .video-container {
+        max-width: 1200px;
+        border: none;
+        background-color: #1f1f1f;
+        display: inline-flex;
+        position: relative;
+      }
+      .separator{
+        display:block;
+        width:42px;
+        height:6px;
+        box-shadow:inset 0 4px 0 0 #cacaca;
+        margin:84px auto 24px;
+      }
+      .video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: left top;
+      }
+    </style>
+    <script id="mcjs">
+      !function(c,h,i,m,p){
+          m=c.createElement(h),
+          p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)
+      } (document,"script","https://chimpstatic.com/mcjs-connected/js/users/eee41676c4d54bd19d02b42b0/d88c7136af61ccef36eb1621a.js");
+    </script>
+  </head>
+  
+  <body id="body">
+    <div>
+        <div class="flex-container" style="background-color: #1e1e1e; height: 400px;">
+          <div class="flex-item" style="flex: 1 999999 0; width: 20%; min-width: 0; overflow:hidden; background-color: white !important;
+          background:url(media/corner-up.png) bottom right no-repeat;">
+          </div>
+          <div class="flex-item" style="flex: 9999999 0 auto; width: 60%; max-width: 1200px; background-color: #1e1e1e;">
+            <div style="text-align: center; color:white; margin-top: 2%; letter-spacing: 5px; font-size: 20px;">CHRONOCATCH</div>
+            <div style="text-align: center; color:white; margin-top: 7%; letter-spacing: 8px; font-size: 30px;">
+                TIME MACHINE <br> FOR YOUR ON-SCREEN EXPERIENCE
+            </div>
+            <div style="text-align: center; color:white; margin-top: 1%;">
+                <input id="email" class="input-email" autofocus="true" type="email" spellcheck="false" placeholder="ENTER EMAIL"/>
+                <div id="subscribe" class="button">
+                    SUBSCRIBE
+                </div>
+            </div>
+          </div>
+          <div class="flex-item" style="flex: 1 999999 0; width: 20%; min-width: 0; overflow:hidden; background-color: #1e1e1e;">
+          </div>
+        </div>
+    </div>
+
+    <div>
+      <div class="flex-container" style="background-color: white;">
+        <div class="flex-item" style="flex: 1 999999 0; width: 20%; min-width: 0; text-align: right;">
+        </div>
+        <div class="flex-item" style="flex: 9999999 0 auto; width: 60%; max-width: 1200px;">
+            <div class="video-container">
+                <video class="video" preload="auto" poster="media/demo-preview.png" playsinline autoplay loop muted>
+                  <source id="demo" src="media/landing-demo4.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+        <div class="flex-item" style="flex: 1 999999 0; width: 20%; min-width: 0; background-color: #1e1e1e;">
+            <div style="display: block; width: 100%; height: 100%; background:url(media/corner2-1.png) bottom left no-repeat;">
+            </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div>
+        <div class="flex-container" style="background-color: white;">
+          <div class="flex-item" style="flex: 4.6 0 auto; width: 0.05%; min-width: 0; overflow:hidden;">
+          </div>
+
+          <div class="flex-item" style="flex: 1 0 auto; width: 99.86%; max-width: 1396px;">            
+          </div>
+
+          <div class="flex-item" style="flex: 4.6 0 auto; width: 0.09%; min-width: 0; overflow:hidden;">
+            <svg width="100%" viewBox="0 0 310 270" preserveAspectRatio="none" style="display: block">
+                <polygon points="0,0 310,0 310,270" style="fill:#1e1e1e;stroke:none;"/>
+            </svg>
+          </div>
+        </div>
+    </div>
+
+    <div>
+        <div class="flex-container" style="background-color: white;">
+          <div class="flex-item" style="flex: 4.6 0 auto; width: 0.05%; min-width: 0; overflow:hidden;">
+          </div>
+
+          <div class="flex-item" style="flex: 1 0 auto; width: 99.86%; max-width: 1396px;">
+            <div class="separator"></div>
+            <div class="flex-container">
+                <div class="flex-item" style="flex: 1 2 0; width: 49%; min-width: 0;">
+                </div>
+                <div class="flex-item" style="flex: 2 1 auto; width: 2%; max-width: 1200px;">
+                    <div style="margin-top: 4%; width: 100%; text-align: center;">
+                        <h2>YOUR PERSONAL TIME MACHINE</h2>
+                    </div>
+                    <div style="margin-top: 4%; width: 100%; font-size: 18px; text-align: left;">
+                        <p>
+                        Chronocatch is not just another productivity tool. It reshapes the way you multitask and access information.
+                        </p>
+                        <p>
+                        No need to remember where things are when you need them.
+                        If you’ve seen something on screen once, you can get it back instantly. No more losing focus while wading
+                        through tabs, messages, or emails.
+                        </p>
+                        <p>
+                        What used to require minutes will now take seconds.
+                        </p>
+                    </div>
+                </div>
+                <div class="flex-item" style="flex: 1 2 0; width: 49%; min-width: 0;">
+                </div>
+              </div>
+          </div>
+
+          <div class="flex-item" style="flex: 4.6 0 auto; width: 0.09%; min-width: 0; overflow:hidden;">
+          </div>
+        </div>
+    </div>
+
+
+    <div>
+        <div class="flex-container" style="background-color: white; margin-top: 10%;">
+          <div class="flex-item" style="flex: 1 999999 0; width: 20%; min-width: 0; text-align: right;">
+          </div>
+          <div class="flex-item" style="flex: 9999999 0 auto; width: 60%; max-width: 1200px;">
+            <div class="float-container" style="width: 100%; height: 100%;">
+                <div class="float-item" style="width: 50%; min-width: 375px; margin-top: 5%;">
+                    <img src="media/interface.png" style="display: block; width: 100%; object-fit: cover;"/>
+                </div>
+                <div class="float-item" style="width: 50%; min-width: 375px; text-align: left;">
+                    <div style="width: 95%; overflow:hidden; margin-left: 5%;">
+                        <h2>KEEP YOUR HABITS INTACT</h2>
+                        <div style="font-size: 18px;">
+                            <p>We packed a unique combination of technology into an application with
+                            a very simple interface, effectively hiding the complexity behind a search box
+                            and a timeline.</p>
+                            <p>You won’t waste time on learning how to use Chronocatch. Being an evolution of
+                            search engines integrated in modern operating systems, Chronocatch feels familiar
+                            from the first moments of use.</p>
+                            <p>It's simple and straighforward.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <div class="flex-item" style="flex: 1 999999 0; width: 20%; min-width: 0;">
+          </div>
+        </div>
+    </div>
+
+    <div>
+        <div class="flex-container" style="background-color: white; height: 149px; margin-top: 5%;">
+          <div class="flex-item" style="flex: 1 999999 0; width: 20%; min-width: 0; overflow:hidden;
+                                        background-color: white !important; text-align: left; direction: rtl;">
+                <img src="media/corner0-22.png"/>
+          </div>
+          <div class="flex-item" style="flex: 9999999 0 auto; width: 60%; max-width: 1200px;">
+          </div>
+          <div class="flex-item" style="flex: 1 999999 0; width: 20%; min-width: 0; overflow:hidden;">
+          </div>
+        </div>
+    </div>
+
+    <div>
+        <div class="flex-container" style="background-color: #1e1e1e; height: 380px;">
+          <div class="flex-item" style="flex: 1 999999 0; width: 20%; min-width: 0; text-align: right; background-color: #1e1e1e;">
+          </div>
+          <div class="flex-item" style="flex: 9999999 0 auto; width: 60%; max-width: 1200px; background-color: #1e1e1e;">
+            <div class="float-container" style="width: 100%; height: 100%;">
+                <div class="float-item" style="width: 50%; min-width: 375px; text-align: left;">
+                    <div style="width: 95%; overflow:hidden; margin-left: 5%; margin-top: 15%; color: white;">
+                        <h2>DATA PRIVACY</h2>
+                        <div style="font-size: 18px;">
+                            <p>
+                            Chronocatch doesn't track your activity. Your data stays yours.</p>
+                            <p>The timeline is stored locally in a storage protected by the operating system
+                            and doesn't go outside of your computer. Full data encryption is available optionally.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="float-item" style="width: 50%; min-width: 375px; margin-bottom: 20%; margin-top: 5%;">
+                </div>                
+            </div>
+          </div>
+          <div class="flex-item" style="flex: 1 999999 0; width: 20%; min-width: 0; background-color: #1e1e1e;">
+          </div>
+        </div>
+    </div>
+
+    <div>
+        <div class="flex-container" style="background-color: white; height: 149px;">
+            <div class="flex-item" style="flex: 1 999999 0; width: 20%; min-width: 0; overflow:hidden;
+                                          background-color: white !important;">
+            </div>
+            <div class="flex-item" style="flex: 9999999 0 auto; width: 60%; max-width: 1200px;">
+            </div>
+            <div class="flex-item" style="flex: 1 999999 0; width: 20%; min-width: 0; overflow:hidden; text-align: right;">
+                <img src="media/corner-022-right-bottom.png"/>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <div class="flex-container" style="background-color: white;">
+          <div class="flex-item" style="flex: 1 999999 0; width: 20%; min-width: 0; text-align: right;">
+          </div>
+          <div class="flex-item" style="flex: 9999999 0 auto; width: 60%; max-width: 1200px;">
+            <div class="float-container" style="width: 100%; height: 100%;">
+                <div class="float-item" style="width: 50%; min-width: 375px;">
+                    <div style="display: block; text-align: right; width: 100%;">
+                        <img src="media/integrations2.png" style="display: inline-block; width: 375px; margin-right: 5%;"/>
+                    </div>                    
+                </div>
+                <div class="float-item" style="width: 50%; min-width: 375px; text-align: left;">
+                    <div style="width: 95%; overflow:hidden; margin-left: 5%;">
+                        <h2>INTEGRATIONS</h2>
+                        <div style="font-size: 18px;">
+                            Text text
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <div class="flex-item" style="flex: 1 999999 0; width: 20%; min-width: 0;">
+          </div>
+        </div>
+    </div>
+
+    <div>
+        <div class="flex-container" style="background-color: white; height: 149px;">
+          <div class="flex-item" style="flex: 1 999999 0; width: 20%; min-width: 0; overflow:hidden;
+                                        background-color: white !important; text-align: left; direction: rtl;">
+                <img src="media/corner0-22.png"/>
+          </div>
+          <div class="flex-item" style="flex: 9999999 0 auto; width: 60%; max-width: 1200px;">
+          </div>
+          <div class="flex-item" style="flex: 1 999999 0; width: 20%; min-width: 0; overflow:hidden;">
+          </div>
+        </div>
+    </div>
+
+    <div>
+        <div class="flex-container" style="background-color: #1e1e1e; height: 480px;">
+          <div class="flex-item" style="flex: 1 999999 0; width: 20%; min-width: 0; text-align: right; background-color: #1e1e1e;">
+          </div>
+          <div class="flex-item" style="flex: 9999999 0 auto; width: 60%; max-width: 1200px; background-color: #1e1e1e;">
+            <div class="float-container" style="width: 100%; height: 100%;">
+                <div class="float-item" style="width: 50%; min-width: 375px; text-align: left;">
+                    <div style="width: 95%; overflow:hidden; margin-left: 5%; margin-top: 15%; color: white;">
+                        <h2>SIGN UP FOR EARLY ACCESS</h2>
+                        <div style="font-size: 18px;">
+                            <p>
+                                Our early access program includes access to beta releases of Chronocatch.
+                            </p>
+                        </div>
+                        <div style="display: block; width: 100%; height: 100%; text-align: left; color:white; margin-top: 10%;">
+                            <input id="email2" class="input-email" autofocus="true" type="email" spellcheck="false" placeholder="ENTER EMAIL"
+                                   style="margin-top: 0px; width: 70%;"/>
+                            <div id="signup" class="button">
+                                SIGN UP
+                            </div>
+                        </div>            
+                    </div>
+                </div>
+                <div class="float-item" style="width: 50%; min-width: 375px; margin-bottom: 20%; margin-top: 5%;">
+                </div>                
+            </div>
+          </div>
+          <div class="flex-item" style="flex: 1 999999 0; width: 20%; min-width: 0; background-color: #1e1e1e;">
+          </div>
+        </div>
+    </div>
+
+  </body>
+</html>
