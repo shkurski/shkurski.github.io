@@ -28,35 +28,7 @@
       a:hover {
         text-decoration: underline;
       }
-	    table.cvTable {
-        /* display:none; */
-        margin-left:5%;
-        max-width: 800px;
-        border-style: hidden;
-        border-collapse: collapse;
-        overflow: hidden;
-        display: flex;
-	    }
-      table.cvTable td {
-        padding-bottom: 5px;
-        vertical-align: top;
-        text-align: left;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        flex: 100 1 auto;
-      }
-      table.cvTable td.spacer {
-        background-color:green;
-        max-width: 6%;
-        width: 6%;
-        flex: 1 100 auto;
-      }
-      table.cvTable tr.sectionStart td {
-        padding-bottom: 15px;
-      }
-      table.cvTable tr.sectionEnd td {
-        padding-bottom: 20px;
-      }
+      
       .tbl {
         max-width: 800px;
         display: flex;
@@ -66,21 +38,19 @@
       .row {
         display: flex;
         min-height: 50px;
+        flex-direction: row;
       }
       
       .cell {
-        flex: 4;
+        flex: 20 0;
         border: 1px solid red;
       }
-      
-      .cell:nth-child(1) {
-        flex: 1;
+
+      .cell.pad {
+        flex: 1 5;
+        background-color: green;
       }
-      
-      .cell:nth-child(2) {
-        flex: 2;
-      }
-      
+            
       .cell.span4-5 {
         flex: 8 12px;                    /*  match 2 border/padding  */
       }
@@ -93,10 +63,11 @@
         flex: 12 24px;                   /*  match 3 border/padding  */
       }
       
-      .row:first-child .cell {
+      .row .cell {
         display: flex;
         justify-content: left;           /*  center horiz. */
-        align-items: up;             /*  center vert. */
+        align-items: up;                 /*  center vert. */
+        text-align: left;
       }
       
       .row .cell {
@@ -116,7 +87,7 @@
         <div class="cell"><b>Summary</b></div>
       </div>
       <div class="row">
-        <div class="cell" style="background-color:green;"></div>
+        <div class="cell pad"></div>
         <div class="cell" colspan="5">Computer engineer with 8+ years of professional experience, solid knowledge of C/C++, x86 assembly and binary code analysis. Participated in development of code coverage / analysis tools, malware unpackers and deobfuscators. Have consistent understanding of concepts on various abstraction levels: from low-level development and optimization to general software design principles.</div>
       </div>
       <div class="row"><div class="cell" colspan="7"></div></div>
@@ -124,7 +95,7 @@
         <div class="cell" colspan="7"><b>Skills</b></div>
       </div>
       <div class="row">
-        <div class="cell" style="background-color:green;"></div>
+        <div class="cell pad"></div>
         <div class="cell" colspan="3">
           &#8226; x86 assembly, C<br>
           &#8226; C++<br>
