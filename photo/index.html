@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <style>
+    * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container {
+  padding: 40px 5%;
+}
+
+.heading-text {
+  margin-bottom: 2rem;
+  font-size: 2rem;
+}
+
+.heading-text span {
+  font-weight: 100;
+}
+
+.image-gallery {
+  /* Mobile first */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.image-gallery .column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.image-item img {
+  width: 100%;
+  border-radius: 5px;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media only screen and (min-width: 768px) {
+  .image-gallery {
+    flex-direction: row;
+  }
+}
+
+.image-item {
+  position: relative;
+}
+
+
+  </style>
+  <body>
+    <div class="container">
+      <div class="image-gallery">
+        <div class="column">
+          <div class="image-item"><img src="img/1.jpg" alt="" /></div>
+          <div class="image-item"><img src="img/2.jpg" alt="" /></div>
+          <div class="image-item"><img src="img/3.jpg" alt="" /></div>
+        </div>
+        <div class="column">
+          <div class="image-item"><img src="img/4.jpg" alt="" /></div>
+          <div class="image-item"><img src="img/11.jpg" alt="" /></div>
+          <div class="image-item"><img src="img/15.jpg" alt="" /></div>
+        </div>
+        <div class="column">
+          <div class="image-item"><img src="img/12.jpg" alt="" /></div>
+          <div class="image-item"><img src="img/13.jpg" alt="" /></div>
+          <div class="image-item"><img src="img/14.jpg" alt="" /></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
