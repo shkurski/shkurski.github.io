@@ -15,10 +15,11 @@
         overflow: auto;
       }      
       .main {
-        top: 4%;
+        top: 35%;
         position: relative;
         text-align: center;
         padding-left: calc(100vw - 100%);
+        transform: translateY(-50%);
       }
       h1 {
         margin: 0;
@@ -77,133 +78,18 @@
   <body id="body">
     <div class="main" id="main">
       <img src="photo.jpg" class="photo" alt="Photo">
-      <h1>Dima Shkurski</h1>
+      <h1>Dmitri Shkurski</h1>
       <div id="navigation" style="margin-left: 2%; margin-right: 2%;">
         <ul>
           software engineer, entrepreneur, founder @ <li><a href="https://chronocatch.com" id="nav_proj">chronocatch</a></li> (<a href="https://shkur.ski/chronocatch" id="nav_proj">join me</a>)
           <br><br>
           <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/dshkurski" title="Twitter"><img src="icon-twitter.svg" alt="Twitter" style="width: 2em; height: 2em;"/></a>
           <a href="mailto:dmitri@shkur.ski" title="dmitri@shkur.ski"><img src="icon-email.svg" alt="Email" style="width: 2em; height: 2em; margin-left: 1.7em;"/></a>
-          <a href="https://shkur.ski/photo" title="Photos"><img src="icon-camera.svg" alt="Photos" style="width: 2em; height: 2em; margin-left: 1.7em;"/></a>          
+          <a href="https://shkur.ski/photo" title="Photos"><img src="icon-camera.svg" alt="Photos" style="width: 2em; height: 2em; margin-left: 1.7em;"/></a>
+          <a href="https://shkur.ski/cv" title="Photos"><img src="icon-cv.svg" alt="Photos" style="width: 2em; height: 2em; margin-left: 1.7em;"/></a>
         </ul>
       </div>
-      <br>
-      <table class="cvTable" id="cvTable">
-      <col style="width:2%">
-      <col style="width:4%">
-      <col style="width:12%">
-      <col style="width:5%">
-      <col style="width:13%">
-      <col style="width:4%">
-      <col style="width:50%">
-      <col style="width:10%">
-		  <tr class="sectionStart">
-        <td/><td colspan="5"></td>
-        <td colspan="2" style="text-align:right;padding-right: 1em;"></td>
-      </tr>
-      <tr class="sectionEnd">
-        <td/><td/>
-        <td colspan="6">Software engineer with 12+ years of professional experience. Have consistent understanding of concepts on various abstraction levels: from low-level development and optimization to general software design principles. Strive for simple and quality solutions delivered on time. Spent most of the career working remotely.</td>
-      </tr>
-      <tr><td colspan="8"/></tr>
-      <tr class="sectionStart">
-        <td/><td colspan="7"><b>Skills</b></td>
-      </tr>
-      <tr class="sectionEnd">
-        <td/><td/>
-        <td colspan="3">
-          &#8226; C++, Rust<br>
-          &#8226; x86 assembly, C<br>
-          &#8226; Python, JS/TS<br>
-          &#8226; STL, Qt Core, Boost<br>
-          &#8226; WinNT, WinAPI<br>
-          &#8226; IDA Pro<br>
-          &#8226; reverse engineering and low-level debugging<br>
-          &#8226; application security<br>
-        </td>
-        <td/>
-        <td>
-          &#8226; asynchronous programming<br>
-          &#8226; network programming<br>
-          &#8226; algorightmic programming<br>
-          &#8226; control flow graph analysis<br>
-          &#8226; applied compiler theory<br>
-          &#8226; development experience for Windows, MacOS and Linux<br></td>
-        <td/>
-      </tr>
-      <tr class="sectionStart">
-        <td/><td colspan="7"><b>Experience</b></td>
-      </tr>
-      <tr class="sectionEnd">
-        <td/>
-        <td colspan="2">
-          <b>[2019 .. ]</b><br>
-          Software Engineer<br>
-          @ Logitech
-        </td>
-        <td/>
-        <td colspan="4">
-          &#8226; owning the client-side backend for Logitech Tune (Windows/macOS desktop application); participate in decision making on API, system architecture and implementation details, while being a point of contact for technical questions and communicating with the outside vendors / internal teams;<br>
-          &#8226; design, implementation and maintenance of a low-level device controller library which purpose is the interaction with various hardware products via unified interface;<br>
-          &#8226; worked on the design and implemented the key back-end part to support a transactional migration process between significantly diverged software versions;<br>
-          &#8226; ported a firmware updater from Python to a native C++ application with support of Windows, MacOS and Linux (ChromeOS) systems.
-        </td>
-      </tr>
-      <tr class="sectionEnd">
-        <td/>
-        <td colspan="2">
-          <b>[2021]</b><br>
-          Software Engineer<br>
-          @ Synth (YC S20)
-        </td>
-        <td/>
-        <td colspan="4">
-          &#8226; joined the company as a first employee after the seed round;<br>
-          &#8226; as a Rust engineer, worked on the core part of Synth and owned multiple subprojects (such as testing the data generation engine, error handling, etc.);<br>
-          &#8226; worked directly with the founding team and taken part in decision making on engineering, market research and strategy.
-        </td>
-      </tr>
-      <tr class="sectionEnd">
-        <td/>
-        <td colspan="2">
-          <b>[2017 .. 2019]</b><br>
-          Software Engineer, Reverse Engineer<br>
-          @ COMODO Group
-        </td>
-        <td/>
-        <td colspan="4">
-          &#8226; participated in the development of antiviral scan engine (malware unpacker, virtual machine, dynamic code translator);<br>
-          &#8226; reverse engineering, design and implementation of a low-level system monitoring library;<br>
-          &#8226; worked closely with the security team on detecting attempts to exploit security vulnerabilities;<br>
-          &#8226; worked on a runtime unpacker of Windows executable modules.
-        </td>
-      </tr>
-      <tr class="sectionEnd">
-        <td/>
-        <td colspan="2">
-          <b>[2014 .. 2016]</b><br>
-          Independent Contractor, Freelancer<br>
-        </td>
-        <td/>
-        <td colspan="4">
-          &#8226; dozens of projects at VWorker, Elance, Freelancer.com; mostly in system programming and security fields;<br>
-          &#8226; algorithmic programming; participated in ACM/ICPC contests;<br>
-        </td>
-      </tr>
-      <tr class="sectionEnd">
-        <td/>
-        <td colspan="2">
-          <b>[2012 .. 2014]</b><br>
-          Software Engineer<br>
-          @ HeuLab
-        </td>
-        <td/>
-        <td colspan="4">
-          &#8226; development of a network traffic analysis / filtration system, including implementation of a WinSock/LSP proxifier; desined and implemented the entire client-side part of Parental Control System for Windows.
-        </td>
-      </tr>
-      <tr class="sectionEnd"><td colspan="8"/></tr>
-      </table>
     </div>
   </body>
+
 </html>
