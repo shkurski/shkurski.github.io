@@ -5,86 +5,25 @@
     <title>Dima Shkurski</title>
     <meta name="viewport" content="width=device-width">
     <style>
-      html, body {
-	      font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
-        position: relative;
-        height: 100%;
-        margin: 0;
-        padding: 0;
-        -webkit-overflow-scrolling: touch;
-        overflow: auto;
-        font-size: 16px;
-      }      
-      .main {
-        top: 35%;
-        position: relative;
-        text-align: center;
-        padding-left: calc(100vw - 100%);
-        transform: translateY(-50%);
-      }
-      h1 {
-        margin: 0;
-        display: inline;
-      }
-      a, a:visited {
-        vertical-align: top;
-        color: blue;
-        text-decoration: none;
-      }
-      a:hover {
-        text-decoration: underline;
-      }
-	    table.cvTable {                
-        max-height: 10px;
-        height: 10px;
-        margin-left: auto;
-        margin-right: auto;
-        max-width: 800px;
-        border-style: hidden;
-        border-collapse: collapse;
-        table-layout: fixed;
-	    }
-      table.cvTable td {
-        padding-bottom: 5px;
-        vertical-align: top;
-        text-align: left;
-      }
-      table.cvTable tr.sectionStart td {
-        padding-bottom: 15px;
-      }
-      table.cvTable tr.sectionEnd td {
-        padding-bottom: 30px;
-      }
-      #navigation ul {
-          margin-top: 0;
-          margin-bottom: 0;
-          padding: 0;
-      }
-      #navigation ul li {
-          list-style-type: none;
-          display: inline;
-      }
-      #navigation li:not(:first-child):before {
-          content: " | ";
-      }
-      .photo {
-          border-radius: 50%;
-          min-width: 1in;
-          max-width: 1.8in;
-          width: 25%;
-      }
+      html, body { font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif; position: relative;
+                   height: 100%; margin: 0; padding: 0; overflow: auto; font-size: 16px; -webkit-overflow-scrolling: touch;         }
+      .main      { top: 35%; position: relative; text-align: center; padding-left: calc(100vw - 100%); transform: translateY(-50%); }
+      .photo     { border-radius: 50%; min-width: 1in; max-width: 1.8in; width: 25%;                                                }
+      h1         { margin: 0; display: inline;                                                                                      }
+
+      a, a:visited { vertical-align: top; color: blue; text-decoration: none; }
+      a:hover      { text-decoration: underline;                                }
+
+      #navigation ul    { margin-top: 0; margin-bottom: 0; padding: 0; }
+      #navigation ul li { list-style-type: none; display: inline;      }
+      #navigation li:not(:first-child):before { content: " | ";        }
     </style>
-  </head>
-  
+  </head>  
   <body id="body">
     <div class="main" id="main">
-      <img src="photo.jpg" class="photo" alt="Photo">
-      <h1>Dima Shkurski</h1>
+      <img src="photo.jpg" class="photo" alt="Photo"><h1>Dima Shkurski</h1>
       <div id="navigation" style="margin-left: 2%; margin-right: 2%;">
-        <ul>
-          software engr., founder @ <li><a href="https://searchpad.ai" id="nav_proj">searchpad.ai</a></li>
-          <br>
-        <ul>
+        <ul>software engr., founder @ <li><a href="https://searchpad.ai" id="nav_proj">searchpad.ai</a></li><br></ul>
         <ul>
           <li><a href="https://x.com/dshkurski" id="nav_proj"><span style="font-size: 13px;">&Xopf;</span> (twitter)</a></li>
           <li><a href="mailto:dmitri@shkur.ski" id="nav_proj">email</a></li>
@@ -93,5 +32,4 @@
       </div>
     </div>
   </body>
-
 </html>
