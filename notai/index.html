@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Not AI: A virtually embodied prediction machine</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,600;0,700;1,600;1,700');
+    @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700');
+    @media screen and (max-width: calc(1484px - 1px)) {
+      html { font-size: 100%; }
+      .main-content { max-width: 1500px; }
+      .demo-block { margin-top: 0; }
+    }
+    @media screen and (min-width: 1484px) and (max-width: calc(2560px - 1px)) {
+      html { font-size: calc(16px + ((100vw - 2184px) * 0.003692)); }
+      .main-content { max-width: calc(1500px + ((100vw - 2248px) * 0.2576)); }
+      .demo-block { margin-top: 0; }
+    }
+    @media screen and (min-width: 2560px) and (max-width:calc(3840px - 1px)) {
+      html { font-size: calc(16px + ((100vw - 2060px) * 0.0078)); }
+      .demo-block { margin-top: 5rem; }
+      .main-content { max-width: calc(1500px + ((100vw - 2060px) * 0.5576)); }
+    }
+    @media screen and (min-width: 3840px) {
+      html { font-size: 200%; }
+      .main-content { max-width: calc(1500px + ((100vw - 1484px) * 0.5576)); }
+      .demo-block { margin-top: 10rem; }
+    }
+
+    .main-content {
+      flex: 1000 0 auto; width: 60%;
+    }
+    /* .main-content {
+      flex: 1000 0 auto; width: 60%; max-width: 1500px;
+    } */
+
+    body {
+      font-family: 'Poppins'; -webkit-font-smoothing: antialiased;
+      margin: 0;
+      background: #F9F9F9;
+    }
+    .no-show { opacity: 0; }
+    .hidden  { opacity: 0; transition-property: opacity; transition-timing-function: ease-in-out; transition-duration: 1.5s;
+               -webkit-transition-property: opacity; -webkit-transition-timing-function: ease-in-out; -webkit-transition-duration: 1.5s;}
+    .duration0_5  { transition-duration: 0.5s !important; -webkit-transition-duration: 0.5s !important; }
+    .duration0_75 { transition-duration: 0.75s !important; -webkit-transition-duration: 0.75s !important; }
+    .duration1    { transition-duration: 1s !important; -webkit-transition-duration: 1s !important; }
+    .duration1_5  { transition-duration: 1.5s !important; -webkit-transition-duration: 1.5s !important; }
+    .duration2    { transition-duration: 2s !important; -webkit-transition-duration: 2s !important; }
+    .duration3    { transition-duration: 3s !important; -webkit-transition-duration: 3s !important; }
+    .duration4    { transition-duration: 4s !important; -webkit-transition-duration: 4s !important; }
+    .delay0    { transition-delay: 0s; -webkit-transition-delay: 0s; }
+    .delay0_5  { transition-delay: 0.5s; -webkit-transition-delay: 0.5s; }
+    .delay0_75 { transition-delay: 0.75s; -webkit-transition-delay: 0.75s; }
+    .delay1    { transition-delay: 1s; -webkit-transition-delay: 1s; }
+    .delay1_25 { transition-delay: 1.25s; -webkit-transition-delay: 1.25s; }
+    .delay1_5  { transition-delay: 1.5s; -webkit-transition-delay: 1.5s; }
+    .delay2    { transition-delay: 2s; -webkit-transition-delay: 2s; }
+    .delay2_5  { transition-delay: 2.5s; -webkit-transition-delay: 2.5s; }
+    .delay3    { transition-delay: 3s; -webkit-transition-delay: 3s; }
+    .delay3_5  { transition-delay: 3.5s; -webkit-transition-delay: 3.5s; }
+
+    h1 { line-height: calc(1.2em * (1 + (1 - 10)/25))  }
+    h2 { line-height: calc(1.2em * (1 + (1 - 2.2)/25)); font-weight: 600; letter-spacing: -1.3324px; white-space-collapse: preserve; margin: 0; }
+    h3 { line-height: calc(1.2em * (1 + (1 - 3.6)/25)); font-weight: 600; letter-spacing: -1.3324px; white-space-collapse: preserve; margin: 0; }
+    h4 { line-height: calc(1.2em * (1 + (1 - 1.6)/25)) }
+    h5 { line-height: calc(1.5em * (1 + (1 - 1.12)/25)); font-weight: 400; font-family: 'Space Mono'; letter-spacing: -0.132px;}
+    .heading-narrow { line-height: calc(1.2em * (1 + (1 - 5.2)/25)); }
+    .content { font-family: 'Space Mono'; }
+    .win-icon-container { display: flex; flex-direction: row; gap: 1rem; align-items: center; justify-content: right; opacity: 0.8; }
+
+    @media screen and (max-width: 767px) {
+        h1 { font-size:calc((10 - 1) * calc(.012 * min(100vh, 900px)) + 1rem)  }
+        h2 { font-size:calc((5.2 - 1) * calc(.012 * min(100vh, 900px)) + 1rem) }
+        h3 { font-size:calc((3.6 - 1) * calc(.012 * min(100vh, 900px)) + 1rem) }
+        h4 { font-size:calc((1.6 - 1) * calc(.012 * min(100vh, 900px)) + 1rem) }
+        h5 { font-size:calc((0.82 - 1) * calc(.012 * min(100vh, 900px)) + 1rem) }
+        .demo-text { height: 3rem; }
+        .reverse { flex-direction: column-reverse !important; }
+        .content { font-size:calc((0.62 - 1) * calc(.012 * min(100vh, 900px)) + 1rem) }
+        .padded2 { flex-direction: column; }
+        .padded2 .content-narrow { width: 100%; }
+        .padded3 { gap: 4.5rem; }
+        .cuboid-wrap { width: 0 !important; padding-left: 0rem !important; margin-right: auto !important; perspective: 180vmin !important; }
+        .cuboid-static-wrap { width: 15%; margin-left: 23vw; perspective: 180vmin !important; }
+        .side {
+          --cuboid-width: 39.6vw;
+          --cuboid-height: 82.5vw;
+          --cuboid-depth: 8.25vw;
+        }
+        .tree { height: 80vw; padding-left: -12.5vmin; margin-left: -17vw; }
+        .padded2 .bottom-demo { margin-top: auto; margin-bottom: auto; gap: 2rem; }
+        .bottom-demo-heading { text-align: center; }
+
+        .only-large            { display: none; }
+        .demo-item             { display: flex; flex-direction: column; padding-top: 6vmin; }
+        .first                 { padding-top: 6vmin; }
+        .demo-item-heading     { padding-left: 1.8vmin; font-size: 3vmin; }
+        .demo-item-text        { padding-top: 1vmin; font-size: 2.4vmin; }
+        .demo-icon-container   { display: flex; align-items: center; justify-content: center; width: 4.5vmin; height: 4.5vmin; }
+        .demo-icon-round       { border-radius: 0.6vmin; }
+        .demo-icon-image       { object-fit: contain; height: 100%; width: 100%; }
+        .demo-icon-image-small { object-fit: contain; height: 3.825vmin; width: 3.825vmin; }
+        .demo-search-container { height: auto; margin-top: auto; padding-left: 3.4vmin; padding-bottom: 4.35vmin; }
+        .demo-search-text      { font-size: 3.75vmin; flex-grow: 1; }
+        .demo-search-icon      { height: 4.8vmin; padding-right: 3vmin;}
+        .subscribe-container   { flex-direction: column; gap: 0.8rem; }
+        .subscribe-item        { width: 100% !important; }
+        .win-icon              { width: 1.282rem; height: 1.282rem; }
+        .win-icon-text         { font-size:calc((0.62 - 1) * calc(.012 * min(100vh, 900px)) + 0.8rem) }
+    }
+
+    @media screen and (min-width: 768px) {
+      .cuboid-static-wrap { margin-left: 13vmin; perspective: 120vmin; }
+      .padded2 .content-wide { width: 70%; }
+      .padded2 .content-narrow { width: 30%; }
+      .padded2 .bottom-demo { margin-left: 4.7vw; margin-top: auto; margin-bottom: auto; gap: 2rem; }
+      .side {
+        --cuboid-width: 28vmin;
+        --cuboid-height: 58.3333333vmin;
+        --cuboid-depth: 5.8333333vmin;
+      }
+      .tree { height:55vmin; margin-left: -13.5vmin; }
+      .bottom-demo-heading { text-align: left; padding-left: 0.9rem; width: 100%; margin-top: auto; margin-bottom: 0; padding-top: 15vmin; }
+
+      .demo-item             { display: flex; flex-direction: column; padding-top: 3.5vmin; }
+      .demo-item-heading     { padding-left: 1.2vmin; font-size: 2vmin; }
+      .demo-item-text        { padding-top: 1vmin; font-size: 1.4vmin; }
+      .demo-icon-container   { display: flex; align-items: center; justify-content: center; width: 3vmin; height: 3vmin; }
+      .demo-icon-round       { border-radius: 0.6vmin; }
+      .demo-icon-image       { object-fit: contain; height: 100%; width: 100%; }
+      .demo-icon-image-small { object-fit: contain; height: 2.55vmin; width: 2.55vmin; }
+      .demo-search-container { height: auto; margin-top: auto; padding-left: 3.2vmin; padding-bottom: 2.9vmin; }
+      .demo-search-text      { font-size: 2.5vmin; flex-grow: 1; }
+      .demo-search-icon      { height: 3.2vmin; padding-right: 2vmin; }
+      .subscribe-container   { flex-direction: row; gap: 0.5rem; }
+      .button                { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .win-icon-container    { margin-right: 0; }
+      .win-icon              { width: 1.55rem; height: 1.55rem; }
+      .win-icon-text         { font-size:calc((0.62 - 1) * calc(.012 * min(100vh, 900px)) + 1rem) }
+    }
+
+    @media screen and (min-width: 768px ) and (max-width:calc(1484px - 1px)) {
+        .cuboid-wrap { margin-right: 30% !important; }
+        h1 { font-size:calc((10 - 1) * 1.2vw + 1rem)  }
+        h2 { font-size:calc((5.2 - 1) * 1.2vw + 1rem) }
+        h3 { font-size:calc((3.6 - 1) * 1.2vw + 1rem) }
+        h4 { font-size:calc((1.6 - 1) * 1.2vw + 1rem) }
+        h5 { font-size:calc((1.12 - 1) * 1.2vw + 1rem) }
+        .content { font-size:calc((0.82 - 1) * 1.2vw + 1rem) }
+        .padded3 { gap: 2rem; }
+        .padded3 .column { width:calc((100% - 4rem) / 3); }
+        .demo-text-agent { margin-left: 20%; }
+        .cuboid-agent-wrap  { margin-left: min(calc(var(--cuboid-agent-margin)*3%), 60%); }
+        .win-icon-container { margin-right: 0; }
+    }
+
+    @media screen and (min-width: 1484px) {
+        h1 { font-size:calc(10 * 1rem)   }
+        h2 { font-size:calc(5.2 * 1rem)  }
+        h3 { font-size:calc(3.6 * 1rem)  }
+        h4 { font-size:calc(1.6 * 1rem)  }
+        h5 { font-size:calc(1.12 * 1rem) }
+        .content { font-size:calc(0.82 * 1rem) }
+        .padded3 { gap: 6rem; }
+        .padded3 .column { width:calc((100% - 12rem) / 3); }
+        .padded2 .bottom-demo { margin-bottom: 12vmin; }
+        .demo-text-agent { margin-left: 35%; }
+        .cuboid-agent-wrap  { margin-left: min(calc(var(--cuboid-agent-margin)*3%), 45%); }
+        .win-icon-container { margin-right: calc(var(--margin)*1.40rem - 16vmin); }
+    }
+
+    .padded2 { display:flex; flex-wrap:wrap; }
+    .padded3 { display:flex; flex-wrap:wrap; }
+    .padded3 > * { width:100%; }
+    .heading { font-weight: 600; }
+    .column .heading { margin:0; padding:1rem; }
+    .column .content { font-family: 'Space Mono'; padding:.1rem 1rem; line-height: 1.6em; }
+    .cuboid-content { font-weight: 200; }
+
+    .glow-dark::before, .glow-dark::after   { background: linear-gradient(45deg, #746a69, #222020 ); }
+    .glow-agent::before, .glow-agent::after { background: linear-gradient(45deg, #e75345, #ff0000 ); }
+
+    .glow-future::before, .glow-future::after {
+      background: linear-gradient(45deg,
+        #ffff00, #00ff00, #0099ff, #001aff, #a200ff, #ff0055, #ff0000,
+        #ff0055, #746a69, #222020, #00ff00, #0099ff, #001aff, #a200ff
+      );
+    }
+    .glow::before,
+    .glow::after {
+      content: ''; position: absolute; top: 0px; left: 0px; z-index: -1; width: calc(100%); height: calc(100%);
+      opacity: 1; background-size: 300%; -webkit-background-size: 300%;
+      animation: border 22s linear infinite; -webkit-animation: border 22s linear infinite;
+    }
+    .glow::after { filter: blur(50px); -webkit-filter: blur(50px); }
+    @keyframes border {
+      0%, 100% { background-position: 0 0; -webkit-background-position: 0 0; }
+      50% { background-position: 300%; -webkit-background-position: 300%; }
+    }
+    @-webkit-keyframes border {
+      0%, 100% { background-position: 0 0; -webkit-background-position: 0 0; }
+      50% { background-position: 300%; -webkit-background-position: 300%; }
+    }
+
+
+    @media screen and (min-width:768px) {
+        .padded3 > * {
+            width: calc((100% - 10rem) / 3);
+        }
+        .demo-text { margin-bottom: 10rem; }
+        .demo-text-agent { margin-bottom: 10rem; }
+        .nav-container:hover {
+          opacity: 1;
+          transition: opacity 0.7s ease;
+        }
+        .nav-container:not(:hover) {
+          opacity: var(--nav-opacity);
+          transition: opacity 0.7s ease;
+        }
+    }
+
+    .cuboid-wrap {
+      margin-right: calc(var(--cuboid-margin)*1.40rem - 9vmin); margin-left: auto; margin-top: 25vh; margin-bottom: 20vh;
+      height: 10vh; width: 4vmin; perspective: 120vmin; -webkit-perspective: 120vmin;
+    }
+    .cuboid {
+      transform-style: preserve-3d; transform: rotateX(0deg) rotateZ(0deg) rotateY(-45deg); animation: cuboid 1s linear;
+      animation-play-state: paused; animation-delay: calc(var(--rotate) * -1s);
+      -webkit-transform-style: preserve-3d; -webkit-transform: rotateX(0deg) rotateZ(0deg) rotateY(-45deg); -webkit-animation: cuboid 1s linear;
+      -webkit-animation-play-state: paused; -webkit-animation-delay: calc(var(--rotate) * -1s);
+      /* Compatibility. IE2 / NT 3.51
+         (for some reason, writing directly at 0xB8000 results in blue background)
+      */
+      animation-iteration-count: 1; animation-fill-mode: both;
+      -webkit-animation-iteration-count: 1; -webkit-animation-fill-mode: both;
+    }
+    .cuboid-future {
+      transform-style: preserve-3d; transform: rotateX(0deg) rotateZ(0deg) rotateY(0); animation: cuboid-future 1s linear;
+      animation-play-state: paused; animation-delay: 0;
+      -webkit-transform-style: preserve-3d; -webkit-transform: rotateX(0deg) rotateZ(0deg) rotateY(0); -webkit-animation: cuboid-future 1s linear;
+      -webkit-animation-play-state: paused; -webkit-animation-delay: 0;
+      animation-iteration-count: 1; animation-fill-mode: both;
+      -webkit-animation-iteration-count: 1; -webkit-animation-fill-mode: both;
+    }
+    .cuboid-agent-wrap {
+      --cuboid-agent-margin: 0;
+      margin-right: auto; margin-top: 25vh; margin-bottom: 20vh;
+      height: 10vh; width: 4vmin; perspective: 120vmin; -webkit-perspective: 120vmin;
+    }
+    .cuboid-agent {
+      transform-style: preserve-3d; transform: rotateX(0deg) rotateZ(0deg) rotateY(0); animation: cuboid-agent 1s linear;
+      animation-play-state: paused; animation-delay: 0;
+      -webkit-transform-style: preserve-3d; -webkit-transform: rotateX(0deg) rotateZ(0deg) rotateY(0); -webkit-animation: cuboid-agent 1s linear;
+      -webkit-animation-play-state: paused; -webkit-animation-delay: 0;
+      animation-iteration-count: 1; animation-fill-mode: both;
+      -webkit-animation-iteration-count: 1; -webkit-animation-fill-mode: both;
+    }
+    .cuboid-static-wrap {
+      margin-right: auto; margin-top: 40vh; margin-bottom: 20vh; height: 10vh;
+    }
+    .cuboid-static {
+      transform-style: preserve-3d; transform: rotateX(0deg) rotateZ(0deg) rotateY(-135deg); margin-left: -5vw;
+      -webkit-transform-style: preserve-3d; -webkit-transform: rotateX(0deg) rotateZ(0deg) rotateY(-135deg); margin-left: -5vw;
+    }
+
+    @keyframes cuboid {
+      to {
+        transform: rotateX(0deg) rotateZ(0deg) rotateY(45deg);
+        -webkit-transform: rotateX(0deg) rotateZ(0deg) rotateY(45deg);
+      }
+    }
+    @-webkit-keyframes cuboid {
+      to {
+        transform: rotateX(0deg) rotateZ(0deg) rotateY(45deg);
+        -webkit-transform: rotateX(0deg) rotateZ(0deg) rotateY(45deg);
+      }
+    }
+
+    .side {
+      position: absolute; background-color: #070707; 
+    }
+    .agent {
+      position: absolute; background-color: #e70b0b !important;
+    }
+    .top {
+      width: var(--cuboid-width); height: var(--cuboid-depth);
+      transform: translate(-50%, -50%) rotateX(90deg) translateZ(calc(var(--cuboid-height)/2));
+      -webkit-transform: translate(-50%, -50%) rotateX(90deg) translateZ(calc(var(--cuboid-height)/2));
+    }
+    .bottom {
+      width: var(--cuboid-width); height: var(--cuboid-depth);
+      transform: translate(-50%, -50%) rotateX(-90deg) translateZ(calc(var(--cuboid-height)/2));
+      -webkit-transform: translate(-50%, -50%) rotateX(-90deg) translateZ(calc(var(--cuboid-height)/2));
+    }
+    .left {
+      width: var(--cuboid-depth); height: var(--cuboid-height); background-color: #2A2A2A;
+      transform: translate(-50%, -50%) rotateY(90deg) translateZ(calc(var(--cuboid-width)/2));
+      -webkit-transform: translate(-50%, -50%) rotateY(90deg) translateZ(calc(var(--cuboid-width)/2));
+    }
+    .right {
+      width: var(--cuboid-depth); height: var(--cuboid-height); background-color: #2A2A2A;
+      transform: translate(-50%, -50%) rotateY(-90deg) translateZ(calc(var(--cuboid-width)/2));
+      -webkit-transform: translate(-50%, -50%) rotateY(-90deg) translateZ(calc(var(--cuboid-width)/2));
+    }
+    .front {
+      width: var(--cuboid-width); height: var(--cuboid-height);
+      transform: translate(-50%, -50%) rotateY(0deg) translateZ(calc(var(--cuboid-depth)/2));
+      -webkit-transform: translate(-50%, -50%) rotateY(0deg) translateZ(calc(var(--cuboid-depth)/2));
+    }
+    .lower-back {
+      width: var(--cuboid-width); height: var(--cuboid-height);
+      transform: translate(-50%, -50%) rotateY(180deg) translateZ(calc(var(--cuboid-depth)/2));
+      -webkit-transform: translate(-50%, -50%) rotateY(180deg) translateZ(calc(var(--cuboid-depth)/2));
+    }
+    .back {
+      width: var(--cuboid-width); height: var(--cuboid-height);
+      transform: translate(-50%, -50%) rotateY(180deg) translateZ(calc(var(--cuboid-depth)/2));
+      -webkit-transform: translate(-50%, -50%) rotateY(180deg) translateZ(calc(var(--cuboid-depth)/2));
+    }
+
+    .subscribe-container {
+      display:flex;
+      overflow: hidden;
+    }
+    .email-input {
+      width: 75%; padding: 10px; box-sizing: border-box; height: 100%;
+      border: 1px solid #070707; background: #F9F9F9; border-radius: 0 !important;
+    }
+    input:focus {
+      outline: none;
+    }
+    input {
+      appearance: none;
+      -webkit-appearance: none;
+    }
+    select,
+    textarea,
+    input {
+      font-size: 1.5rem;
+    }
+    .button {
+      display: flex; width: 25%; background-color: #070707; align-items: center; justify-content: center;
+      text-decoration: none; color: white; cursor: pointer; border: none;
+    }
+    .button:hover { opacity: 0.75; }
+    .main-side {
+      flex: 1 1000 0; width: 20%; min-width: 5%; overflow:hidden;
+    }
+    #demo-text {
+      opacity: 0;
+    }
+
+    /* Navigation */
+    .nav-container {
+      --nav-opacity: 0.3;
+      opacity: var(--nav-opacity);
+      display: flex; flex-direction: row;
+      width: 100%;
+      left: 0;
+      top: 0;
+      position: fixed;
+      color: black;
+      background: white;
+      z-index: 2;
+      letter-spacing: 0.025em;
+      transition: background-color 0.2s linear;
+      -webkit-transition: background-color 0.2s linear;
+      
+      &.solid-nav {
+        background-color: #aaa;
+        transition: background-color 0.2s linear;
+        -webkit-transition: background-color 0.2s linear;
+      }
+
+      .nav-panel {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        .nav-logo {
+          flex: 1;
+          height: 2.2vh;
+          width: 2.2vh;
+        }
+        
+        .nav-controls {
+          flex: grow;
+          margin-top: 1vh;
+          margin-bottom: 1vh;
+          .nav-item {
+            position: relative;
+            font-family: 'Space Mono'; display: inline-block; list-style: none;  text-decoration: none;
+            transition: opacity .125s linear; -webkit-transition: opacity .125s linear;
+            &:hover {
+              opacity: 0.5; cursor: pointer; transition: opacity .125s linear; -webkit-transition: opacity .125s linear;
+            }
+          }
+
+          .nav-item.selected::after {
+            content: '';
+            position: absolute;
+            bottom: -0.5rem;
+            left: calc(50% + 1.5rem);
+            transform: translateX(-50%);
+            width: 0.31rem;
+            height: 0.31rem;
+            background-color: black;
+            border-radius: 50%;
+          }
+          @media screen and (max-width: 767px) {
+            .nav-item {
+              padding-left: 1.8rem;
+            }
+            .nav-item.selected::after {
+              left: calc(50% + 0.9rem) !important;
+            }
+          }
+          @media screen and (min-width: 768px) {
+            .nav-item {
+              padding-left: 3rem;
+            }
+          }
+        }
+      }
+    }
+
+    section {
+      display: none;
+    }
+
+    section.active {
+      display: block;
+    }
+
+    .demo-search-text-wrapper {
+      position: relative;
+    }
+
+    .line {
+      opacity: 0;
+      position: absolute;
+      left: 0;
+      height: 100%;
+      width: 3px;
+      background-color: #fff;
+      transform-origin: 0 50%;
+      -webkit-transform-origin: 0 50%;
+    }
+
+    .line1 { 
+      top: 0; 
+      left: 0;
+    }
+
+    .letters {
+      line-height: 1em;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="nav-container" id="navigation-bar">
+    <div style="flex: 1 10000 0; width: 30%; overflow:hidden;"></div>
+    <div style="flex: 10 0 auto; width: 40%; max-width: 800px;">
+      <div class="nav-panel">
+        <div class="nav-logo">
+          <object type="image/svg+xml" data="media/icon-notai-flat.svg" style="height: 100%; width: auto; object-fit: contain;" id="icon-notai"></object>
+          <object type="image/svg+xml" data="media/icon-agent-flat.svg" style="height: 100%; width: auto; object-fit: contain; display: none;" id="icon-agent"></object>
+        </div>
+        <div class="nav-controls">
+            <div class="nav-item" id="nav-page-notai" onclick="navigateTo('page-notai')">NOTAI</div>
+            <div class="nav-item" id="nav-page-agent" onclick="navigateTo('page-agent')">AGENT</div>
+            <div class="nav-item" id="nav-page-direction" onclick="navigateTo('page-direction')">DIRECTION</div>
+        </div>
+      </div>
+    </div>
+    <div style="flex: 1 10000 0; width: 30%; overflow:hidden;"></div>
+  </div>
+
+  <div style="display:flex; flex-direction: row; overflow: hidden; margin-top: 3.5rem;">
+    <div class="main-side"></div>
+    <div class="main-content">
+      <div class="win-icon-container" id="win-icon-container">
+        <div style="display: flex; flex-direction: column; gap: 0.25rem; align-items: center;">
+          <div class="win-icon"><object data="media/win10.svg" type="image/svg+xml" style="width: 100%; height: 100%;"></object></div>
+          <div class="win-icon-text">10</div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 0.25rem; align-items: center;">
+          <div class="win-icon"><object data="media/win11.svg" type="image/svg+xml" style="width: 100%; height: 100%;"></object></div>
+          <div class="win-icon-text">11</div>
+        </div>
+      </div>
+    </div>
+    <div class="main-side"></div>
+  </div>
+
+  <div style="display:flex; flex-direction: row; overflow: hidden;">
+    <div class="main-side"></div>
+    <div class="main-content">
+      <section id="page-notai" style="margin-top: 6.5rem;">
+      <h2 class="hidden delay0" style="text-align: center;">Your computer<br>will be different</h2>
+      <div style="display:flex; flex-direction: row; overflow: hidden;">
+        <div style="flex: 1 10000 0; width: 30%; overflow:hidden;"></div>
+        <div style="flex: 10 0 auto; width: 40%; max-width: 40rem;">
+          <h5 class="hidden delay0_5 duration0_75" style="text-align: center; white-space: pre-wrap; margin: 1rem;">NotAI is a virtually embodied prediction machine.<br>It makes your computer work with you.
+          </h5>
+          <form method="POST" action="https://script.google.com/macros/s/AKfycbxjmiw_Fdha2GW3JWA_voAWc_FFqFHXo8qwTqTfPnanjLBletIoP3G--BbmsHL-VAhggA/exec" name="subscribe" id="subscribe-form">
+            <div class="subscribe-container hidden delay0_75 duration0_75" style="margin-top: 5rem; margin-bottom: 250px;">
+              <input type="hidden" name="type" value="notai">
+              <input type="email" name="email" class="email-input subscribe-item" id="email-top" style="height: 3rem;">
+              <button type="submit" class="button subscribe-item" style="height: 3rem;"><h5 style="font-size: 0.8rem; letter-spacing: .1em;">SUBSCRIBE</h5></button>
+            </div>
+          </form>
+        </div>
+        <div style="flex: 1 10000 0; width: 30%; overflow:hidden;"></div>
+      </div>
+
+      <div class="padded2 reverse demo-block">
+        <div class="content-wide" style="display: flex; margin: 0; align-items: center;">
+          <h3 class="heading demo-text" style="text-align: center; width: 100%;" id="demo-text">It sees what you see</h3>
+        </div>
+        <div class="content-narrow">
+          <div class="cuboid-wrap" id="cuboid-wrap">
+            <div class="cuboid">
+              <div class="side top"></div> <div class="side bottom"></div>
+              <div class="side front" id="cuboid-front">
+                <div class="cuboid-content" style="display: flex; flex-direction: column; color: white; height: 100%;">
+                  <div class="only-large no-show" id="demo-window-header"
+                       style="text-align: right; color:white; font-size: 1rem; padding-right: 1.5vmin; padding-top: 0.8vmin;">&#x2573;</div>
+                  <div style="flex: 1; padding-left: 3.2vmin; padding-right: 2vmin;">
+
+                    <div class="demo-item first" id="demo-item-chrome">
+                      <div style="display: flex; flex-direction: row; align-items: center;">
+                        <div class="demo-icon-container">
+                          <object data="media/chrome.svg" style="width: 100%; height: 100%; object-fit: contain;"></object>
+                        </div>
+                        <div class="demo-item-heading">notai.co</div>
+                      </div>
+                      <div class="demo-item-text">It sees what you see</div>
+                    </div>
+
+                    <div class="demo-item no-show" id="demo-item-gmail">
+                      <div style="display: flex; flex-direction: row; align-items: center;">
+                        <div class="demo-icon-container demo-icon-round" style="background: white;">
+                          <object class="demo-icon-image-small" data="media/gmail.svg"></object>
+                        </div>
+                        <div class="demo-item-heading">Katya Kladkova</div>
+                      </div>
+                      <div class="demo-item-text">Headline suggestions. Hi, ...</div>
+                    </div>
+
+                    <div class="demo-item no-show" id="demo-item-wiki">
+                      <div style="display: flex; flex-direction: row; align-items: center;">
+                        <div class="demo-icon-container" style="background: white;">
+                          <object class="demo-icon-image" data="media/wiki.svg"></object>
+                        </div>
+                        <div class="demo-item-heading">Computer vision</div>
+                      </div>
+                      <div class="demo-item-text">Computer vision tasks ...</div>
+                    </div>
+
+                    <div class="demo-item no-show" id="demo-item-contact1">
+                      <div style="display: flex; flex-direction: row; align-items: center;">
+                        <div class="demo-icon-container demo-icon-round" style="background: white; border-radius: 10rem;">
+                          <object class="demo-icon-image-small" data="media/contact.svg"></object>
+                        </div>
+                        <div class="demo-item-heading">Emma Schmidt</div>
+                      </div>
+                      <div class="demo-item-text">Last seen: 4:43 PM on Slack</div>
+                    </div>
+
+                    <div class="demo-item no-show" id="demo-item-contact2">
+                      <div style="display: flex; flex-direction: row; align-items: center;">
+                        <div class="demo-icon-container demo-icon-round" style="background: white; border-radius: 10rem;">
+                          <object class="demo-icon-image-small" data="media/contact.svg"></object>
+                        </div>
+                        <div class="demo-item-heading">John Williams</div>
+                      </div>
+                      <div class="demo-item-text">Last seen: 11:06 AM on Gmail</div>
+                    </div>
+
+                    <div class="demo-item no-show" id="demo-item-contact3">
+                      <div style="display: flex; flex-direction: row; align-items: center;">
+                        <div class="demo-icon-container demo-icon-round" style="background: white; border-radius: 10rem;">
+                          <object class="demo-icon-image-small" data="media/contact.svg"></object>
+                        </div>
+                        <div class="demo-item-heading">Katya Kladkova</div>
+                      </div>
+                      <div class="demo-item-text">Last seen: 3:12 PM on Slack</div>
+                    </div>
+
+                    <div class="demo-item no-show" id="demo-item-report">
+                      <div style="display: flex; flex-direction: row; align-items: center;">
+                        <div class="demo-icon-container demo-icon-round" style="background: white;">
+                          <object class="demo-icon-image-small" data="media/sheets.svg"></object>
+                        </div>
+                        <div class="demo-item-heading">Q4 Report</div>
+                      </div>
+                      <div class="demo-item-text">Our net profit this quarter ...</div>
+                    </div>
+
+                    <div class="demo-item no-show" id="demo-item-meet">
+                      <div style="display: flex; flex-direction: row; align-items: center;">
+                        <div class="demo-icon-container demo-icon-round" style="background: white;">
+                          <object class="demo-icon-image-small" data="media/meet.svg"></object>
+                        </div>
+                        <div class="demo-item-heading">Meeting</div>
+                      </div>
+                      <div class="demo-item-text">Alex: Regarding the report ...</div>
+                    </div>
+
+                    <div class="demo-item no-show" id="demo-item-slack">
+                      <div style="display: flex; flex-direction: row; align-items: center;">
+                        <div class="demo-icon-container demo-icon-round" style="background: white;">
+                          <object class="demo-icon-image-small" data="media/slack.svg"></object>
+                        </div>
+                        <div class="demo-item-heading">John Williams</div>
+                      </div>
+                      <div class="demo-item-text">Here is the spreadsheet ...</div>
+                    </div>
+
+                  </div>
+
+                  <div class="demo-search-container">
+                    <div style="display: flex; flex-direction: row; height: 100%;">
+                      <div class="demo-search-text">
+                          <div class="demo-search-text-wrapper">
+                            <div class="line line1" id="demo-search-cursor"></div>
+                            <span class="letters" id="demo-item-search-text">report</span>
+                          </div>
+                      </div>
+                      <object class="demo-search-icon no-show" id="demo-item-search-icon" data="media/search.svg"></object>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <div class="side back glow glow-dark"></div>
+              <div class="side left"></div>  <div class="side right"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="padded3 hidden" style="margin-top: 15rem;">
+        <div class="column">
+            <h4 class="heading">Automated</h4>
+            <div class="content">
+              It reads information from screen, stuctures it and makes available at any time, acting as an automated personal CRM and note-taking tool.
+            </div>
+        </div>
+        <div class="column">
+            <h4 class="heading">Proactive</h4>
+            <div class="content">
+              Whether you're on a call, preparing for it or doing research, NotAI brings relevant context instantly. You don't have to ask. It already knows.
+            </div>
+        </div>
+        <div class="column" id="right-column">
+            <h4 class="heading">Integrated</h4>
+            <div class="content">
+              NotAI integrates with OS and preserves information from any app that appears on screen. For some of them it can restore context: open an URL in browser or message in Slack.
+            </div>
+        </div>
+      </div>
+
+      <div class="padded2" style="margin-top: 10rem;">
+        <div class="content-narrow">
+          <div style="display: flex; flex-direction: row;">
+            <div class="cuboid-static-wrap">
+              <div class="cuboid-static">
+                <div class="side top">   </div>  <div class="side bottom"> </div>
+                <div class="side front glow glow-dark"> </div>  <div class="side lower-back">   </div>
+                <div class="side left">  </div>  <div class="side right">  </div>
+              </div>
+            </div>
+            <object id="tree" class="tree" data="media/tree2.svg" type="image/svg+xml"
+              style="margin-top: auto; margin-bottom: auto;
+              padding-top: 13vh; margin-right: auto; z-index: 1;">
+            </object>
+          </div>
+        </div>
+        <div class="content-wide" style="display: flex; flex-direction: column;">
+          <!-- <div style="display: flex; "> -->
+            <div class="bottom-demo padded2">
+              <h3 class="bottom-demo-heading hidden delay0_5">Your data<br>grows safely</h3>
+              <div class="column" style="padding-top: 3vmin;">
+                  <h4 class="heading hidden delay1 duration0_75">Privacy guarantees</h4>
+                  <div class="content hidden delay1 duration0_75">
+                    We provide the strongest possible privacy guarantees. No data is sent behind your back. Zero bytes. For additional safety, NotAI can be blocked from network independently on OS level. Instructions are provided during installation.
+                  </div>
+              </div>
+              <div class="column">
+                  <h4 class="heading hidden delay1 duration0_75">Unique way of capturing</h4>
+                  <div class="content hidden delay1 duration0_75">
+                    NotAI accesses only relevant text data and never captures the video stream from screen. In the same way, it captures meeting transcripts only when automated captions are enabled: the audio stream is processed by meeting software you already trust. 
+                  </div>
+              </div>
+            </div>
+          <!-- </div> -->
+        </div>
+      </div>
+
+      <h4 class="heading" style="text-align: center; width: 100%; color: #070707; margin-top: 18rem; margin-bottom: 2rem;">New language</h4>
+
+      <div style="display:flex; flex-direction: row; overflow: hidden;">
+        <div style="flex: 1 10000 0; width: 30%; overflow:hidden;"></div>
+        <div style="flex: 10 0 auto; width: 40%; max-width: 30rem;">
+          <div class="content">
+            We designed a new language for human-machine interaction: proactive user interfaces. They go beyond words and don't require chatting. By using screen contents as input, NotAI learns what you need and predicts the next step. It's fast, it saves time, it keeps you focused. You don't have to ask when it already knows. 
+          </div>
+        </div>
+        <div style="flex: 1 10000 0; width: 30%; overflow:hidden;"></div>
+      </div>
+
+      <h2 style="text-align: center; margin-top: 22rem;">It's you<br><span style="opacity: 0;" id="bottom-animated-text">who understands</span></h2><br><br>
+      <div style="display:flex; flex-direction: row; overflow: hidden;">
+        <div style="flex: 1 10000 0; width: 30%; overflow:hidden;"></div>
+        <div style="flex: 10 0 auto; width: 40%; max-width: 40rem;">
+          <form method="POST" action="https://script.google.com/macros/s/AKfycbxjmiw_Fdha2GW3JWA_voAWc_FFqFHXo8qwTqTfPnanjLBletIoP3G--BbmsHL-VAhggA/exec" name="subscribe" id="subscribe-form2">
+            <div class="subscribe-container hidden delay0_75 duration0_75" style="margin-top: 5rem;">
+              <input type="hidden" name="type" value="notai">
+              <input type="email" name="email" class="email-input subscribe-item" id="email-top" style="height: 3rem;">
+              <button type="submit" class="button subscribe-item" style="height: 3rem;"><h5 style="font-size: 0.8rem; letter-spacing: .1em;">SUBSCRIBE</h5></button>
+            </div>
+          </form>
+        </div>
+        <div style="flex: 1 10000 0; width: 30%; overflow:hidden;"></div>
+      </div>
+      </section> <!-- page-notai -->
+
+
+      <!-- page-agent -->
+      <section id="page-agent" style="margin-top: 6.5rem;">
+        <h2 class="hidden delay0 duration1 heading-narrow" style="text-align: center;">Who<br></h2>
+        <h2 class="hidden delay0_5 duration1 heading-narrow" style="text-align: center;">moved<br></h2>
+        <h2 class="hidden delay1 duration0_5 heading-narrow" style="text-align: center;">the<br></h2>
+        <h2 class="hidden delay1_25 duration0_5 heading-narrow" style="text-align: center;">cursor<br></h2>
+        <h2 class="hidden delay1_5 duration3 heading-narrow" style="text-align: center;">?</h2>
+        <div style="display:flex; flex-direction: row; overflow: hidden;">
+          <div style="flex: 1 10000 0; width: 30%; overflow:hidden;"></div>
+          <div style="flex: 10 0 auto; width: 40%; max-width: 40rem;">
+            <div class="subscribe-container hidden delay2 duration2" style="margin-top: 5rem; margin-bottom: 8rem;">
+              <input type="email" class="email-input subscribe-item" id="email-top" style="height: 3rem;">
+              <div class="button subscribe-item" style="height: 3rem; background: #e70b0b;"><h5 style="font-size: 0.8rem; letter-spacing: .1em;">JOIN WAITLIST</h5></div>
+            </div>
+          </div>
+          <div style="flex: 1 10000 0; width: 30%; overflow:hidden;"></div>
+        </div>
+  
+        <div class="padded2 reverse" style="margin-top: 0 !important;">
+          <div class="content-narrow" style="display: flex; width: 50%; text-align: right; align-items: center;">
+            <h3 class="heading demo-text-agent" style="text-align: center; width: 100%;">
+              <div id="demo-text-agent1" class="duration1_5" style="opacity: 0;">It's Not AI</div><div id="demo-text-agent2" class="delay1 duration4" style="opacity: 0; color: #e70b0b">Agent</div>
+            </h3>
+          </div>
+          <div class="content-wide" style="display: flex; margin-top: 13vmin; margin-bottom: 13vh; align-items: center; justify-content: center; width: 50%;">
+            <div class="cuboid-agent-wrap" id="cuboid-agent-wrap">
+              <div class="cuboid-agent">
+                <div class="side agent top"></div> <div class="side agent bottom"></div>
+                <div class="side agent front" id="cuboid-agent-front"></div>
+                <div class="side agent back glow glow-agent"></div>
+                <div class="side agent left"></div>  <div class="side agent right"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h4 class="heading" style="text-align: center; width: 100%; color: #070707; margin-top: 10rem; margin-bottom: 2rem;">Virtual embodiment</h4>
+        <div style="display:flex; flex-direction: row; overflow: hidden;">
+          <div style="flex: 1 10000 0; width: 30%; overflow:hidden;"></div>
+          <div style="flex: 10 0 auto; width: 40%; max-width: 30rem;">
+            <div class="content">We present a new concept of computer programs: a virtually embodied software. First, it's a software that is integrated and is able to <b>perceive</b>, freeing you from the need to provide inputs manually.
+              <br><br>Second, it's a software that is able to <b>act</b> and do it transparently, using the same graphical interfaces as we, humans, do.
+              <br><br>Third, it's a software that is <b>fully local</b>, autonomous and indedepndent. In other words, it runs completely on your computer.
+              <br><br>Our goal is to provide the standard of human-machine interaction that is open and clear, and we do so by acting.<br><br> NotAI is the first software of its kind and it starts the new age of user interfaces. The age when machines work hand-in-hand with us, while we retain control.
+            </div>
+          </div>
+          <div style="flex: 1 10000 0; width: 30%; overflow:hidden;"></div>
+        </div>
+
+        <div style="display:flex; flex-direction: row; overflow: hidden; margin-top: 13rem;">
+          <div style="flex: 1 10000 0; width: 30%; overflow:hidden;"></div>
+          <div style="flex: 10 0 auto; width: 40%; max-width: 75rem;">
+            <img src="media/agent-update.jpg" style="width: 100%;" />
+            <div class="content">Figure 0. NotAI updates itself while being isolated from network with Windows Defender Firewall.<br>TODO: Teaser demo.</div>
+          </div>
+          <div style="flex: 1 10000 0; width: 30%; overflow:hidden;"></div>
+        </div>
+
+      <div style="display:flex; flex-direction: row; overflow: hidden; margin-top: 7rem;">
+        <div style="flex: 1 10000 0; width: 30%; overflow:hidden;"></div>
+        <div style="flex: 10 0 auto; width: 40%; max-width: 40rem;">
+          <div class="subscribe-container hidden delay0 duration1" style="margin-top: 5rem;">
+            <input type="email" class="email-input subscribe-item" id="email-top" style="height: 3rem;">
+            <div class="button subscribe-item" style="height: 3rem; background: #e70b0b;"><h5 style="font-size: 0.8rem; letter-spacing: .1em;">JOIN WAITLIST</h5></div>
+          </div>
+        </div>
+        <div style="flex: 1 10000 0; width: 30%; overflow:hidden;"></div>
+      </div>
+
+      </section>
+      <!-- page-agent -->
+
+
+      <!-- page-direction -->
+      <section id="page-direction">
+        <div class="padded2 reverse">
+          <div class="content-wide" style="display: flex; margin-top: 10rem; margin-bottom: 10rem; align-items: center; justify-content: center; width: 100%;">
+              <div class="cuboid-wrap" id="cuboid-wrap" style="width: 0 !important; padding-left: 0rem !important; margin-right: auto !important; perspective: 180vmin !important;">
+                  <div class="cuboid-future">
+                    <div class="side top"></div> <div class="side bottom"></div>
+                    <div class="side front"></div>
+                    <div class="side back glow glow-future"></div>
+                    <div class="side left"></div>  <div class="side right"></div>
+                  </div>
+                </div>    
+          </div>
+        </div>
+        <h4 class="heading" style="text-align: center; width: 100%; color: #070707; margin-top: 7rem; margin-bottom: 2rem; font-style: italic;">Future</h4>
+        <div style="display:flex; flex-direction: row; overflow: hidden;">
+          <div style="flex: 1 10000 0; width: 30%; overflow:hidden;"></div>
+          <div style="flex: 10 0 auto; width: 40%; max-width: 40rem;">
+            <!-- <div class="content" style="text-indent: 8ch; text-align: justify;"> -->
+            <div class="content">
+              TODO: Company mission. This is a placeholder.<br><br>
+              The European languages are members of the same family. Their separate existence is a myth. For science, music, sport, etc, Europe uses the same vocabulary.
+              The languages only differ in their grammar, their pronunciation and their most common words. Everyone realizes why a new common language would be desirable:
+              one could refuse to pay expensive translators. To achieve this, it would be necessary to have uniform grammar, pronunciation and more common words. If several
+              languages coalesce, the grammar of the resulting language is more simple and regular than that of the individual languages. The new common language will be more
+              simple and regular than the existing European languages. It will be as simple as Occidental; in fact, it will be Occidental. To an English person, it will seem
+              like simplified English, as a skeptical Cambridge friend of mine told me what Occidental is.The European languages are members of the same family.</div>
+          </div>
+          <div style="flex: 1 10000 0; width: 30%; overflow:hidden;"></div>
+        </div>
+      </section>
+      <!-- page-direction -->
+
+    </div>
+    <div class="main-side"></div>
+  </div>
+
+  <div style="margin-bottom: 2vmin; margin-top: 15rem; font-size: 0.7rem; margin-left: auto; margin-right: auto; text-align: center;">
+    This site doesn't use cookies, trackers or analytics.<br>
+		Copyright &#169; 2024 All rights reserved.<br><br>
+    <!-- <div style="font-size: 1rem; color: rgb(199, 22, 22);">&#x2665;</div> -->
+	</div>
+
+  <script>
+    // const lastDiv = document.body.querySelector('body > div[data-netlify-deploy-id]');
+    // if (lastDiv) {
+    //   lastDiv.remove();
+    //   console.log('last div removed');
+    // }
+    let navigation_bar = document.getElementById('navigation-bar');
+    let vw = window.innerWidth || document.documentElement.clientWidth;
+    let vh = window.innerHeight || document.documentElement.clientHeight;
+    let is_portrait = vw < 768;
+    let animation_running = false;
+    let agent_animation_complete = false;
+    let current_page_id;
+
+    function calc_text_cursor_offset() {
+      const vmin = vh > vw ? vw : vh;
+      return (is_portrait ? 0.122 : 0.08) * vmin;
+    }
+
+    function animation_disable_elements(ids) {
+      ids.forEach(id => {
+        let e = document.getElementById(id);
+        e.style.display = 'none';
+        e.style.opacity = '0';
+      });
+    }
+
+    function animation_enable_elements(ids) {
+      ids.forEach(id => {
+        let e = document.getElementById(id);
+        e.style.display = 'block';
+      });
+    }
+    
+    const hiddenElements = document.querySelectorAll('.hidden');
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = 1;
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 /* 50% visible */ });
+    hiddenElements.forEach(element => {
+        observer.observe(element);
+    });
+
+    const bottom_text = document.getElementById('bottom-animated-text');
+    const animate_bottom_text =  anime.timeline({
+      targets: bottom_text, easing: 'easeOutQuad', duration: 1000, loop: false, autoplay: false
+    });
+
+    animate_bottom_text
+      .add({ opacity: [1, 0], delay: 1500, duration: 700, complete() { bottom_text.innerHTML = 'who owns data'; }})
+      .add({ opacity: [0, 1] })
+      .add({ opacity: [1, 0], delay: 500, duration: 700, complete() { bottom_text.innerHTML = 'who sets goals'; } })
+      .add({ opacity: [0, 1] })
+      .add({ opacity: [1, 0], delay: 500, duration: 700, complete() { bottom_text.innerHTML = "It's Not AI"; } })
+      .add({ opacity: [0, 1], delay: 100, duration: 6500 });
+
+    const observer_bottom  = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animate_bottom_text.play();
+                observer_bottom.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 1 });
+    observer_bottom.observe(bottom_text);
+
+    const right_column = document.getElementById('right-column');
+    let cuboid_front = document.getElementById('cuboid-front');
+    let cuboid_wrap = document.getElementById('cuboid-wrap');
+    let win_icon_container = document.getElementById('win-icon-container');
+    let cuboid_agent_wrap = document.getElementById('cuboid-agent-wrap');
+
+    function calc_cuboid_margin() {
+      const col = right_column.getBoundingClientRect();
+      const cub = cuboid_front.getBoundingClientRect();
+      const delta = cub.left - col.left;
+      const aspect = vh/vw;
+      return (5-aspect)*(3.8-aspect);
+    }
+
+    cuboid_wrap.style.setProperty('--cuboid-margin', calc_cuboid_margin());
+    win_icon_container.style.setProperty('--margin', calc_cuboid_margin());
+    const demo_text = document.getElementById('demo-text');
+
+    let demo_text_cursor_offset = calc_text_cursor_offset();
+    const slow = 1.3;
+
+    let animate_hide_header = anime.timeline({
+      targets: document.getElementById('demo-window-header'),
+      easing: 'easeOutQuad', delay: 900*slow, duration: 400*slow, loop: false, autoplay: false
+    });
+    animate_hide_header.add({ opacity: [1, 0] });
+
+
+    let animate_private = anime.timeline({
+      targets: ['demo-item-search-text', 'demo-item-search-icon', 'demo-item-report',
+                'demo-item-meet', 'demo-item-slack'].map(id => document.getElementById(id)),
+      easing: 'easeOutQuad', delay: 700*slow, duration: 1500*slow, loop: false, autoplay: false });
+
+    animate_private.add({opacity: [1, 0], complete() { animate_hide_header.play(); }});
+
+    let animate_between = anime.timeline({
+      targets: ['demo-item-meet', 'demo-item-slack'].map(id => document.getElementById(id)),
+      easing: 'easeOutQuad', delay: 1200*slow, duration: 1500*slow, loop: false, autoplay: false});
+
+    animate_between.add({
+      opacity: [0, 1], changeBegin() {
+        document.getElementById('demo-search-cursor').style.opacity = 0;
+        animation_enable_elements(['demo-item-meet', 'demo-item-slack']);
+      },
+      complete() { animate_private.play(); }
+    });
+
+    let animate_remember = anime.timeline({
+      targets: [document.getElementById('demo-item-search-icon')],
+      easing: 'easeOutQuad', delay: 1500*slow, duration: 500*slow, loop: false, autoplay: false });
+
+    animate_remember.add({
+      opacity: [0, 1],
+      changeBegin() {
+        animation_disable_elements(['demo-item-contact1', 'demo-item-contact2', 'demo-item-contact3']);
+      }
+    });
+
+    let animate_remember_type = anime.timeline({loop: false, autoplay: false, delay: 0})
+    .add({
+      targets: document.getElementById('demo-search-cursor'),
+      scaleY: [0,1], opacity: [0.5,1], easing: "easeOutExpo", delay: 1600*slow, duration: 100*slow
+    })
+    .add({
+      targets: document.getElementById('demo-search-cursor'),
+      translateX: [0, demo_text_cursor_offset], easing: "easeOutExpo", delay: 0, duration: 200*slow,
+    }).add({
+      targets: document.getElementById('demo-item-search-text'),
+      opacity: [0,1], easing: "easeOutExpo", delay: 0, duration: 1, offset: '-=775', delay: (el, i) => 34 * (i+1)
+    });
+
+    let animate_remember_report = anime.timeline({
+      targets: document.getElementById('demo-item-report'),
+      easing: 'easeOutQuad', delay: 1900*slow, duration: 500*slow, loop: false, autoplay: false
+    });
+    animate_remember_report.add({
+      opacity: [0, 1],
+      changeBegin() { animation_enable_elements(['demo-item-report']); },
+      complete() { animate_between.play(); }
+    });
+
+    let animate_contacts = anime.timeline({
+      targets: ['demo-item-contact1', 'demo-item-contact2', 'demo-item-contact3'].map(id => document.getElementById(id)),
+      easing: 'easeOutQuad', delay: 800*slow, duration: 600*slow, loop: false, autoplay: false
+    });
+    animate_contacts.add({
+      opacity: [0, 1],
+      changeBegin() {
+        animation_disable_elements(['demo-item-chrome', 'demo-item-gmail', 'demo-item-wiki']);
+        animation_enable_elements(['demo-item-contact1', 'demo-item-contact2', 'demo-item-contact3']);
+      },
+      complete() {
+        animate_remember.play();
+        animate_remember_type.play();
+        animate_remember_report.play();
+      }
+    });
+
+    let animate_predict = anime.timeline({
+      targets: [document.getElementById('demo-item-gmail'), document.getElementById('demo-item-wiki')],
+      easing: 'easeOutQuad', delay: 700*slow, duration: 1500*slow, loop: false, autoplay: false
+    });
+    animate_predict.add({opacity: [0, 1], complete() { animate_contacts.play(); }});
+
+    let animate_see = anime.timeline({
+      targets: [document.getElementById('demo-item-chrome'), document.getElementById('demo-window-header')],
+      easing: 'easeOutQuad', delay: 0, duration: 1500*slow, loop: false, autoplay: false
+    });
+    animate_see.add({opacity: [0, 1],
+      changeBegin() { animation_enable_elements(['demo-item-chrome', 'demo-item-gmail', 'demo-item-wiki']); },
+      complete() { animate_predict.play(); }
+    });
+
+    let animate_text = anime.timeline({
+      targets: demo_text, easing: 'easeOutQuad', duration: 1500*slow, loop: true, autoplay: false
+    });
+
+    animate_text.add({
+        opacity: [0, 1],
+        changeBegin() {
+          // cleanup the elements from previous iteration
+          animation_disable_elements(['demo-item-chrome', 'demo-item-gmail', 'demo-item-wiki', 'demo-item-report',
+                                      'demo-item-meet', 'demo-item-slack', 'demo-item-contact1', 'demo-item-contact2',
+                                      'demo-item-contact3']);
+          animate_see.play();
+        }
+    })
+    .add({ opacity: [1, 0], delay: 500*slow, duration: 300*slow, complete() { demo_text.innerHTML = 'Predicts what you need' }})
+    .add({ opacity: [0, 1] })
+    .add({ opacity: [1, 0], delay: 500*slow, duration: 300*slow, complete() { demo_text.innerHTML = 'Keeps track of<br>your contacts' }})
+    .add({ opacity: [0, 1] })
+    .add({ opacity: [1, 0], delay: 500*slow, duration: 300*slow, complete() { demo_text.innerHTML = 'Remembers things' }})
+    .add({ opacity: [0, 1] })
+    .add({ opacity: [1, 0], duration: 300*slow, complete() { demo_text.innerHTML = 'Between applications' }})
+    .add({ opacity: [0, 1] })
+    .add({ opacity: [1, 0], delay: 500*slow, duration: 300*slow, complete() { demo_text.innerHTML = 'In a fully private way' }})
+    .add({ opacity: [0, 1] })
+    .add({ opacity: [1, 0], duration: 300*slow, complete() { demo_text.innerHTML = 'It\'s Not AI' }})
+    .add({ delay: 500*slow, opacity: [0, 1], duration: 3000*slow })
+    .add({ opacity: [1, 0], duration: 500, complete() { demo_text.innerHTML = 'It sees what you see'; animate_text.restart(); }});
+
+    function start_animation() {
+      if (animation_running === true) {
+        return;
+      }
+      document.getElementById('demo-text').innerHTML = "It sees what you see";
+      animate_text.restart();
+      animation_running = true;
+    }
+
+    function stop_animation() {
+      if (animation_running === false) {
+        return;
+      }
+      [animate_text, animate_see, animate_predict, animate_contacts, animate_between, animate_remember, animate_private,
+       animate_remember_report, animate_remember_type, animate_hide_header].forEach((a) => { a.restart(); a.pause(); });
+       animation_disable_elements(['demo-item-chrome', 'demo-item-gmail', 'demo-item-wiki', 'demo-item-report',
+                                   'demo-item-meet', 'demo-item-slack', 'demo-item-contact1', 'demo-item-contact2',
+                                   'demo-item-contact3']);
+      ['demo-item-search-text', 'demo-item-search-icon', 'demo-search-cursor', 'demo-window-header', 'demo-text']
+        .forEach((id) => { document.getElementById(id).style.opacity = 0; });
+       animation_running = false;
+    }
+
+    let once = {};
+    const cuboid = document.getElementById('cuboid-front');
+    const cuboid_agent = document.getElementById('cuboid-agent-front');
+    const tree = document.getElementById('tree');
+    let tree_container;
+    let tree_branches;
+    let cuboid_range, tree_range, cuboid_agent_range;
+
+    function animate_cuboid(pos /* [0..1] */) {
+      document.body.style.setProperty('--rotate', pos/2);
+      if (pos === 1 && animation_running === false) { start_animation(); }
+      if (pos < 1 && animation_running === true) { stop_animation(); }
+    }
+
+    function animate_cuboid_agent(pos/* [0..1] */) {
+      cuboid_agent_wrap.style.setProperty('--cuboid-agent-margin', pos*15);
+      if (pos === 1 && !agent_animation_complete) {
+        agent_animation_complete = true;
+        ['demo-text-agent1', 'demo-text-agent2'].forEach((id) => {
+          document.getElementById(id).style.display = 'block';
+          document.getElementById(id).style.opacity = 1;
+        });
+      }
+      if (pos < 1 && agent_animation_complete) {
+        agent_animation_complete = false;
+        ['demo-text-agent1', 'demo-text-agent2'].forEach((id) => {
+          document.getElementById(id).style.display = 'none';
+        });
+      }
+    }
+
+    function animate_tree(pos /* [0..1] */) {
+      if (tree_branches === undefined) {
+        return;
+      }
+      pos *= Math.round(tree_branches.length);
+      let current = tree_container.children.length;
+      if (pos > current) {
+        for (let i=current; i < pos; ++i) {
+          tree_container.appendChild(tree_branches[i]);
+        }
+      }
+      else {
+        while (current-- > pos) {
+          tree_container.removeChild(tree_container.lastChild);
+        }
+      }
+    }
+
+      // Calculates current position of objects bottom relative to range.
+      // Normalized to [0..1]
+      function calc_position(rect, range) {
+        const position = 1 - (rect.bottom - range.top) / (range.bottom - range.top);
+        return position < 0 ? 0 : position > 1 ? 1 : position;
+      }
+
+      // 'trigger_top': sets the screen height that object's TOP has to reach in order to
+      // start animation. [0..1] of vh.
+      // 'trigger_bottom': sets the screen height that object's BOTTOM has to reach in order to
+      // stop animation. [0..1] of vh.
+    function calculate_viewport_range(obj, trigger_top, trigger_bottom, adj_ratio) {
+      // The closer we get to portrait orientation, the closer to the top we
+      // finalize the animation.
+      console.log('Viewport height: ', vh, 'Ratio: ', vh/vw);
+      const rect = obj.getBoundingClientRect();
+      // Calculate triggers relative to obj's bottom.
+      const upper = vh*trigger_bottom;
+      let lower = vh*trigger_top + rect.height;
+      const rect_bottom_abs = rect.bottom + window.scrollY;
+      if (rect_bottom_abs < lower && rect_bottom_abs > upper) {
+          lower = rect_bottom_abs;
+      }
+      let range = { init_pos: undefined, top: upper, bottom: lower };
+      range.init_pos = calc_position(rect, range);
+      return range;
+    }
+
+    function init(force = false) {
+      if (!force && once[current_page_id]) {
+        return;
+      }
+      if (current_page_id === 'page-notai') {
+        cuboid_range = calculate_viewport_range(cuboid, 0.8, 0.9, 0.125);
+        tree_range = calculate_viewport_range(tree, 0.4, 0.85, 0);
+        console.log('cuboid range: ', cuboid_range);
+        console.log('tree range: ', tree_range);
+        animate_cuboid(cuboid_range.init_pos);
+        animate_tree(tree_range.init_pos);
+      }
+      if (current_page_id === 'page-agent') {
+        cuboid_agent_range = calculate_viewport_range(cuboid_agent, 0.7, 0.9, 0.125);
+        animate_cuboid_agent(cuboid_agent_range.init_pos);
+      }
+      once[current_page_id] = true;
+    }
+
+    function vscroll_ratio() {
+      return window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight);
+    }
+
+    function animate_navbar(pos /* 0..1 */) {
+      const min = 0.15;
+      const max = 0.3;
+      const trigger = 0.38; // ofs from center, both directions
+      pos = Math.abs(pos - 0.5);
+      navigation_bar.style.setProperty('--nav-opacity', pos >= trigger ? min+(max-min)*(pos-trigger)*10 : min);
+    }
+
+    window.addEventListener('scroll', () => {
+      init();
+      animate_navbar(vscroll_ratio());
+      if (current_page_id === 'page-notai') {
+        animate_cuboid(calc_position(cuboid.getBoundingClientRect(), cuboid_range));
+        animate_tree(calc_position(tree.getBoundingClientRect(), tree_range));
+      }
+      if (current_page_id === 'page-agent') {
+        animate_cuboid_agent(calc_position(cuboid_agent.getBoundingClientRect(), cuboid_agent_range));
+      }
+    }, false);
+
+    window.addEventListener('hashchange', () => {
+      console.log('hashchange');
+      if (window.location.hash) {
+        navigateTo('page-'+window.location.hash.substring(1));
+      }
+      else {
+        navigateTo('page-notai');
+      }
+    });
+
+    window.addEventListener("load", (event) => {
+      // Prevent redirect on form submission
+      const forms = document.querySelectorAll('#subscribe-form, #subscribe-form2');
+      forms.forEach(form => {
+        form.addEventListener("submit", async function(e) {
+          e.preventDefault();
+          const data = new FormData(form);
+          const action = e.target.action;
+          const response = await fetch(action, { method: 'POST', body: data });
+          const responseData = await response.json();
+          console.log(responseData);
+        });
+      });
+
+      if (window.location.hash) {
+        navigateTo('page-'+window.location.hash.substring(1));
+      }
+      else {
+        navigateTo('page-notai');
+      }
+      init();
+
+      // There is a slight possibility for this guy to have SVG paths loaded with delay. Avoid racing.
+      tree.addEventListener('load', () => {
+        tree_container = tree.contentDocument.querySelector('g') || tree.contentDocument.querySelector('svg');
+        tree_branches = Array.from(tree_container.children);
+        tree_branches.sort((lhs, rhs) => {
+          return parseFloat(rhs.getAttribute('stroke-width') || 1) - parseFloat(lhs.getAttribute('stroke-width') || 1);
+        });
+        tree_container.replaceChildren();
+      });
+      // If we subscribed too late, fire the event manually.
+      if (tree.complete) {
+        tree.dispatchEvent(new Event('load'));
+      }
+
+      addEventListener('resize', (event) => {
+        vw = window.innerWidth || document.documentElement.clientWidth;
+        vh = window.innerHeight || document.documentElement.clientHeight;
+        is_portrait = vw < 768;
+        demo_text_cursor_offset = calc_text_cursor_offset();
+        init(true);
+        const margin = calc_cuboid_margin();
+        cuboid_wrap.style.setProperty('--cuboid-margin', margin);
+        win_icon_container.style.setProperty('--margin', margin);
+      });
+
+    }); // Page "load" event handler.
+
+    function navigateTo(page_id) {
+      if (current_page_id === page_id || !document.getElementById(page_id)) {
+        return;
+      }
+      const locations = {
+        'page-notai': '',
+        'page-agent': '#agent',
+        'page-direction': '#direction'
+      };
+      const loc_hash = locations[page_id];
+      if (loc_hash !== undefined) {
+        window.location.hash = loc_hash;
+      }
+      // Don't show icons on Direction page
+      win_icon_container.style.visibility = page_id == 'page-direction' ? 'hidden' : 'visible';
+      // Switch product icon on the left
+      if (page_id === 'page-agent') {
+        document.getElementById('icon-notai').style.display = 'none';
+        document.getElementById('icon-agent').style.display = 'block';
+      }
+      else {
+        document.getElementById('icon-agent').style.display = 'none';
+        document.getElementById('icon-notai').style.display = 'block';
+      }
+      window.scrollTo({top: 0, left: 0, behavior: "auto" });
+      let nav_item = document.getElementById("nav-" + current_page_id);
+      nav_item && nav_item.classList.remove('selected');
+      current_page_id = page_id;
+      nav_item = document.getElementById("nav-" + current_page_id);
+      nav_item && nav_item.classList.add('selected');
+      document.querySelectorAll('section').forEach(section => {
+        section.classList.remove('active');
+      });
+      document.getElementById(page_id).classList.add('active');
+    }
+  </script>
+</body>
+
+</html>
