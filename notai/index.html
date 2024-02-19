@@ -43,8 +43,8 @@
       background: #F9F9F9;
     }
     .no-show { opacity: 0; }
-    .hidden  { opacity: 0; transition-property: opacity; transition-timing-function: ease-in-out; transition-duration: 1.5s;
-               -webkit-transition-property: opacity; -webkit-transition-timing-function: ease-in-out; -webkit-transition-duration: 1.5s;}
+    .hidden  { opacity: 0; transition: opacity ease-in-out 1.5s, visibility 2s;
+               -webkit-transition: opacity ease-in-out 1.5s, visibility 2s;}
     .duration0_5  { transition-duration: 0.5s !important; -webkit-transition-duration: 0.5s !important; }
     .duration0_75 { transition-duration: 0.75s !important; -webkit-transition-duration: 0.75s !important; }
     .duration1    { transition-duration: 1s !important; -webkit-transition-duration: 1s !important; }
@@ -138,6 +138,7 @@
       .demo-search-icon      { height: 3.2vmin; padding-right: 2vmin; }
       .subscribe-container   { flex-direction: row; gap: 0.5rem; }
       .button                { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .purchase-button       { padding-left: 0; padding-right: 0; }
       .win-icon-container    { margin-right: 0; }
       .win-icon              { width: 1.55rem; height: 1.55rem; }
       .win-icon-text         { font-size:calc((0.62 - 1) * calc(.012 * min(100vh, 900px)) + 1rem) }
@@ -206,6 +207,21 @@
       50% { background-position: 300%; -webkit-background-position: 300%; }
     }
 
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+        transition: background-color 50000s ease-in-out 0s;
+    }
+
+    input.hidden:-webkit-autofill,
+    input.hidden:-webkit-autofill:hover,
+    input.hidden:-webkit-autofill:focus,
+    input.hidden:-webkit-autofill:active {
+      opacity: 0;
+      transition: opacity ease-in-out 1.5s, visibility 2s, background-color 50000s ease-in-out 0s;
+      -webkit-transition: opacity ease-in-out 1.5s, visibility 2s, background-color 50000s ease-in-out 0s;
+    }
 
     @media screen and (min-width:768px) {
         .padded3 > * {
@@ -322,9 +338,22 @@
       -webkit-transform: translate(-50%, -50%) rotateY(180deg) translateZ(calc(var(--cuboid-depth)/2));
     }
 
+    /* Holds labels and subscribe container */
+    .subscribe-wrap {
+      display: flex;
+      flex-direction: column;
+    }
     .subscribe-container {
       display:flex;
       overflow: hidden;
+    }
+    .input-label-above {
+      margin-bottom: 0.3rem;
+      pointer-events: none;
+    }
+    .input-label-below {
+      margin-top: 0.2rem;
+      pointer-events: none;
     }
     .email-input {
       width: 75%; padding: 10px; box-sizing: border-box; height: 100%;
@@ -343,8 +372,10 @@
       font-size: 1.5rem;
     }
     .button {
-      display: flex; width: 25%; background-color: #070707; align-items: center; justify-content: center;
-      text-decoration: none; color: white; cursor: pointer; border: none;
+      display: flex; width: 25%; background-color: #070707; color: white; border: none;
+      align-items: center; justify-content: center; text-decoration: none; cursor: pointer;
+      transition: background-color 2s;
+      transition: color 2s;
     }
     .button:hover { opacity: 0.75; }
     .main-side {
@@ -417,7 +448,8 @@
               padding-left: 1.8rem;
             }
             .nav-item.selected::after {
-              left: calc(50% + 0.9rem) !important;
+              left: 1.4rem;
+              bottom: 0.6rem;
             }
           }
           @media screen and (min-width: 768px) {
@@ -473,6 +505,7 @@
           <object type="image/svg+xml" data="media/icon-agent-flat.svg" style="height: 100%; width: auto; object-fit: contain; display: none;" id="icon-agent"></object>
         </div>
         <div class="nav-controls">
+            <div class="nav-item" id="nav-page-purchase" onclick="navigateTo('page-purchase')">PURCHASE</div>
             <div class="nav-item" id="nav-page-notai" onclick="navigateTo('page-notai')">NOTAI</div>
             <div class="nav-item" id="nav-page-agent" onclick="navigateTo('page-agent')">AGENT</div>
             <div class="nav-item" id="nav-page-direction" onclick="navigateTo('page-direction')">DIRECTION</div>
@@ -510,10 +543,14 @@
           <h5 class="hidden delay0_5 duration0_75" style="text-align: center; white-space: pre-wrap; margin: 1rem;">NotAI is a virtually embodied prediction machine.<br>It makes your computer work with you.
           </h5>
           <form method="POST" action="https://script.google.com/macros/s/AKfycbxjmiw_Fdha2GW3JWA_voAWc_FFqFHXo8qwTqTfPnanjLBletIoP3G--BbmsHL-VAhggA/exec" name="subscribe" id="subscribe-form">
-            <div class="subscribe-container hidden delay0_75 duration0_75" style="margin-top: 5rem; margin-bottom: 250px;">
-              <input type="hidden" name="type" value="notai">
-              <input type="email" name="email" class="email-input subscribe-item" id="email-top" style="height: 3rem;">
-              <button type="submit" class="button subscribe-item" style="height: 3rem;"><h5 style="font-size: 0.8rem; letter-spacing: .1em;">SUBSCRIBE</h5></button>
+            <div class="subscribe-wrap" style="margin-top: 5rem; margin-bottom: 16rem;">
+              <label for="email-top" class="input-label-above content hidden delay1_5 duration1">Email <span style="color: #989190;">(required)</span></label>
+              <div class="subscribe-container hidden delay0_75 duration0_75">
+                <input type="hidden" name="type" value="notai">
+                <input type="email" name="email" class="email-input subscribe-item" id="email-top" style="height: 3rem;" required>
+                <button type="submit" class="button subscribe-item" style="height: 3rem;" id="submit-top"><h5 style="font-size: 0.8rem; letter-spacing: .1em;">SUBSCRIBE</h5></button>
+              </div>
+              <!-- <label for="submit-top" class="input-label-below content" style="color: #989190; text-align: right;">waitlist</label> -->
             </div>
           </form>
         </div>
@@ -716,16 +753,19 @@
         </div>
         <div style="flex: 1 10000 0; width: 30%; overflow:hidden;"></div>
       </div>
-
+      
       <h2 style="text-align: center; margin-top: 22rem;">It's you<br><span style="opacity: 0;" id="bottom-animated-text">who understands</span></h2><br><br>
       <div style="display:flex; flex-direction: row; overflow: hidden;">
         <div style="flex: 1 10000 0; width: 30%; overflow:hidden;"></div>
         <div style="flex: 10 0 auto; width: 40%; max-width: 40rem;">
           <form method="POST" action="https://script.google.com/macros/s/AKfycbxjmiw_Fdha2GW3JWA_voAWc_FFqFHXo8qwTqTfPnanjLBletIoP3G--BbmsHL-VAhggA/exec" name="subscribe" id="subscribe-form2">
-            <div class="subscribe-container hidden delay0_75 duration0_75" style="margin-top: 5rem;">
-              <input type="hidden" name="type" value="notai">
-              <input type="email" name="email" class="email-input subscribe-item" id="email-top" style="height: 3rem;">
-              <button type="submit" class="button subscribe-item" style="height: 3rem;"><h5 style="font-size: 0.8rem; letter-spacing: .1em;">SUBSCRIBE</h5></button>
+            <div class="subscribe-wrap" style="margin-top: 5rem;">
+              <label for="email-bottom" class="input-label-above content hidden delay1 duration1_5">Email <span style="color: #989190;">(required)</span></label>
+              <div class="subscribe-container hidden delay0_75 duration0_75">
+                <input type="hidden" name="type" value="notai">
+                <input type="email" name="email" class="email-input subscribe-item" id="email-bottom" style="height: 3rem;" required>
+                <button type="submit" class="button subscribe-item" style="height: 3rem;"><h5 style="font-size: 0.8rem; letter-spacing: .1em;">SUBSCRIBE</h5></button>
+              </div>
             </div>
           </form>
         </div>
@@ -744,10 +784,16 @@
         <div style="display:flex; flex-direction: row; overflow: hidden;">
           <div style="flex: 1 10000 0; width: 30%; overflow:hidden;"></div>
           <div style="flex: 10 0 auto; width: 40%; max-width: 40rem;">
-            <div class="subscribe-container hidden delay2 duration2" style="margin-top: 5rem; margin-bottom: 8rem;">
-              <input type="email" class="email-input subscribe-item" id="email-top" style="height: 3rem;">
-              <div class="button subscribe-item" style="height: 3rem; background: #e70b0b;"><h5 style="font-size: 0.8rem; letter-spacing: .1em;">JOIN WAITLIST</h5></div>
-            </div>
+            <form method="POST" action="https://script.google.com/macros/s/AKfycbxjmiw_Fdha2GW3JWA_voAWc_FFqFHXo8qwTqTfPnanjLBletIoP3G--BbmsHL-VAhggA/exec" name="subscribe" id="agent-subscribe-form">
+              <div class="subscribe-wrap" style="margin-top: 5rem; margin-bottom: 8rem;">
+                <label for="agent-email" class="input-label-above content hidden delay3 duration1_5">Email <span style="color: #989190;">(required)</span></label>
+                <div class="subscribe-container hidden delay2 duration2">
+                  <input type="hidden" name="type" value="agent">
+                  <input type="email" name="email" class="email-input subscribe-item" id="agent-email" style="height: 3rem;" required>
+                  <button type="submit" class="button subscribe-item" style="height: 3rem; background: #e70b0b;" id="agent-submit"><h5 style="font-size: 0.8rem; letter-spacing: .1em;">SUBSCRIBE</h5></button>
+                </div>
+              </div>
+            </form>
           </div>
           <div style="flex: 1 10000 0; width: 30%; overflow:hidden;"></div>
         </div>
@@ -787,7 +833,7 @@
           <div style="flex: 1 10000 0; width: 30%; overflow:hidden;"></div>
           <div style="flex: 10 0 auto; width: 40%; max-width: 75rem;">
             <img src="media/agent-update.jpg" style="width: 100%;" />
-            <div class="content">Figure 0. NotAI updates itself while being isolated from network with Windows Defender Firewall.<br>TODO: Teaser demo.</div>
+            <div class="content">Figure 0. NotAI updates itself while being isolated from network with Windows Defender Firewall.</div>
           </div>
           <div style="flex: 1 10000 0; width: 30%; overflow:hidden;"></div>
         </div>
@@ -795,10 +841,16 @@
       <div style="display:flex; flex-direction: row; overflow: hidden; margin-top: 7rem;">
         <div style="flex: 1 10000 0; width: 30%; overflow:hidden;"></div>
         <div style="flex: 10 0 auto; width: 40%; max-width: 40rem;">
-          <div class="subscribe-container hidden delay0 duration1" style="margin-top: 5rem;">
-            <input type="email" class="email-input subscribe-item" id="email-top" style="height: 3rem;">
-            <div class="button subscribe-item" style="height: 3rem; background: #e70b0b;"><h5 style="font-size: 0.8rem; letter-spacing: .1em;">JOIN WAITLIST</h5></div>
-          </div>
+          <form method="POST" action="https://script.google.com/macros/s/AKfycbxjmiw_Fdha2GW3JWA_voAWc_FFqFHXo8qwTqTfPnanjLBletIoP3G--BbmsHL-VAhggA/exec" name="subscribe" id="agent-subscribe-form2">
+            <div class="subscribe-wrap" style="margin-top: 5rem;">
+              <label for="agent-email2" class="input-label-above content hidden delay0_5 duration1_5">Email <span style="color: #989190;">(required)</span></label>
+              <div class="subscribe-container hidden delay0 duration1">
+                <input type="hidden" name="type" value="agent">
+                <input type="email" name="email" class="email-input subscribe-item" id="agent-email2" style="height: 3rem;" required>
+                <button type="submit" class="button subscribe-item" style="height: 3rem; background: #e70b0b;" id="agent-submit2"><h5 style="font-size: 0.8rem; letter-spacing: .1em;">SUBSCRIBE</h5></button>
+              </div>
+            </div>
+          </form>
         </div>
         <div style="flex: 1 10000 0; width: 30%; overflow:hidden;"></div>
       </div>
@@ -839,6 +891,48 @@
         </div>
       </section>
       <!-- page-direction -->
+
+      <section id="page-purchase" style="margin-top: 6.5rem;">
+        <h2 class="hidden delay0" style="text-align: center;">Limited offer</h2>
+        <div style="display:flex; flex-direction: row; overflow: hidden;">
+          <div style="flex: 1 10000 0; width: 30%; overflow:hidden;"></div>
+          <div style="flex: 10 0 auto; width: 40%; max-width: 40rem;">
+            <h5 class="hidden delay0_5 duration0_75" style="text-align: center; white-space: pre-wrap; margin: 1rem;"><b>Lifetime subscription</b> for<br>the first batch of early adopters.
+            </h5>
+            <form method="POST" action="https://script.google.com/macros/s/AKfycbxjmiw_Fdha2GW3JWA_voAWc_FFqFHXo8qwTqTfPnanjLBletIoP3G--BbmsHL-VAhggA/exec" name="subscribe" id="purchase-form">
+              <div class="subscribe-wrap" style="margin-top: 5rem; margin-bottom: 5rem;">
+                <label for="purchase-email" class="input-label-above content">Email <span style="color: #989190;">(required)</span></label>
+                <div class="subscribe-container hidden delay0_75 duration0_75">
+                  <input type="hidden" name="type" value="notai">
+                  <input type="email" name="email" class="email-input subscribe-item" id="purchase-email" style="height: 3rem;" required>
+                  <a href="https://notai.lemonsqueezy.com/checkout/buy/110d783c-3b2c-458c-8035-20ed518a3b3c?embed=1&discount=0"
+                     class="lemonsqueezy-button purchase-button button subscribe-item" style="height: 3rem;" id="purchase">
+                    <h5 style="font-size: 0.8rem; letter-spacing: .1em;">USD 149.99</h5>
+                  </a>
+                  <script src="https://assets.lemonsqueezy.com/lemon.js" defer></script>
+                  <!-- <button type="submit" class="button subscribe-item" style="height: 3rem;"><h5 style="font-size: 0.8rem; letter-spacing: .1em;">USD 149.99</h5></button> -->
+                </div>
+                <label for="purchase" class="input-label-below content" style="color: #989190; text-align: right; margin-top: 0.1rem;">one-off</label>
+              </div>
+            </form>
+          </div>
+          <div style="flex: 1 10000 0; width: 30%; overflow:hidden;"></div>
+        </div>
+        <h4 class="heading hidden delay0_75 duration0_75" style="text-align: center; width: 100%; color: #070707; margin-bottom: 2rem;">You get</h4>
+        <div style="display:flex; flex-direction: row; overflow: hidden;">
+          <div style="flex: 1 10000 0; width: 30%; overflow:hidden;"></div>
+          <div style="flex: 10 0 auto; width: 40%; max-width: 30rem;">
+            <div class="content hidden delay1 duration1">
+              <b>&#x2022;</b> Lifetime access to a full consumer version of NotAI.<br>
+              <b>&#x2022;</b> Early access to beta features.<br>
+              <b>&#x2022;</b> NotAI Agent previews.<br>
+              <b>&#x2022;</b> Direct communication with the team.<br>
+              <b>&#x2022;</b> 30-day money-back guarantee. No answers questioned.
+            </div>
+          </div>
+          <div style="flex: 1 10000 0; width: 30%; overflow:hidden;"></div>
+        </div>
+      </section>
 
     </div>
     <div class="main-side"></div>
@@ -1145,9 +1239,6 @@
       // 'trigger_bottom': sets the screen height that object's BOTTOM has to reach in order to
       // stop animation. [0..1] of vh.
     function calculate_viewport_range(obj, trigger_top, trigger_bottom, adj_ratio) {
-      // The closer we get to portrait orientation, the closer to the top we
-      // finalize the animation.
-      console.log('Viewport height: ', vh, 'Ratio: ', vh/vw);
       const rect = obj.getBoundingClientRect();
       // Calculate triggers relative to obj's bottom.
       const upper = vh*trigger_bottom;
@@ -1214,19 +1305,63 @@
       }
     });
 
+    function propagateEmailAddress(email, form_ids) {
+      form_ids.forEach(id => {
+        let input = document.getElementById(id).querySelector('input[type="email"]');
+        if (input.value === '') {
+          input.value = email;
+        }
+      });
+    }
+
+    function disableForms(form_ids) {
+      form_ids.forEach(id => {
+          let form = document.getElementById(id);
+          form.querySelector('[name="email"]').disabled = true;
+          let button = form.querySelector('button[type="submit"]');
+          button.disabled = true;
+          button.style.setProperty('opacity', '1', 'important');
+          button.style.background = "#F9F9F9";
+          button.style.color = "#070707";
+          button.style.setProperty('cursor', 'default', 'important');
+          button.innerHTML = '<h5 style="font-size: 0.8rem; letter-spacing: .1em;">SUBSCRIBED</h5>';
+          form.querySelectorAll('label').forEach(label => {
+            label.style.setProperty('opacity', '0', 'important');
+            label.style.setProperty('visibility', 'hidden', 'important');
+          });
+      });
+    }
+
+    async function processFormEvent(event, data) {
+      event.preventDefault();
+      const response = await fetch(event.target.action, { method: 'POST', body: data });
+      const responseData = await response.json();
+      console.log(responseData);
+      // TODO: Error handling
+    }
+
     window.addEventListener("load", (event) => {
-      // Prevent redirect on form submission
-      const forms = document.querySelectorAll('#subscribe-form, #subscribe-form2');
-      forms.forEach(form => {
-        form.addEventListener("submit", async function(e) {
-          e.preventDefault();
+      // NotAI forms
+      document.querySelectorAll('#subscribe-form, #subscribe-form2').forEach(form => {
+        form.addEventListener("submit", async function(event) {
           const data = new FormData(form);
-          const action = e.target.action;
-          const response = await fetch(action, { method: 'POST', body: data });
-          const responseData = await response.json();
-          console.log(responseData);
+          processFormEvent(event, data);
+          // TODO: Error handling. Put error into email label and don't execute subscribed flow below.
+          propagateEmailAddress(data.get('email'), ['subscribe-form', 'subscribe-form2', 'agent-subscribe-form', 'agent-subscribe-form2', 'purchase-form']);
+          disableForms(['subscribe-form', 'subscribe-form2']);
         });
       });
+      // NotAI Agent forms
+      document.querySelectorAll('#agent-subscribe-form, #agent-subscribe-form2').forEach(form => {
+        form.addEventListener("submit", async function(event) {
+          const data = new FormData(form);
+          processFormEvent(event, data);
+          // TODO: Error handling. Put error into email label and don't execute subscribed flow below.
+          propagateEmailAddress(data.get('email'), ['subscribe-form', 'subscribe-form2', 'agent-subscribe-form', 'agent-subscribe-form2', 'purchase-form']);
+          disableForms(['agent-subscribe-form', 'agent-subscribe-form2']);
+        });
+      });
+
 
       if (window.location.hash) {
         navigateTo('page-'+window.location.hash.substring(1));
@@ -1269,6 +1404,7 @@
       }
       const locations = {
         'page-notai': '',
+        'page-purchase': '#purchase',
         'page-agent': '#agent',
         'page-direction': '#direction'
       };
