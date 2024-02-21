@@ -83,17 +83,18 @@
         .content { font-size:calc((0.62 - 1) * calc(.012 * min(100vh, 900px)) + 1rem) }
         .padded2 { flex-direction: column; }
         .padded2 .content-narrow { width: 100% !important; }
-        .padded3 { gap: 4.5rem; }
+        .padded3 { gap: 15vmin; }
         .cuboid-wrap { width: 0 !important; padding-left: 0rem !important; margin-right: auto !important; perspective: 180vmin !important; }
         .cuboid-static-wrap { width: 15%; margin-left: 23vw; perspective: 180vmin !important; }
+        .cuboid-agent-wrap  { margin-left: min(calc(var(--cuboid-agent-margin)*1rem), 100%); }
         .side {
           --cuboid-width: 39.6vw;
           --cuboid-height: 82.5vw;
           --cuboid-depth: 8.25vw;
         }
         .tree { height: 80vw; padding-left: -12.5vmin; margin-left: -17vw; }
-        .padded2 .bottom-demo { margin-top: auto; margin-bottom: auto; gap: 2rem; }
-        .bottom-demo-heading { text-align: center; }
+        .padded2 .bottom-demo { margin-top: 10vmin; margin-bottom: auto; gap: 10vmin; }
+        .bottom-demo-heading  { text-align: center; }
 
         .only-large            { display: none; }
         .demo-item             { display: flex; flex-direction: column; padding-top: 6vmin; }
@@ -111,6 +112,7 @@
         .subscribe-item        { width: 100% !important; }
         .win-icon              { width: 1.282rem; height: 1.282rem; }
         .win-icon-text         { font-size:calc((0.62 - 1) * calc(.012 * min(100vh, 900px)) + 0.8rem) }
+        .cuboid-future-content { margin-top: 27vmin; margin-bottom: 13vmin; }
     }
 
     @media screen and (min-width: 768px) {
@@ -124,7 +126,7 @@
         --cuboid-depth: 5.8333333vmin;
       }
       .tree { height:55vmin; margin-left: -13.5vmin; }
-      .bottom-demo-heading { text-align: left; padding-left: 0.9rem; width: 100%; margin-top: auto; margin-bottom: 0; padding-top: 15vmin; }
+      .bottom-demo-heading { text-align: left; padding-left: 0.9rem; width: 100%; margin-top: auto; margin-bottom: 0; padding-top: 15vmin; margin-left: 4.7vw; }
 
       .demo-item             { display: flex; flex-direction: column; padding-top: 3.5vmin; }
       .demo-item-heading     { padding-left: 1.2vmin; font-size: 2vmin; }
@@ -142,6 +144,7 @@
       .win-icon-container    { margin-right: 0; }
       .win-icon              { width: 1.55rem; height: 1.55rem; }
       .win-icon-text         { font-size:calc((0.62 - 1) * calc(.012 * min(100vh, 900px)) + 1rem) }
+      .cuboid-future-content { margin-top: 13rem; margin-bottom: 10rem; }
     }
 
     @media screen and (min-width: 768px ) and (max-width:calc(1484px - 1px)) {
@@ -498,7 +501,7 @@
 <body>
   <div class="nav-container" id="navigation-bar">
     <div style="flex: 1 10000 0; width: 30%; overflow:hidden;"></div>
-    <div style="flex: 10 0 auto; width: 40%; max-width: 800px;">
+    <div style="flex: 10 0 auto; width: 40%; max-width: 45rem;">
       <div class="nav-panel">
         <div class="nav-logo">
           <object type="image/svg+xml" data="media/icon-notai-flat.svg" style="height: 100%; width: auto; object-fit: contain;" id="icon-notai"></object>
@@ -723,8 +726,8 @@
         </div>
         <div class="content-wide" style="display: flex; flex-direction: column;">
           <!-- <div style="display: flex; "> -->
+            <h3 class="bottom-demo-heading hidden delay0_5">Your data<br>grows safely</h3>
             <div class="bottom-demo padded2">
-              <h3 class="bottom-demo-heading hidden delay0_5">Your data<br>grows safely</h3>
               <div class="column" style="padding-top: 3vmin;">
                   <h4 class="heading hidden delay1 duration0_75">Privacy guarantees</h4>
                   <div class="content hidden delay1 duration0_75">
@@ -862,7 +865,7 @@
       <!-- page-direction -->
       <section id="page-direction">
         <div class="padded2 reverse">
-          <div class="content-wide" style="display: flex; margin-top: 10rem; margin-bottom: 10rem; align-items: center; justify-content: center; width: 100%;">
+          <div class="content-wide cuboid-future-content" style="display: flex; align-items: center; justify-content: center; width: 100%;">
               <div class="cuboid-wrap" id="cuboid-wrap" style="width: 0 !important; padding-left: 0rem !important; margin-right: auto !important; perspective: 180vmin !important;">
                   <div class="cuboid-future">
                     <div class="side top"></div> <div class="side bottom"></div>
@@ -1413,7 +1416,7 @@
         window.location.hash = loc_hash;
       }
       // Don't show icons on Direction page
-      win_icon_container.style.visibility = page_id == 'page-direction' ? 'hidden' : 'visible';
+      win_icon_container.style.display = page_id == 'page-direction' ? 'none' : 'flex';
       // Switch product icon on the left
       if (page_id === 'page-agent') {
         document.getElementById('icon-notai').style.display = 'none';
