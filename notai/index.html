@@ -552,6 +552,9 @@
                 <input type="hidden" name="type" value="notai">
                 <input type="email" name="email" class="email-input subscribe-item" id="email-top" style="height: 3rem;" required>
                 <button type="submit" class="button subscribe-item" style="height: 3rem;" id="submit-top"><h5 style="font-size: 0.8rem; letter-spacing: .1em;">SUBSCRIBE</h5></button>
+                <div style="position: absolute; left: -5840px;" aria-hidden="true">
+                  <input type="text" name="profession" id="profession-field" tabindex="-1" value="">
+                </div>
               </div>
               <!-- <label for="submit-top" class="input-label-below content" style="color: #989190; text-align: right;">waitlist</label> -->
             </div>
@@ -768,6 +771,9 @@
                 <input type="hidden" name="type" value="notai">
                 <input type="email" name="email" class="email-input subscribe-item" id="email-bottom" style="height: 3rem;" required>
                 <button type="submit" class="button subscribe-item" style="height: 3rem;"><h5 style="font-size: 0.8rem; letter-spacing: .1em;">SUBSCRIBE</h5></button>
+                <div style="position: absolute; left: -5840px;" aria-hidden="true">
+                  <input type="text" name="profession" id="profession-field" tabindex="-1" value="">
+                </div>
               </div>
             </div>
           </form>
@@ -794,6 +800,9 @@
                   <input type="hidden" name="type" value="agent">
                   <input type="email" name="email" class="email-input subscribe-item" id="agent-email" style="height: 3rem;" required>
                   <button type="submit" class="button subscribe-item" style="height: 3rem; background: #e70b0b;" id="agent-submit"><h5 style="font-size: 0.8rem; letter-spacing: .1em;">SUBSCRIBE</h5></button>
+                  <div style="position: absolute; left: -5840px;" aria-hidden="true">
+                    <input type="text" name="profession" id="profession-field" tabindex="-1" value="">
+                  </div>  
                 </div>
               </div>
             </form>
@@ -851,6 +860,9 @@
                 <input type="hidden" name="type" value="agent">
                 <input type="email" name="email" class="email-input subscribe-item" id="agent-email2" style="height: 3rem;" required>
                 <button type="submit" class="button subscribe-item" style="height: 3rem; background: #e70b0b;" id="agent-submit2"><h5 style="font-size: 0.8rem; letter-spacing: .1em;">SUBSCRIBE</h5></button>
+                <div style="position: absolute; left: -5840px;" aria-hidden="true">
+                  <input type="text" name="profession" id="profession-field" tabindex="-1" value="">
+                </div>
               </div>
             </div>
           </form>
@@ -908,6 +920,9 @@
                 <div class="subscribe-container hidden delay0_75 duration0_75">
                   <input type="hidden" name="type" value="notai">
                   <input type="email" name="email" class="email-input subscribe-item" id="purchase-email" style="height: 3rem;" required>
+                  <div style="position: absolute; left: -5840px;" aria-hidden="true">
+                    <input type="text" name="profession" id="profession-field" tabindex="-1" value="">
+                  </div>  
                   <a href="https://notai.lemonsqueezy.com/checkout/buy/110d783c-3b2c-458c-8035-20ed518a3b3c?embed=1&discount=0"
                      class="lemonsqueezy-button purchase-button button subscribe-item" style="height: 3rem;" id="purchase">
                     <h5 style="font-size: 0.8rem; letter-spacing: .1em;">USD 149.99</h5>
@@ -1385,7 +1400,7 @@
         setError(form, "Error. Please check your connection and try again.");
       }
       else {
-        replaceFormMessage(form, 'Subscribing...');
+        replaceFormMessage(form, 'Subscribing... Done');
         propagateEmailAddress(data.get('email'),
           ['subscribe-form', 'subscribe-form2', 'agent-subscribe-form', 'agent-subscribe-form2', 'purchase-form']);
         disableForms(form_group_ids);
