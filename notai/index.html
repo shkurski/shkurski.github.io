@@ -545,7 +545,7 @@
         <div style="flex: 10 0 auto; width: 40%; max-width: 40rem;">
           <h5 class="hidden delay0_5 duration0_75" style="text-align: center; white-space: pre-wrap; margin: 1rem;">NotAI is a virtually embodied prediction machine.<br>It makes your computer work with you.
           </h5>
-          <form method="POST" action="https://searchpad.ai/.netlify/functions/subscribe" name="subscribe" id="subscribe-form" enctype="application/x-www-form-urlencoded">
+          <form method="POST" action="https://searchpad.ai/.netlify/functions/subscribe" name="subscribe" id="subscribe-form">
             <div class="subscribe-wrap" style="margin-top: 5rem; margin-bottom: 16rem;">
               <label for="email-top" class="input-label-above content hidden delay1_5 duration1">Email <span style="color: #989190;">(required)</span></label>
               <div class="subscribe-container hidden delay0_75 duration0_75">
@@ -1335,7 +1335,24 @@
       });
     }
 
-    async function processFormEvent(event, data) {
+    function setFormError(form, message) {
+      let labels = form.querySelectorAll('label.input-label-above');
+      if (labels.length > 0) {
+        labels[0].innerHTML = '<span style="color: #c90e24;">' + message + "</span>";
+      }
+    }
+
+    function replaceFormMessage(form, message) {
+      let labels = form.querySelectorAll('label.input-label-above');
+      let result = '';
+      if (labels.length > 0) {
+        result = labels[0].innerHTML;
+        labels[0].innerHTML = message;
+      }
+      return result;
+    }
+
+    async function sendFormData(event, data) {
       event.preventDefault();
       try {
         const response = await fetch(event.target.action, {
@@ -1345,44 +1362,50 @@
           },
           body: data
         });
-
         if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+          throw new Error(`Error. Status: ${response.status}`);
         }
-
-        const responseData = await response.json();
-        console.log(responseData);
-      } catch (error) {
-        console.error('Error processing form event:', error);
+        //const responseData = await response.json();
+      } catch (err) {
+        console.log('Error processing form event:', err);
+        return { error: err };
       }
-      // TODO: Error handling
+      return {};
+    }
+
+    async function processSubmitEvent(event, form, form_group_ids) {
+      // Serialize the form data manually
+      const formData = new FormData(form);
+      const data = new URLSearchParams();
+      for (const pair of formData.entries()) {
+        data.append(pair[0], pair[1]);
+      }
+      const process_result = await sendFormData(event, data);
+      if (process_result.error) {
+        setError(form, "Error. Please check your connection and try again.");
+      }
+      else {
+        replaceFormMessage(form, 'Subscribing...');
+        propagateEmailAddress(data.get('email'),
+          ['subscribe-form', 'subscribe-form2', 'agent-subscribe-form', 'agent-subscribe-form2', 'purchase-form']);
+        disableForms(form_group_ids);
+      }
     }
 
     window.addEventListener("load", (event) => {
       // NotAI forms
       document.querySelectorAll('#subscribe-form, #subscribe-form2').forEach(form => {
         form.addEventListener("submit", async function(event) {
-          // Serialize the form data manually
-          const formData = new FormData(form);
-          const data = new URLSearchParams();
-
-          for (const pair of formData.entries()) {
-            data.append(pair[0], pair[1]);
-          }
-          processFormEvent(event, data);
-          // TODO: Error handling. Put error into email label and don't execute subscribed flow below.
-          propagateEmailAddress(data.get('email'), ['subscribe-form', 'subscribe-form2', 'agent-subscribe-form', 'agent-subscribe-form2', 'purchase-form']);
-          disableForms(['subscribe-form', 'subscribe-form2']);
+          replaceFormMessage(form, 'Subscribing.');
+          await processSubmitEvent(event, form, ['subscribe-form', 'subscribe-form2']);
         });
       });
+
       // NotAI Agent forms
       document.querySelectorAll('#agent-subscribe-form, #agent-subscribe-form2').forEach(form => {
         form.addEventListener("submit", async function(event) {
-          const data = new FormData(form);
-          processFormEvent(event, data);
-          // TODO: Error handling. Put error into email label and don't execute subscribed flow below.
-          propagateEmailAddress(data.get('email'), ['subscribe-form', 'subscribe-form2', 'agent-subscribe-form', 'agent-subscribe-form2', 'purchase-form']);
-          disableForms(['agent-subscribe-form', 'agent-subscribe-form2']);
+          replaceFormMessage(form, 'Subscribing.');
+          await processSubmitEvent(event, form, ['agent-subscribe-form', 'agent-subscribe-form2']);
         });
       });
 
