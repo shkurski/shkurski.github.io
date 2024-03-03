@@ -135,8 +135,8 @@
       background: #F9F9F9;
     }
     .no-show { opacity: 0; }
-    .hidden  { opacity: 0; transition: opacity ease-in-out 1.5s, visibility 2s;
-               -webkit-transition: opacity ease-in-out 1.5s, visibility 2s;}
+    .hidden  { opacity: 0; transition: opacity ease-in-out 1s, visibility 2s;
+               -webkit-transition: opacity ease-in-out 1s, visibility 2s;}
     .duration0_5  { transition-duration: 0.5s !important; -webkit-transition-duration: 0.5s !important; }
     .duration0_75 { transition-duration: 0.75s !important; -webkit-transition-duration: 0.75s !important; }
     .duration1    { transition-duration: 1s !important; -webkit-transition-duration: 1s !important; }
@@ -145,6 +145,7 @@
     .duration3    { transition-duration: 3s !important; -webkit-transition-duration: 3s !important; }
     .duration4    { transition-duration: 4s !important; -webkit-transition-duration: 4s !important; }
     .delay0    { transition-delay: 0s; -webkit-transition-delay: 0s; }
+    .delay0_25 { transition-delay: 0.25s; -webkit-transition-delay: 0.5s; }
     .delay0_5  { transition-delay: 0.5s; -webkit-transition-delay: 0.5s; }
     .delay0_75 { transition-delay: 0.75s; -webkit-transition-delay: 0.75s; }
     .delay1    { transition-delay: 1s; -webkit-transition-delay: 1s; }
@@ -824,14 +825,14 @@
             <h3 class="bottom-demo-heading hidden delay0_5">Your data<br>grows safely</h3>
             <div class="bottom-demo padded2">
               <div class="column" style="padding-top: 3vmin;">
-                  <h4 class="heading hidden delay1 duration0_75">Privacy guarantees</h4>
-                  <div class="content hidden delay1 duration0_75">
+                  <h4 class="heading hidden delay0_75 duration0_75">Privacy guarantees</h4>
+                  <div class="content hidden delay0_75 duration0_75">
                     We provide the strongest possible privacy guarantees. No data is sent behind your back. Zero bytes. For additional safety, NotAI can be blocked from network independently on OS level. Instructions are provided during installation.
                   </div>
               </div>
               <div class="column">
-                  <h4 class="heading hidden delay1 duration0_75">Unique way of capturing</h4>
-                  <div class="content hidden delay1 duration0_75">
+                  <h4 class="heading hidden delay0_75 duration0_75">Unique way of capturing</h4>
+                  <div class="content hidden delay0_75 duration0_75">
                     NotAI accesses only relevant text data and never captures the video stream from screen. In the same way, it captures meeting transcripts only when automated captions are enabled: the audio stream is processed by meeting software you already trust. 
                   </div>
               </div>
@@ -878,10 +879,10 @@
       <!-- page-agent -->
       <section id="page-agent" style="margin-top: 6.5rem;">
         <h2 class="hidden delay0 duration1 heading-narrow" style="text-align: center;">Who<br></h2>
-        <h2 class="hidden delay0_5 duration1 heading-narrow" style="text-align: center;">moved<br></h2>
-        <h2 class="hidden delay1 duration0_5 heading-narrow" style="text-align: center;">the<br></h2>
-        <h2 class="hidden delay1_25 duration0_5 heading-narrow" style="text-align: center;">cursor<br></h2>
-        <h2 class="hidden delay1_5 duration3 heading-narrow" style="text-align: center;">?</h2>
+        <h2 class="hidden delay0_25 duration1 heading-narrow" style="text-align: center;">moved<br></h2>
+        <h2 class="hidden delay0_75 duration0_5 heading-narrow" style="text-align: center;">the<br></h2>
+        <h2 class="hidden delay1 duration0_5 heading-narrow" style="text-align: center;">cursor<br></h2>
+        <h2 class="hidden delay1_25 duration3 heading-narrow" style="text-align: center;">?</h2>
         <div style="display:flex; flex-direction: row; overflow: hidden;">
           <div style="flex: 1 10000 0; width: 30%; overflow:hidden;"></div>
           <div style="flex: 10 0 auto; width: 40%; max-width: 40rem;">
@@ -905,7 +906,7 @@
         <div class="padded2 reverse" style="margin-top: 0 !important;">
           <div class="content-narrow" style="display: flex; width: 50%; text-align: right; align-items: center;">
             <h3 class="heading demo-text-agent" style="text-align: center; width: 100%;">
-              <div id="demo-text-agent1" class="duration1_5" style="opacity: 0;">It's Not AI</div><div id="demo-text-agent2" class="delay1 duration4" style="opacity: 0; color: #e70b0b">Agent</div>
+              <div id="demo-text-agent1" class="duration1_5" style="opacity: 0;">It's Not AI</div><div id="demo-text-agent2" class="delay0_5 duration2" style="opacity: 0; color: #e70b0b">Agent</div>
             </h3>
           </div>
           <div class="content-wide" style="display: flex; margin-top: 13vmin; margin-bottom: 13vh; align-items: center; justify-content: center; width: 50%;">
@@ -1143,14 +1144,13 @@
     const demo_text = document.getElementById('demo-text');
 
     let demo_text_cursor_offset = calc_text_cursor_offset();
-    const slow = 1.3;
+    const slow = 1;
 
     let animate_hide_header = anime.timeline({
       targets: document.getElementById('demo-window-header'),
       easing: 'easeOutQuad', delay: 900*slow, duration: 400*slow, loop: false, autoplay: false
     });
     animate_hide_header.add({ opacity: [1, 0] });
-
 
     let animate_private = anime.timeline({
       targets: ['demo-item-search-text', 'demo-item-search-icon', 'demo-item-report',
