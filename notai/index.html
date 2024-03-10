@@ -604,7 +604,7 @@
             <div class="nav-item" id="nav-page-purchase" onclick="navigateTo('page-purchase')">PURCHASE</div>
             <div class="nav-item" id="nav-page-notai" onclick="navigateTo('page-notai')">NOTAI</div>
             <div class="nav-item" id="nav-page-agent" onclick="navigateTo('page-agent')">AGENT</div>
-            <div class="nav-item" id="nav-page-direction" onclick="navigateTo('page-direction')">USE CASES</div>
+            <div class="nav-item" id="nav-page-usage" onclick="navigateTo('page-usage')">USAGE</div>
         </div>
       </div>
     </div>
@@ -967,8 +967,8 @@
       <!-- page-agent -->
 
 
-      <!-- page-direction -->
-      <section id="page-direction">
+      <!-- page-usage -->
+      <section id="page-usage">
         <div class="padded2 reverse">
           <div class="content-wide cuboid-future-content" style="display: flex; align-items: center; justify-content: center; width: 100%;">
               <div class="cuboid-wrap" style="width: 0 !important; padding-left: 0rem !important; margin-right: auto !important; perspective: 180vmin !important;">
@@ -999,7 +999,7 @@
         </div>
         -->
       </section>
-      <!-- page-direction -->
+      <!-- page-usage -->
 
       <section id="page-purchase" style="margin-top: 6.5rem;">
         <h2 class="hidden delay0" style="text-align: center;">Limited offer</h2>
@@ -1560,14 +1560,14 @@
         'page-notai': '',
         'page-purchase': '#purchase',
         'page-agent': '#agent',
-        'page-direction': '#direction'
+        'page-usage': '#usage'
       };
       const loc_hash = locations[page_id];
       if (loc_hash !== undefined) {
         window.location.hash = loc_hash;
       }
-      // Don't show icons on Direction page
-      win_icon_container.style.display = page_id == 'page-direction' ? 'none' : 'flex';
+      // Don't show icons on Usage page
+      win_icon_container.style.display = page_id == 'page-usage' ? 'none' : 'flex';
       // Switch product icon on the left
       if (page_id === 'page-agent') {
         document.getElementById('icon-notai').style.display = 'none';
