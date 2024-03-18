@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YCombinator Application</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            color: #000000;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            margin-top: 3vh;
+            max-width: 40%;
+            text-align: center;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .flex-container {
+		border: none;
+		padding: 0px;
+		margin: 0px;
+		background-color: white;
+		display: flex;
+		flex-direction: row;
+		overflow: hidden;
+	}
+	
+	.flex-item {
+		/* border: 2px solid red; */
+		border: none;
+		padding: 0px;
+		margin: 0px;
+		background-color: #FAFAFA;;
+		color: black;
+		display: block;
+		overflow: hidden;
+		min-width: 0;
+	}
+	
+	.test-container {
+		border: none;
+		padding: 0px;
+		margin: 0px;
+		background-color: white;
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: row;
+	}
+    </style>
+</head>
+<body>
+    <div class="flex-container" style="background-color: #FAFAFA; margin-top: 2.5%; margin-bottom: 10vh;">
+		<div class="flex-item" style="flex: 1 999999 0; width: 20%; min-width: 0; background-color: #FAFAFA;"></div>
+		<div class="flex-item" style="flex: 9999999 0 auto; width: 60%; max-width: 1200px; background-color: #FAFAFA; border-radius: 20px;">
+			<div class="test-container" style="border-radius: 20px;">
+					<div class="flex-item" style="flex: 1 999999 0; width: 20%; min-width: 0; text-align: right;"> </div>
+					<div class="flex-item" style="flex: 9999999 0 auto; width: 60%; max-width: 800px; background-color: #FAFAFA;">
+                        <h1>Apply to pre-seed funds and pitch competitions</h1>
+                        <table style="margin-top: 5vh;">
+                            <thead>
+                                <tr>
+                                    <th>Select</th>
+                                    <th>Event Name</th>
+                                    <th>Website</th>
+                                    <th>Location</th>
+                                    <th>Date</th>
+                                    <th>Prize</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="checkbox"></td>
+                                    <td>TechCrunch Disrupt</td>
+                                    <td><a href="www.techcrunch.com/events/disrupt">www.techcrunch.com/events/disrupt</a></td>
+                                    <td>Boston</td>
+                                    <td>25.04.2024</td>
+                                    <td>€100,000</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox"></td>
+                                    <td>TechCrunch Disrupt</td>
+                                    <td></td>
+                                    <td>London</td>
+                                    <td>21.05.2024</td>
+                                    <td>€100,000</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox"></td>
+                                    <td>TechCrunch Disrupt</td>
+                                    <td><a href="www.techcrunch.com/events/disrupt">www.techcrunch.com/events/disrupt</a></td>
+                                    <td>Boston</td>
+                                    <td>25.04.2024</td>
+                                    <td>€100,000</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox"></td>
+                                    <td>TechCrunch Disrupt</td>
+                                    <td></td>
+                                    <td>London</td>
+                                    <td>21.05.2024</td>
+                                    <td>€100,000</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox"></td>
+                                    <td>TechCrunch Disrupt</td>
+                                    <td></td>
+                                    <td>SanFrancisco</td>
+                                    <td>28.10.2024</td>
+                                    <td>€100,000</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox"></td>
+                                    <td>The Next Web Pitch Tower</td>
+                                    <td><a href="https://thenextweb.com/events">https://thenextweb.com/events</a></td>
+                                    <td>Amsterdam, Netherlands</td>
+                                    <td>20.06.2024</td>
+                                    <td>€100,000</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox"></td>
+                                    <td>Slush 100 Pitching Competition</td>
+                                    <td><a href="www.slush.org/competitions/slush100">www.slush.org/competitions/slush100</a></td>
+                                    <td>Helsinki, Finland</td>
+                                    <td>20.11.2024</td>
+                                    <td>€1,000,000</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <form action="#" style="margin-top: 5vh;">
+                            <label for="question1">1. What is your company's name?</label><br>
+                            <input type="text" id="question1" name="question1"><br>
+                            
+                            <label for="question2">2. What does your company do?</label><br>
+                            <input type="text" id="question2" name="question2"><br>
+                            
+                            <label for="question3">3. How do you plan to make money?</label><br>
+                            <input type="text" id="question3" name="question3"><br>
+                            
+                            <label for="question4">4. Who are your competitors?</label><br>
+                            <input type="text" id="question4" name="question4"><br>
+                            
+                            <label for="question5">5. What is your unfair advantage?</label><br>
+                            <input type="text" id="question5" name="question5"><br>
+                            
+                            <label for="question6">6. How will you acquire customers?</label><br>
+                            <input type="text" id="question6" name="question6"><br>
+                            
+                            <label for="question7">7. What progress have you made so far?</label><br>
+                            <input type="text" id="question7" name="question7"><br>
+                            
+                            <label for="question8">8. What is your team's background?</label><br>
+                            <input type="text" id="question8" name="question8"><br>
+                            
+                            <div style="text-align: center;">
+                                <input type="submit" value="Submit [$299.99]">
+                            </div>
+                        </form>
+					</div>
+					<div class="flex-item" style="flex: 1 999999 0; width: 20%; min-width: 0;">
+						<div style="display: block; width: 100%; height: 100%;"> </div>
+					</div>		
+			</div>
+		</div>
+		<div class="flex-item" style="flex: 1 999999 0; width: 20%; min-width: 0; background-color: #FAFAFA;"></div>
+	</div>
+</body>
+</html>
