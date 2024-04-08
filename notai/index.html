@@ -785,19 +785,19 @@
 
       <div class="padded3 hidden" style="margin-top: 15rem;">
         <div class="column">
-            <h4 class="heading">Automated</h4>
+            <h4 class="heading">Takes notes for you</h4>
             <div class="content">
-              It reads information from screen, stuctures it and makes available at any time, acting as an automated personal CRM and note-taking tool.
+              It reads information from screen, stuctures it and makes available at any time, acting as an automated personal CRM and note-taking tool. It's fast. It saves time. It keeps you focused.
             </div>
         </div>
         <div class="column">
-            <h4 class="heading">Proactive</h4>
+            <h4 class="heading">Works without chatting</h4>
             <div class="content">
               Whether you're on a call, preparing for it or doing research, NotAI brings relevant context instantly. You don't have to ask. It already knows.
             </div>
         </div>
         <div class="column" id="right-column">
-            <h4 class="heading">Integrated</h4>
+            <h4 class="heading">Restores context</h4>
             <div class="content">
               NotAI integrates with OS and preserves information from any app that appears on screen. For some of them it can restore context: open a URL in browser or message in Slack.
             </div>
@@ -847,7 +847,7 @@
         <div style="flex: 1 10000 0; width: 30%; overflow:hidden;"></div>
         <div style="flex: 10 0 auto; width: 40%; max-width: 30rem;">
           <div class="content">
-            We designed a new language for human-machine interaction: proactive user interfaces. They go beyond words and don't require chatting. By using screen contents as input, NotAI learns what you need and predicts the next step. It's fast, it saves time, it keeps you focused. You don't have to ask when it already knows. 
+            We designed a new language for human-machine interaction: proactive user interfaces. They go beyond words and don't require chatting. By using screen contents as input, NotAI learns what you need and predicts the next step. You don't have to ask when it already knows. 
           </div>
         </div>
         <div style="flex: 1 10000 0; width: 30%; overflow:hidden;"></div>
@@ -1108,12 +1108,12 @@
     });
 
     animate_bottom_text
-      .add({ opacity: [1, 0], delay: 1500, duration: 700, complete() { bottom_text.innerHTML = 'who owns data'; }})
+      .add({ opacity: [1, 0], delay: 1300, duration: 500, complete() { bottom_text.innerHTML = 'who owns data'; }})
       .add({ opacity: [0, 1] })
-      .add({ opacity: [1, 0], delay: 500, duration: 700, complete() { bottom_text.innerHTML = 'who sets goals'; } })
+      .add({ opacity: [1, 0], delay: 300, duration: 500, complete() { bottom_text.innerHTML = 'who sets goals'; } })
       .add({ opacity: [0, 1] })
-      .add({ opacity: [1, 0], delay: 500, duration: 700, complete() { bottom_text.innerHTML = "It's Not AI"; } })
-      .add({ opacity: [0, 1], delay: 100, duration: 6500 });
+      .add({ opacity: [1, 0], delay: 300, duration: 500, complete() { bottom_text.innerHTML = "It's Not AI"; } })
+      .add({ opacity: [0, 1], delay: 100, duration: 3000 });
 
     const observer_bottom  = new IntersectionObserver(entries => {
         entries.forEach(entry => {
