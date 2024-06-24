@@ -209,6 +209,7 @@
     }
 
     @media screen and (min-width: 768px) {
+      .cuboid-timeline-wrap { perspective: 120vmin; }
       .cuboid-static-wrap { margin-left: 13vmin; perspective: 120vmin; }
       .padded2 .content-wide { width: 70%; }
       .padded2 .content-narrow { width: 30%; }
@@ -253,9 +254,122 @@
         .demo-text-agent { margin-left: 20%; }
         .cuboid-agent-wrap  { margin-left: min(calc(var(--cuboid-agent-margin)*3%), 60%); }
         .win-icon-container { margin-right: 0; }
+        .side-tiny {
+          --cuboid-tiny-width: calc(3.2vw * var(--cuboid-tiny-scale));
+          --cuboid-tiny-height: calc(5vw * var(--cuboid-tiny-scale));
+          --cuboid-tiny-depth: calc(0.5vw * var(--cuboid-tiny-scale));
+        }
+    }
+
+    @media screen and (max-width:calc(1484px - 1px)) {
+        .timeline-wrap {
+            --cuboid-tiny-scale: 0.9;
+            margin-left: 0;
+        }
+
+        .cuboid-tiny-wrap {
+            margin-left: calc(7.8vw * var(--cuboid-tiny-scale));
+            margin-top: calc(4.7vw * var(--cuboid-tiny-scale));
+        }
+
+        .timeline-text:nth-child(1) {
+            font-size: calc(100vw * 0.0375 * var(--cuboid-tiny-scale));
+            letter-spacing: calc(2.5vw * var(--cuboid-tiny-scale));
+        }
+
+        .timeline-text:nth-child(2) {
+            font-size: calc(100vw * 0.024 * var(--cuboid-tiny-scale));
+            letter-spacing: calc(1.7vw * var(--cuboid-tiny-scale));
+            margin-left: calc(4.35vw * var(--cuboid-tiny-scale));
+            margin-top: calc(0.7vw * var(--cuboid-tiny-scale));
+        }
+
+        .timeline-text:nth-child(3) {
+            font-size: calc(100vw * 0.0125 * var(--cuboid-tiny-scale));
+            letter-spacing: calc(1vw * var(--cuboid-tiny-scale));
+            margin-left: calc(8.05vw * var(--cuboid-tiny-scale));
+            margin-top: calc(2vw * var(--cuboid-tiny-scale));
+        }
+
+        .timeline-text:nth-child(5) {
+            font-size: calc(100vw * 0.0125 * var(--cuboid-tiny-scale));
+            letter-spacing: calc(1vw * var(--cuboid-tiny-scale));
+            margin-left: calc(9.75vw * var(--cuboid-tiny-scale));
+            margin-top: calc(9.5vw * var(--cuboid-tiny-scale));
+        }
+
+        .timeline-text:nth-child(6) {
+            font-size: calc(100vw * 0.024 * var(--cuboid-tiny-scale));
+            letter-spacing: calc(1.7vw * var(--cuboid-tiny-scale));
+            margin-left: calc(7.2vw * var(--cuboid-tiny-scale));
+            margin-top: calc(1vw * var(--cuboid-tiny-scale));
+        }
+
+        .timeline-text:nth-child(7) {
+            font-size: calc(100vw * 0.0375 * var(--cuboid-tiny-scale));
+            letter-spacing: calc(4vw * var(--cuboid-tiny-scale));
+            margin-left: calc(2vw * var(--cuboid-tiny-scale));
+            margin-top: calc(0.3vw * var(--cuboid-tiny-scale));
+        }
     }
 
     @media screen and (min-width: 1484px) {
+        .timeline-wrap {
+          --cuboid-tiny-scale: 0.8;
+          margin-left: 2rem;
+        }
+
+        .cuboid-tiny-wrap {
+            margin-left: calc(122.53px * var(--cuboid-tiny-scale));
+            margin-top: calc(69.75px * var(--cuboid-tiny-scale));
+        }
+
+        .side-tiny {
+            --cuboid-tiny-width: calc(47.492px * var(--cuboid-tiny-scale));
+            --cuboid-tiny-height: calc(74.2px * var(--cuboid-tiny-scale));
+            --cuboid-tiny-depth: calc(7.42px * var(--cuboid-tiny-scale));
+        }
+
+        .timeline-text:nth-child(1) {
+            font-size: calc(1484px * 0.0375 * var(--cuboid-tiny-scale));
+            letter-spacing: calc(37.1px * var(--cuboid-tiny-scale));
+        }
+
+        .timeline-text:nth-child(2) {
+            font-size: calc(1484px * 0.024 * var(--cuboid-tiny-scale));
+            letter-spacing: calc(25.23px * var(--cuboid-tiny-scale));
+            margin-left: calc(64.55px * var(--cuboid-tiny-scale));
+            margin-top: calc(10.39px * var(--cuboid-tiny-scale));
+        }
+
+        .timeline-text:nth-child(3) {
+            font-size: calc(1484px * 0.0125 * var(--cuboid-tiny-scale));
+            letter-spacing: calc(14.84px * var(--cuboid-tiny-scale));
+            margin-left: calc(119.46px * var(--cuboid-tiny-scale));
+            margin-top: calc(29.68px * var(--cuboid-tiny-scale));
+        }
+
+        .timeline-text:nth-child(5) {
+            font-size: calc(1484px * 0.0125 * var(--cuboid-tiny-scale));
+            letter-spacing: calc(14.84px * var(--cuboid-tiny-scale));
+            margin-left: calc(144.67px * var(--cuboid-tiny-scale));
+            margin-top: calc(140.98px * var(--cuboid-tiny-scale));
+        }
+
+        .timeline-text:nth-child(6) {
+            font-size: calc(1484px * 0.024 * var(--cuboid-tiny-scale));
+            letter-spacing: calc(25.23px * var(--cuboid-tiny-scale));
+            margin-left: calc(105px * var(--cuboid-tiny-scale));
+            margin-top: calc(14.84px * var(--cuboid-tiny-scale));
+        }
+
+        .timeline-text:nth-child(7) {
+            font-size: calc(1484px * 0.0375 * var(--cuboid-tiny-scale));
+            letter-spacing: calc(59.36px * var(--cuboid-tiny-scale));
+            margin-left: calc(29.68px * var(--cuboid-tiny-scale));
+            margin-top: calc(4.45px * var(--cuboid-tiny-scale));
+        }
+
         h1 { font-size:calc(10 * 1rem)   }
         h2 { font-size:calc(5.2 * 1rem)  }
         h3 { font-size:calc(3.6 * 1rem)  }
@@ -279,6 +393,7 @@
     .cuboid-content { font-weight: 200; }
 
     .glow-dark::before, .glow-dark::after   { background: linear-gradient(45deg, #746a69, #222020 ); }
+    .glow-tiny-dark::before, .glow-tiny-dark::after   { background: linear-gradient(45deg, #34302f, #222020 ); }
     .glow-agent::before, .glow-agent::after { background: linear-gradient(45deg, #e75345, #ff0000 ); }
 
     .glow-future::before, .glow-future::after {
@@ -287,11 +402,19 @@
         #ff0055, #746a69, #222020, #00ff00, #0099ff, #001aff, #a200ff
       );
     }
+
+    .glow-tiny::before,
+    .glow-tiny::after {
+      content: ''; position: absolute; top: 0px; left: 0px; z-index: -1; width: calc(100%); height: calc(100%);
+      opacity: 1; background-size: 200%; -webkit-background-size: 200%;
+    }
+    .glow-tiny::after { filter: blur(35px); -webkit-filter: blur(35px); }
+
     .glow::before,
     .glow::after {
       content: ''; position: absolute; top: 0px; left: 0px; z-index: -1; width: calc(100%); height: calc(100%);
       opacity: 1; background-size: 300%; -webkit-background-size: 300%;
-      animation: border 22s linear infinite; -webkit-animation: border 22s linear infinite;
+      /* animation: border 22s linear infinite; -webkit-animation: border 22s linear infinite; */
     }
     .glow::after { filter: blur(50px); -webkit-filter: blur(50px); }
     @keyframes border {
@@ -350,13 +473,19 @@
       animation-iteration-count: 1; animation-fill-mode: both;
       -webkit-animation-iteration-count: 1; -webkit-animation-fill-mode: both;
     }
+    .cuboid-tiny-wrap {
+      --cuboid-tiny-margin: 0;
+      perspective: 12vw; -webkit-perspective: 12vw;
+    }
+    .cuboid-tiny {
+      transform-style: preserve-3d;
+      transform: rotateX(0deg) rotateZ(0deg) rotateY(-40deg);
+      -webkit-transform-style: preserve-3d;
+       -webkit-transform: rotateX(0deg) rotateZ(0deg) rotateY(-40deg);
+    }
     .cuboid-future {
-      transform-style: preserve-3d; transform: rotateX(0deg) rotateZ(0deg) rotateY(0); animation: cuboid-future 1s linear;
-      animation-play-state: paused; animation-delay: 0;
-      -webkit-transform-style: preserve-3d; -webkit-transform: rotateX(0deg) rotateZ(0deg) rotateY(0); -webkit-animation: cuboid-future 1s linear;
-      -webkit-animation-play-state: paused; -webkit-animation-delay: 0;
-      animation-iteration-count: 1; animation-fill-mode: both;
-      -webkit-animation-iteration-count: 1; -webkit-animation-fill-mode: both;
+      transform-style: preserve-3d; transform: rotateX(0deg) rotateZ(0deg) rotateY(0);
+      -webkit-transform-style: preserve-3d; -webkit-transform: rotateX(0deg) rotateZ(0deg) rotateY(0);
     }
     .cuboid-agent-wrap {
       --cuboid-agent-margin: 0;
@@ -370,6 +499,9 @@
       -webkit-animation-play-state: paused; -webkit-animation-delay: 0;
       animation-iteration-count: 1; animation-fill-mode: both;
       -webkit-animation-iteration-count: 1; -webkit-animation-fill-mode: both;
+    }
+    .cuboid-timeline-wrap {
+        margin-left: auto;
     }
     .cuboid-static-wrap {
       margin-right: auto; margin-top: 40vh; margin-bottom: 20vh; height: 10vh;
@@ -433,6 +565,44 @@
       transform: translate(-50%, -50%) rotateY(180deg) translateZ(calc(var(--cuboid-depth)/2));
       -webkit-transform: translate(-50%, -50%) rotateY(180deg) translateZ(calc(var(--cuboid-depth)/2));
     }
+    .side-tiny {
+      position: absolute; background-color: #070707; 
+    }
+    .side-tiny.top {
+      width: var(--cuboid-tiny-width); height: var(--cuboid-tiny-depth);
+      transform: translate(-50%, -50%) rotateX(90deg) translateZ(calc(var(--cuboid-tiny-height)/2));
+      -webkit-transform: translate(-50%, -50%) rotateX(90deg) translateZ(calc(var(--cuboid-tiny-height)/2));
+    }
+    .side-tiny.bottom {
+      width: var(--cuboid-tiny-width); height: var(--cuboid-tiny-depth);
+      transform: translate(-50%, -50%) rotateX(-90deg) translateZ(calc(var(--cuboid-tiny-height)/2));
+      -webkit-transform: translate(-50%, -50%) rotateX(-90deg) translateZ(calc(var(--cuboid-tiny-height)/2));
+    }
+    .side-tiny.left {
+      width: var(--cuboid-tiny-depth); height: var(--cuboid-tiny-height); background-color: #2A2A2A;
+      transform: translate(-50%, -50%) rotateY(90deg) translateZ(calc(var(--cuboid-tiny-width)/2));
+      -webkit-transform: translate(-50%, -50%) rotateY(90deg) translateZ(calc(var(--cuboid-tiny-width)/2));
+    }
+    .side-tiny.right {
+      width: var(--cuboid-tiny-depth); height: var(--cuboid-tiny-height); background-color: #2A2A2A;
+      transform: translate(-50%, -50%) rotateY(-90deg) translateZ(calc(var(--cuboid-tiny-width)/2));
+      -webkit-transform: translate(-50%, -50%) rotateY(-90deg) translateZ(calc(var(--cuboid-tiny-width)/2));
+    }
+    .side-tiny.front {
+      width: var(--cuboid-tiny-width); height: var(--cuboid-tiny-height);
+      transform: translate(-50%, -50%) rotateY(0deg) translateZ(calc(var(--cuboid-tiny-depth)/2));
+      -webkit-transform: translate(-50%, -50%) rotateY(0deg) translateZ(calc(var(--cuboid-tiny-depth)/2));
+    }
+    .side-tiny.lower-back {
+      width: var(--cuboid-tiny-width); height: var(--cuboid-tiny-height);
+      transform: translate(-50%, -50%) rotateY(180deg) translateZ(calc(var(--cuboid-tiny-depth)/2));
+      -webkit-transform: translate(-50%, -50%) rotateY(180deg) translateZ(calc(var(--cuboid-tiny-depth)/2));
+    }
+    .side-tiny.back {
+      width: var(--cuboid-tiny-width); height: var(--cuboid-tiny-height);
+      transform: translate(-50%, -50%) rotateY(180deg) translateZ(calc(var(--cuboid-tiny-depth)/2));
+      -webkit-transform: translate(-50%, -50%) rotateY(180deg) translateZ(calc(var(--cuboid-tiny-depth)/2));
+    }
 
     /* Holds labels and subscribe container */
     .subscribe-wrap {
@@ -479,6 +649,15 @@
     }
     #demo-text {
       opacity: 0;
+    }
+
+    .timeline-text {
+        font-family: 'Poppins';
+        font-weight: 400;
+        -webkit-font-smoothing: antialiased;
+        white-space: nowrap;
+        color: grey;
+        width: 100%;
     }
 
     /* Navigation */
@@ -803,6 +982,99 @@
             </div>
         </div>
       </div>
+
+      <div class="padded2 reverse" style="margin-top: 10rem;">
+        <div class="content-wide" style="display: flex; flex-direction: column;">
+          <!-- <div style="display: flex; "> -->
+            <h3 class="bottom-demo-heading hidden delay0_5"
+                style="margin-left: 0; margin-top: 0;">Links past to future<br>By predicting</h3>
+            <div class="bottom-demo padded2" style="margin-left: 0; padding-right: 3rem; margin-top: 0;">
+              <div class="column" style="padding-top: 3vmin;">
+                  <h4 class="heading hidden delay1 duration0_75">Automated search</h4>
+                  <div class="content hidden delay1 duration0_75">
+                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
+                  </div>
+              </div>
+              <div class="column">
+                  <h4 class="heading hidden delay1 duration0_75">In-meeting assistance</h4>
+                  <div class="content hidden delay1 duration0_75">
+                    Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
+                  </div>
+              </div>
+            </div>
+          <!-- </div> -->
+        </div>
+        <div class="content-narrow"
+             style="padding-top: 14vmin; display: flex; flex-direction: column; justify-content: center;">
+             
+          <div style="display: flex; flex-direction: row; position: relative;
+                      margin-left: 6rem; margin-top: 2vw; height: fit-content;">
+
+              <!-- margin-top: 21.4vmin; -->
+              <div class="cuboid-timeline-wrap"
+                  style="mix-blend-mode: difference; position: absolute;
+                         margin-bottom: 0;">
+                <div class="cuboid-static">
+                  <div class="side top"></div>
+                  <div class="side bottom"></div>
+                  <div class="side front glow glow-dark"></div>
+                  <div class="side lower-back"
+                       style="background: linear-gradient(to right, #070707, #060606) !important;"></div>
+                  <div class="side left"
+                  style="background: #0A0A0A;"></div>
+                  <div class="side right"></div>
+                </div>
+              </div>
+
+              <div class="timeline-wrap"
+                   style="z-index: 1; position: absolute;
+                          margin-left: 2vw; margin-top: -2vw;">
+                <div class="timeline-text">FUTURE</div>
+                <div class="timeline-text">FUTURE</div>
+                <div class="timeline-text">FUTURE</div>
+                <div class="cuboid-tiny-wrap">
+                  <div class="cuboid-tiny">
+                    <div class="side-tiny top"></div>
+                    <div class="side-tiny bottom"></div>
+                    <div class="side-tiny front"></div>
+                    <div class="side-tiny back"></div>
+                    <div class="side-tiny left"></div>
+                    <div class="side-tiny right"></div>
+                  </div>
+                </div>
+                <div class="timeline-text">PAST</div>
+                <div class="timeline-text">PAST</div>
+                <div class="timeline-text">PAST</div>
+              </div>
+
+            </div>
+
+          <!--
+          <div class="cuboid-wrap" style="margin-left: 11rem;">
+            <div class="cuboid">
+              <div class="side top"></div>
+              <div class="side bottom"></div>
+              <div class="side front">
+                <div class="timeline-wrap">
+                  <div class="timeline-text">FUTURE</div>
+                  <div class="timeline-text">FUTURE</div>
+                  <div class="timeline-text">FUTURE</div>
+                  <div></div>
+                  <div class="timeline-text">PAST</div>
+                  <div class="timeline-text">PAST</div>
+                  <div class="timeline-text">PAST</div>
+                </div>                
+              </div>
+              <div class="side back glow glow-dark"></div>
+              <div class="side left"></div>
+              <div class="side right"></div>
+            </div>
+          </div>
+          -->
+
+        </div>
+      </div>
+
 
       <div class="padded2" style="margin-top: 10rem;">
         <div class="content-narrow">
