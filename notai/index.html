@@ -179,6 +179,7 @@
         .padded3 { gap: 15vmin; }
         .cuboid-wrap { width: 0 !important; padding-left: 0rem !important; margin-right: auto !important; perspective: 180vmin !important; }
         .cuboid-static-wrap { width: 15%; margin-left: 23vw; perspective: 180vmin !important; }
+        .cuboid-timeline-wrap { width: 15%; perspective: 180vmin !important; }
         .cuboid-agent-wrap  { margin-left: min(calc(var(--cuboid-agent-margin)*1rem), 100%); }
         .side {
           --cuboid-width: 39.6vw;
@@ -206,6 +207,66 @@
         .win-icon              { width: 1.282rem; height: 1.282rem; }
         .win-icon-text         { font-size:calc((0.62 - 1) * calc(.012 * min(100vh, 900px)) + 0.8rem) }
         .cuboid-future-content { margin-top: 27vmin; margin-bottom: 13vmin; }
+
+        .timeline-wrap {
+            --timeline-scale: 1.5;
+            margin-left: 14%;
+        }
+
+        .cuboid-timeline-wrap {
+            margin-left: -18%;
+        }
+
+        .timeline-content {
+          height: 120vmin;
+          align-items: center;
+        }
+
+        .cuboid-tiny-wrap {
+            margin-left: calc(7.8vw * var(--timeline-scale));
+            margin-top: calc(4.7vw * var(--timeline-scale));
+            perspective: 20vmin !important;
+        }
+
+        .timeline-text:nth-child(1) {
+            font-size: calc(100vw * 0.0375 * var(--timeline-scale));
+            letter-spacing: calc(2.5vw * var(--timeline-scale));
+        }
+
+        .timeline-text:nth-child(2) {
+            font-size: calc(100vw * 0.024 * var(--timeline-scale));
+            letter-spacing: calc(1.7vw * var(--timeline-scale));
+            margin-left: calc(4.35vw * var(--timeline-scale));
+            margin-top: calc(0.7vw * var(--timeline-scale));
+        }
+
+        .timeline-text:nth-child(3) {
+            font-size: calc(100vw * 0.0125 * var(--timeline-scale));
+            letter-spacing: calc(1vw * var(--timeline-scale));
+            margin-left: calc(8.05vw * var(--timeline-scale));
+            margin-top: calc(2vw * var(--timeline-scale));
+        }
+
+        .timeline-text:nth-child(5) {
+            font-size: calc(100vw * 0.0125 * var(--timeline-scale));
+            letter-spacing: calc(1vw * var(--timeline-scale));
+            margin-left: calc(9.75vw * var(--timeline-scale));
+            margin-top: calc(9.5vw * var(--timeline-scale));
+        }
+
+        .timeline-text:nth-child(6) {
+            font-size: calc(100vw * 0.024 * var(--timeline-scale));
+            letter-spacing: calc(1.7vw * var(--timeline-scale));
+            margin-left: calc(7.2vw * var(--timeline-scale));
+            margin-top: calc(1vw * var(--timeline-scale));
+        }
+
+        .timeline-text:nth-child(7) {
+            font-size: calc(100vw * 0.0375 * var(--timeline-scale));
+            letter-spacing: calc(4vw * var(--timeline-scale));
+            margin-left: calc(2vw * var(--timeline-scale));
+            margin-top: calc(0.3vw * var(--timeline-scale));
+        }
     }
 
     @media screen and (min-width: 768px) {
@@ -239,9 +300,10 @@
       .win-icon              { width: 1.55rem; height: 1.55rem; }
       .win-icon-text         { font-size:calc((0.62 - 1) * calc(.012 * min(100vh, 900px)) + 1rem) }
       .cuboid-future-content { margin-top: 13rem; margin-bottom: 10rem; }
+      .cuboid-timeline-wrap  { margin-left: calc(8vw + 2rem); }
     }
 
-    @media screen and (min-width: 768px ) and (max-width:calc(1484px - 1px)) {
+    @media screen and (min-width: 768px) and (max-width:calc(1484px - 1px)) {
         .cuboid-wrap { margin-right: 30% !important; }
         h1 { font-size:calc((10 - 1) * 1.2vw + 1rem)  }
         h2 { font-size:calc((5.2 - 1) * 1.2vw + 1rem) }
@@ -254,120 +316,128 @@
         .demo-text-agent { margin-left: 20%; }
         .cuboid-agent-wrap  { margin-left: min(calc(var(--cuboid-agent-margin)*3%), 60%); }
         .win-icon-container { margin-right: 0; }
-        .side-tiny {
-          --cuboid-tiny-width: calc(3.2vw * var(--cuboid-tiny-scale));
-          --cuboid-tiny-height: calc(5vw * var(--cuboid-tiny-scale));
-          --cuboid-tiny-depth: calc(0.5vw * var(--cuboid-tiny-scale));
+        .timeline-wrap {
+            --timeline-scale: 0.9;
+            margin-left: calc(2vw + 2rem);
+        }
+
+        .timeline-content {
+          padding-top: 15vmin;
+        }
+
+        .cuboid-tiny-wrap {
+            margin-left: calc(7.8vw * var(--timeline-scale));
+            margin-top: calc(4.7vw * var(--timeline-scale));
+        }
+
+        .timeline-text:nth-child(1) {
+            font-size: calc(100vw * 0.0375 * var(--timeline-scale));
+            letter-spacing: calc(2.5vw * var(--timeline-scale));
+        }
+
+        .timeline-text:nth-child(2) {
+            font-size: calc(100vw * 0.024 * var(--timeline-scale));
+            letter-spacing: calc(1.7vw * var(--timeline-scale));
+            margin-left: calc(4.35vw * var(--timeline-scale));
+            margin-top: calc(0.7vw * var(--timeline-scale));
+        }
+
+        .timeline-text:nth-child(3) {
+            font-size: calc(100vw * 0.0125 * var(--timeline-scale));
+            letter-spacing: calc(1vw * var(--timeline-scale));
+            margin-left: calc(8.05vw * var(--timeline-scale));
+            margin-top: calc(2vw * var(--timeline-scale));
+        }
+
+        .timeline-text:nth-child(5) {
+            font-size: calc(100vw * 0.0125 * var(--timeline-scale));
+            letter-spacing: calc(1vw * var(--timeline-scale));
+            margin-left: calc(9.75vw * var(--timeline-scale));
+            margin-top: calc(9.5vw * var(--timeline-scale));
+        }
+
+        .timeline-text:nth-child(6) {
+            font-size: calc(100vw * 0.024 * var(--timeline-scale));
+            letter-spacing: calc(1.7vw * var(--timeline-scale));
+            margin-left: calc(7.2vw * var(--timeline-scale));
+            margin-top: calc(1vw * var(--timeline-scale));
+        }
+
+        .timeline-text:nth-child(7) {
+            font-size: calc(100vw * 0.0375 * var(--timeline-scale));
+            letter-spacing: calc(4vw * var(--timeline-scale));
+            margin-left: calc(2vw * var(--timeline-scale));
+            margin-top: calc(0.3vw * var(--timeline-scale));
         }
     }
 
     @media screen and (max-width:calc(1484px - 1px)) {
-        .timeline-wrap {
-            --cuboid-tiny-scale: 0.9;
-            margin-left: 0;
-        }
-
-        .cuboid-tiny-wrap {
-            margin-left: calc(7.8vw * var(--cuboid-tiny-scale));
-            margin-top: calc(4.7vw * var(--cuboid-tiny-scale));
-        }
-
-        .timeline-text:nth-child(1) {
-            font-size: calc(100vw * 0.0375 * var(--cuboid-tiny-scale));
-            letter-spacing: calc(2.5vw * var(--cuboid-tiny-scale));
-        }
-
-        .timeline-text:nth-child(2) {
-            font-size: calc(100vw * 0.024 * var(--cuboid-tiny-scale));
-            letter-spacing: calc(1.7vw * var(--cuboid-tiny-scale));
-            margin-left: calc(4.35vw * var(--cuboid-tiny-scale));
-            margin-top: calc(0.7vw * var(--cuboid-tiny-scale));
-        }
-
-        .timeline-text:nth-child(3) {
-            font-size: calc(100vw * 0.0125 * var(--cuboid-tiny-scale));
-            letter-spacing: calc(1vw * var(--cuboid-tiny-scale));
-            margin-left: calc(8.05vw * var(--cuboid-tiny-scale));
-            margin-top: calc(2vw * var(--cuboid-tiny-scale));
-        }
-
-        .timeline-text:nth-child(5) {
-            font-size: calc(100vw * 0.0125 * var(--cuboid-tiny-scale));
-            letter-spacing: calc(1vw * var(--cuboid-tiny-scale));
-            margin-left: calc(9.75vw * var(--cuboid-tiny-scale));
-            margin-top: calc(9.5vw * var(--cuboid-tiny-scale));
-        }
-
-        .timeline-text:nth-child(6) {
-            font-size: calc(100vw * 0.024 * var(--cuboid-tiny-scale));
-            letter-spacing: calc(1.7vw * var(--cuboid-tiny-scale));
-            margin-left: calc(7.2vw * var(--cuboid-tiny-scale));
-            margin-top: calc(1vw * var(--cuboid-tiny-scale));
-        }
-
-        .timeline-text:nth-child(7) {
-            font-size: calc(100vw * 0.0375 * var(--cuboid-tiny-scale));
-            letter-spacing: calc(4vw * var(--cuboid-tiny-scale));
-            margin-left: calc(2vw * var(--cuboid-tiny-scale));
-            margin-top: calc(0.3vw * var(--cuboid-tiny-scale));
+      .side-tiny {
+          --cuboid-tiny-width: calc(3.2vw * var(--timeline-scale));
+          --cuboid-tiny-height: calc(5vw * var(--timeline-scale));
+          --cuboid-tiny-depth: calc(0.5vw * var(--timeline-scale));
         }
     }
 
     @media screen and (min-width: 1484px) {
         .timeline-wrap {
-          --cuboid-tiny-scale: 0.8;
-          margin-left: 2rem;
+          --timeline-scale: 0.8;
+          margin-left: calc(2vw + 3.5rem);
+        }
+
+        .timeline-content {
+          padding-top: 7vmin;
         }
 
         .cuboid-tiny-wrap {
-            margin-left: calc(122.53px * var(--cuboid-tiny-scale));
-            margin-top: calc(69.75px * var(--cuboid-tiny-scale));
+            margin-left: calc(122.53px * var(--timeline-scale));
+            margin-top: calc(69.75px * var(--timeline-scale));
         }
 
         .side-tiny {
-            --cuboid-tiny-width: calc(47.492px * var(--cuboid-tiny-scale));
-            --cuboid-tiny-height: calc(74.2px * var(--cuboid-tiny-scale));
-            --cuboid-tiny-depth: calc(7.42px * var(--cuboid-tiny-scale));
+            --cuboid-tiny-width: calc(47.492px * var(--timeline-scale));
+            --cuboid-tiny-height: calc(74.2px * var(--timeline-scale));
+            --cuboid-tiny-depth: calc(7.42px * var(--timeline-scale));
         }
 
         .timeline-text:nth-child(1) {
-            font-size: calc(1484px * 0.0375 * var(--cuboid-tiny-scale));
-            letter-spacing: calc(37.1px * var(--cuboid-tiny-scale));
+            font-size: calc(1484px * 0.0375 * var(--timeline-scale));
+            letter-spacing: calc(37.1px * var(--timeline-scale));
         }
 
         .timeline-text:nth-child(2) {
-            font-size: calc(1484px * 0.024 * var(--cuboid-tiny-scale));
-            letter-spacing: calc(25.23px * var(--cuboid-tiny-scale));
-            margin-left: calc(64.55px * var(--cuboid-tiny-scale));
-            margin-top: calc(10.39px * var(--cuboid-tiny-scale));
+            font-size: calc(1484px * 0.024 * var(--timeline-scale));
+            letter-spacing: calc(25.23px * var(--timeline-scale));
+            margin-left: calc(64.55px * var(--timeline-scale));
+            margin-top: calc(10.39px * var(--timeline-scale));
         }
 
         .timeline-text:nth-child(3) {
-            font-size: calc(1484px * 0.0125 * var(--cuboid-tiny-scale));
-            letter-spacing: calc(14.84px * var(--cuboid-tiny-scale));
-            margin-left: calc(119.46px * var(--cuboid-tiny-scale));
-            margin-top: calc(29.68px * var(--cuboid-tiny-scale));
+            font-size: calc(1484px * 0.0125 * var(--timeline-scale));
+            letter-spacing: calc(14.84px * var(--timeline-scale));
+            margin-left: calc(119.46px * var(--timeline-scale));
+            margin-top: calc(29.68px * var(--timeline-scale));
         }
 
         .timeline-text:nth-child(5) {
-            font-size: calc(1484px * 0.0125 * var(--cuboid-tiny-scale));
-            letter-spacing: calc(14.84px * var(--cuboid-tiny-scale));
-            margin-left: calc(144.67px * var(--cuboid-tiny-scale));
-            margin-top: calc(140.98px * var(--cuboid-tiny-scale));
+            font-size: calc(1484px * 0.0125 * var(--timeline-scale));
+            letter-spacing: calc(14.84px * var(--timeline-scale));
+            margin-left: calc(144.67px * var(--timeline-scale));
+            margin-top: calc(140.98px * var(--timeline-scale));
         }
 
         .timeline-text:nth-child(6) {
-            font-size: calc(1484px * 0.024 * var(--cuboid-tiny-scale));
-            letter-spacing: calc(25.23px * var(--cuboid-tiny-scale));
-            margin-left: calc(105px * var(--cuboid-tiny-scale));
-            margin-top: calc(14.84px * var(--cuboid-tiny-scale));
+            font-size: calc(1484px * 0.024 * var(--timeline-scale));
+            letter-spacing: calc(25.23px * var(--timeline-scale));
+            margin-left: calc(105px * var(--timeline-scale));
+            margin-top: calc(14.84px * var(--timeline-scale));
         }
 
         .timeline-text:nth-child(7) {
-            font-size: calc(1484px * 0.0375 * var(--cuboid-tiny-scale));
-            letter-spacing: calc(59.36px * var(--cuboid-tiny-scale));
-            margin-left: calc(29.68px * var(--cuboid-tiny-scale));
-            margin-top: calc(4.45px * var(--cuboid-tiny-scale));
+            font-size: calc(1484px * 0.0375 * var(--timeline-scale));
+            letter-spacing: calc(59.36px * var(--timeline-scale));
+            margin-left: calc(29.68px * var(--timeline-scale));
+            margin-top: calc(4.45px * var(--timeline-scale));
         }
 
         h1 { font-size:calc(10 * 1rem)   }
@@ -483,6 +553,9 @@
       -webkit-transform-style: preserve-3d;
        -webkit-transform: rotateX(0deg) rotateZ(0deg) rotateY(-40deg);
     }
+    .cuboid-timeline-wrap {
+      position: absolute;
+    }
     .cuboid-future {
       transform-style: preserve-3d; transform: rotateX(0deg) rotateZ(0deg) rotateY(0);
       -webkit-transform-style: preserve-3d; -webkit-transform: rotateX(0deg) rotateZ(0deg) rotateY(0);
@@ -499,9 +572,6 @@
       -webkit-animation-play-state: paused; -webkit-animation-delay: 0;
       animation-iteration-count: 1; animation-fill-mode: both;
       -webkit-animation-iteration-count: 1; -webkit-animation-fill-mode: both;
-    }
-    .cuboid-timeline-wrap {
-        margin-left: auto;
     }
     .cuboid-static-wrap {
       margin-right: auto; margin-top: 40vh; margin-bottom: 20vh; height: 10vh;
@@ -1004,33 +1074,28 @@
             </div>
           <!-- </div> -->
         </div>
-        <div class="content-narrow"
-             style="padding-top: 14vmin;
-             display: flex; flex-direction: column;
+        <div class="content-narrow timeline-content"
+             style="display: flex; flex-direction: column;
              justify-content: center;">
-             
 
-              <!-- margin-top: 21.4vmin; -->
-               <div style="mix-blend-mode: difference;">
-              <div class="cuboid-timeline-wrap"
-                  style="position: absolute;
-                         margin-bottom: 0; margin-left: 8vw;">
-                <div class="cuboid-static">
-                  <div class="side top"></div>
-                  <div class="side bottom"></div>
-                  <div class="side front glow glow-dark"></div>
-                  <div class="side lower-back"
-                       style="background: linear-gradient(to right, #070707, #060606) !important;"></div>
-                  <div class="side left"
-                  style="background: #0A0A0A;"></div>
-                  <div class="side right"></div>
+              <div style="mix-blend-mode: difference;">
+                <div class="cuboid-timeline-wrap">
+                  <div class="cuboid-static">
+                    <div class="side top"></div>
+                    <div class="side bottom"></div>
+                    <div class="side front glow glow-dark"></div>
+                    <div class="side lower-back"
+                        style="background: linear-gradient(to right, #070707, #060606) !important;"></div>
+                    <div class="side left"
+                    style="background: #090909;"></div>
+                    <div class="side right"></div>
+                  </div>
                 </div>
               </div>
-            </div>
 
-              <div class="timeline-wrap"
+              <div class="timeline-wrap" id="timeline-wrap"
                    style="z-index: 1; position: absolute;
-                          margin-left: 2vw; margin-top: -2vw;">
+                          margin-top: -2vw;">
                 <div class="timeline-text">FUTURE</div>
                 <div class="timeline-text">FUTURE</div>
                 <div class="timeline-text">FUTURE</div>
@@ -1048,30 +1113,6 @@
                 <div class="timeline-text">PAST</div>
                 <div class="timeline-text">PAST</div>
               </div>
-
-
-          <!--
-          <div class="cuboid-wrap" style="margin-left: 11rem;">
-            <div class="cuboid">
-              <div class="side top"></div>
-              <div class="side bottom"></div>
-              <div class="side front">
-                <div class="timeline-wrap">
-                  <div class="timeline-text">FUTURE</div>
-                  <div class="timeline-text">FUTURE</div>
-                  <div class="timeline-text">FUTURE</div>
-                  <div></div>
-                  <div class="timeline-text">PAST</div>
-                  <div class="timeline-text">PAST</div>
-                  <div class="timeline-text">PAST</div>
-                </div>                
-              </div>
-              <div class="side back glow glow-dark"></div>
-              <div class="side left"></div>
-              <div class="side right"></div>
-            </div>
-          </div>
-          -->
 
         </div>
       </div>
@@ -1095,7 +1136,7 @@
         </div>
         <div class="content-wide" style="display: flex; flex-direction: column;">
           <!-- <div style="display: flex; "> -->
-            <h3 class="bottom-demo-heading hidden delay0_5">Your data<br>grows safely</h3>
+            <h3 class="bottom-demo-heading hidden delay0_5">Extreme<br>privacy</h3>
             <div class="bottom-demo padded2">
               <div class="column" style="padding-top: 3vmin;">
                   <h4 class="heading hidden delay0_75 duration0_75">Privacy guarantees</h4>
@@ -1329,11 +1370,6 @@
 	</div>
 
   <script>
-    // const lastDiv = document.body.querySelector('body > div[data-netlify-deploy-id]');
-    // if (lastDiv) {
-    //   lastDiv.remove();
-    //   console.log('last div removed');
-    // }
     let navigation_bar = document.getElementById('navigation-bar');
     let vw = window.innerWidth || document.documentElement.clientWidth;
     let vh = window.innerHeight || document.documentElement.clientHeight;
@@ -1401,6 +1437,7 @@
     const right_column = document.getElementById('right-column');
     let cuboid_front = document.getElementById('cuboid-front');
     let cuboid_wrap = document.getElementById('cuboid-wrap');
+    let timeline_wrap = document.getElementById('timeline-wrap');
     let win_icon_container = document.getElementById('win-icon-container');
     let cuboid_agent_wrap = document.getElementById('cuboid-agent-wrap');
 
@@ -1412,8 +1449,15 @@
       return (5-aspect)*(3.8-aspect);
     }
 
+    function calc_timeline_scale() {
+      return 0.8 + ((vw-1920) * (0.13/640));
+    }
+
     cuboid_wrap.style.setProperty('--cuboid-margin', calc_cuboid_margin());
     win_icon_container.style.setProperty('--margin', calc_cuboid_margin());
+    if (vw >= 1920) {
+      timeline_wrap.style.setProperty('--timeline-scale', calc_timeline_scale());
+    }
     const demo_text = document.getElementById('demo-text');
 
     let demo_text_cursor_offset = calc_text_cursor_offset();
@@ -1642,8 +1686,6 @@
       if (current_page_id === 'page-notai') {
         cuboid_range = calculate_viewport_range(cuboid, 0.8, 0.9, 0.125);
         tree_range = calculate_viewport_range(tree, 0.4, 0.85, 0);
-        console.log('cuboid range: ', cuboid_range);
-        console.log('tree range: ', tree_range);
         animate_cuboid(cuboid_range.init_pos);
         animate_tree(tree_range.init_pos);
       }
@@ -1679,7 +1721,6 @@
     }, false);
 
     window.addEventListener('hashchange', () => {
-      console.log('hashchange');
       if (window.location.hash) {
         navigateTo('page-'+window.location.hash.substring(1));
       }
@@ -1821,6 +1862,9 @@
         const margin = calc_cuboid_margin();
         cuboid_wrap.style.setProperty('--cuboid-margin', margin);
         win_icon_container.style.setProperty('--margin', margin);
+        if (vw >= 1920) {
+          timeline_wrap.style.setProperty('--timeline-scale', calc_timeline_scale());
+        }
       });
 
     }); // Page "load" event handler.
