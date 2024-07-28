@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You are sleeping</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            transition: background-color 2s, color 2s;
+        }
+        #game-container {
+            text-align: center;
+            width: 100%;
+            opacity: 1;
+            transition: opacity 2s;
+            padding: 2rem;
+            box-sizing: border-box;
+        }
+        #game-text {
+            text-align: center;
+            line-height: 1.7;
+            transition: opacity 2.5s;
+        }
+        #image-container {
+            margin-top: 2rem;
+            margin-left: auto;
+            margin-right: auto;
+            width: 80%;
+            padding: 2rem;
+            max-width: 800px;
+            height: 20vh;
+            opacity: 0;
+            transition: opacity 20s;
+        }
+        #image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            top: 0;
+            left: 0;
+        }
+        .sentence {
+            display: inline-block;
+            margin-right: 0.2em;
+        }
+        .clickable {
+            border: 1px solid;
+            cursor: pointer;
+            padding: 2px;
+        }
+        .day {
+            background-color: white;
+            color: black;
+        }
+        .night {
+            background-color: #222;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <div id="game-text"></div>
+        <div id="image-container"></div>
+    </div>
+
+    <audio id="background-music" loop></audio>
+
+    <script>
+        const gameStates = [
+            {
+                id: "start",
+                text: "You are sleeping. [Wake up].",
+                clickables: [
+                    { pos: 19, len: 7, nextState: "room" },
+                ],
+                isDay: false
+            },
+            {
+                id: "room",
+                text: "You are awake. You sit on the bed. In an empty bright room.",
+                clickables: [
+                    { pos: 8, len: 5, nextState: "start" },
+                    { pos: 19, len: 3, nextState: "stand-awake" }
+                ],
+                isDay: true
+            },
+            {
+                id: "stand-awake",
+                text: "You are awake. You stand next to your bed. In an empty bright room.",
+                clickables: [
+                    //{ pos: 8, len: 5, nextState: "stand-sleep" },
+                    { pos: 19, len: 5, nextState: "room" },
+                    { pos: 49, len: 5, nextState: "stand-awake-alive" }
+
+                ],
+                isDay: true
+            },
+            {
+                id: "stand-awake-alive",
+                text: "You are awake. You stand next to your bed. In a bright room that feels alive.",
+                clickables: [
+                    { pos: 8, len: 5, nextState: "stand-sleep" },
+                    { pos: 60, len: 16, nextState: "stand-awake" },
+                ],
+                isDay: true
+            },
+            {
+                id: "stand-sleep",
+                text: "You are sleeping. You stand next to your bed. Dreams see you.",
+                clickables: [
+                    { pos: 8, len: 8, nextState: "stand-awake-alive" },
+                    { pos: 46, len: 6, nextState: "stand-sleep-she" }
+                ],
+                isDay: false,
+                music: "grow.m4a"
+            },
+            {
+                id: "stand-sleep-she",
+                text: "You are sleeping. You stand next to your bed. She sees you.",
+                clickables: [
+                    { pos: 8, len: 8, nextState: "sleep-thinking" },
+                    { pos: 46, len: 3, nextState: "stand-sleep" }
+                ],
+                isDay: false,
+                music: "grow.m4a"
+            },
+            {
+                id: "sleep-thinking",
+                text: "You are thinking. Of what makes it harder to stay close. She sees you.",
+                clickables: [
+                    { pos: 8, len: 8, nextState: "0" }
+                ],
+                isDay: false,
+                music: "grow.m4a"
+            },
+            {
+                id: "0",
+                text: "You are thinking. That it's not about the distance. She sees you.",
+                clickables: [],
+                isDay: false,
+                music: "grow.m4a"
+            },
+            {
+                id: "1",
+                text: "You are thinking. That it's constantly about the same. She sees you.",
+                clickables: [],
+                isDay: false,
+                music: "grow.m4a"
+            },
+            {
+                id: "2",
+                text: "You are feeling. As if you lost your heart. She sees you.",
+                clickables: [],
+                isDay: false,
+                music: "grow.m4a"
+            },
+            {
+                id: "3",
+                text: "You are feeling. As if you speak to yourself. She sees you.",
+                clickables: [],
+                isDay: false,
+                music: "grow.m4a"
+            },
+            {
+                id: "4",
+                text: "When you are feeling. As if you're looking into a mirror. She sees you.",
+                clickables: [],
+                isDay: false,
+                music: "grow.m4a"
+            },
+            {
+                id: "5",
+                text: "When you are feeling.",
+                clickables: [],
+                isDay: false,
+                music: "grow.m4a"
+            },
+            {
+                id: "6",
+                text: "She sees you.",
+                clickables: [],
+                isDay: false,
+                music: "grow.m4a"
+            },
+            {
+                id: "7",
+                text: "She is you.",
+                clickables: [],
+                isDay: false,
+                music: "grow.m4a"
+            },
+            {
+                id: "8",
+                text: "She is you.",
+                clickables: [],
+                isDay: false,
+                music: "grow.m4a"
+            },
+            {
+                id: "9",
+                text: "She is you.",
+                clickables: [
+                    { pos: 0, len: 10, nextState: "awake" }
+                ],
+                isDay: false,
+                music: "grow.m4a"
+            },
+            {
+                id: "awake",
+                text: "You are awake.",
+                clickables: [],
+                isDay: true,
+                music: "grow.m4a"
+            }
+        ];
+
+        let imagePaths = [
+            'img/paper0.jpg',
+            'img/paper1.jpg',
+            'img/paper2.jpg',
+            'img/paper3.jpg',
+            'img/paper4.jpg',
+            'img/slide3.jpg',
+            'img/slide-sees.jpg',
+            'img/slide1.jpg',
+            'img/slide0.jpg',
+            'img/slide2.jpg',
+            'img/slide4.jpg',
+            'img/slide5.jpg'
+        ];
+
+        let imageShow = [0, 1, 2, 3, 4];
+
+        const imageContainer = document.getElementById('image-container');
+        const imageElements = [];
+        imagePaths.forEach((path, index) => {
+            const img = new Image();
+            img.src = path;
+            imageElements[index] = img;
+        });
+
+        const audioElement = document.getElementById('background-music');
+        let current_music = "";
+
+        function startSlideshow() {
+            let currentIndex = 0;
+            imageContainer.style.opacity = 0.8;
+            setInterval(() => {
+                if (currentIndex >= imageShow.length) {
+                    currentIndex = 0;
+                }
+                imageContainer.innerHTML = '';
+                imageContainer.appendChild(imageElements[imageShow[currentIndex]]);
+                currentIndex = (currentIndex + 1) % imageShow.length;
+            }, 200);
+        }
+
+        function isNumeric(str) {
+            return !isNaN(str) && !isNaN(parseFloat(str));
+        }
+
+        function incrementStringNumber(str) {
+            let number = parseInt(str, 10);
+            number += 1;
+            return number.toString();
+        }
+
+        function updateGameState(stateId) {
+            const state = gameStates.find(s => s.id === stateId);
+            if (!state) return;
+
+            // Fade out text
+            document.getElementById('game-text').style.opacity = 0;
+
+            if (state.id === "1") {
+                startSlideshow();
+            }
+            if (state.id === "3") {
+                imageShow = [0, 1, 2, 3, 4, 5];
+            }
+            if (state.id === "6") {
+                imageShow = [0, 1, 2, 3, 4, 5, 6];
+            }
+            if (state.id === "7") {
+                imageShow = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+            }
+            if (state.id === "8") {
+                imageShow = [4, 5, 6, 7, 8, 9, 10, 11];
+            }
+
+            setTimeout(() => {
+                // Change background color
+                document.body.className = state.isDay ? 'day' : 'night';
+
+                // Wait for background transition to complete
+                setTimeout(() => {
+                    let displayText = state.text;
+                    const clickableElements = [];
+
+                    state.clickables.sort((a, b) => b.pos - a.pos).forEach(clickable => {
+                        const before = displayText.slice(0, clickable.pos);
+                        const clickableText = displayText.slice(clickable.pos, clickable.pos + clickable.len);
+                        const after = displayText.slice(clickable.pos + clickable.len);
+                        displayText = `${before}<span class="clickable" data-next-state="${clickable.nextState}">${clickableText}</span>${after}`;
+                    });
+
+                    displayText = displayText.replace(/\[|\]/g, '');
+                    displayText = displayText.replace(/([^.!?]+[.!?]+)/g, '<span class="sentence">$1</span>');
+
+                    document.getElementById('game-text').innerHTML = displayText;
+
+                    if (isNumeric(state.id)) {
+                        setTimeout(() => {
+                            updateGameState(incrementStringNumber(state.id));
+                        }, 5000);
+                    }
+
+                    document.querySelectorAll('.clickable').forEach(el => {
+                        el.addEventListener('click', function() {
+                            const nextState = this.getAttribute('data-next-state');
+                            history.pushState(null, '', `#${nextState}`);
+                            updateGameState(nextState);
+                        });
+                    });
+                    console.log("MUSIC:");
+                    console.log(state.music);
+                    if (state.music) {
+                        console.log(current_music);
+                        if (current_music !== state.music) {
+                            console.log("PLAY2");
+                            current_music = state.music;
+                            audioElement.src = state.music;
+                            audioElement.play();
+                        }
+                    }
+                    else {
+                        current_music = state.music;
+                        audioElement.pause();
+                        audioElement.currentTime = 0;
+                    }
+
+                    // Fade in text
+                    document.getElementById('game-text').style.opacity = 1;
+                }, 1000); // Wait for 1 second for background transition
+            }, 500); // Wait for 0.5 seconds for text to fade out
+        }
+
+        function handleHashChange() {
+            const stateId = window.location.hash.slice(1) || 'start';
+            updateGameState(stateId);
+        }
+
+        window.addEventListener('hashchange', handleHashChange);
+        handleHashChange();
+    </script>
+</body>
+</html>
