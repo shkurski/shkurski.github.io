@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Not AI: A virtually embodied personal assistant</title>
+  <title>Not AI: A fully local personal assistant</title>
   <script>
     /*
     * anime.js v3.2.2
@@ -179,6 +179,7 @@
         .padded3 { gap: 15vmin; }
         .cuboid-wrap { width: 0 !important; padding-left: 0rem !important; margin-right: auto !important; perspective: 180vmin !important; }
         .cuboid-static-wrap { width: 15%; margin-left: 23vw; perspective: 180vmin !important; }
+        .cuboid-timeline-wrap { width: 15%; perspective: 180vmin !important; }
         .cuboid-agent-wrap  { margin-left: min(calc(var(--cuboid-agent-margin)*1rem), 100%); }
         .side {
           --cuboid-width: 39.6vw;
@@ -206,9 +207,70 @@
         .win-icon              { width: 1.282rem; height: 1.282rem; }
         .win-icon-text         { font-size:calc((0.62 - 1) * calc(.012 * min(100vh, 900px)) + 0.8rem) }
         .cuboid-future-content { margin-top: 27vmin; margin-bottom: 13vmin; }
+
+        .timeline-wrap {
+            --timeline-scale: 1.5;
+            margin-left: 14%;
+        }
+
+        .cuboid-timeline-wrap {
+            margin-left: -18%;
+        }
+
+        .timeline-content {
+          height: 120vmin;
+          align-items: center;
+        }
+
+        .cuboid-tiny-wrap {
+            margin-left: calc(7.8vw * var(--timeline-scale));
+            margin-top: calc(4.7vw * var(--timeline-scale));
+            perspective: 20vmin !important;
+        }
+
+        .timeline-text:nth-child(1) {
+            font-size: calc(100vw * 0.0375 * var(--timeline-scale));
+            letter-spacing: calc(2.5vw * var(--timeline-scale));
+        }
+
+        .timeline-text:nth-child(2) {
+            font-size: calc(100vw * 0.024 * var(--timeline-scale));
+            letter-spacing: calc(1.7vw * var(--timeline-scale));
+            margin-left: calc(4.35vw * var(--timeline-scale));
+            margin-top: calc(0.7vw * var(--timeline-scale));
+        }
+
+        .timeline-text:nth-child(3) {
+            font-size: calc(100vw * 0.0125 * var(--timeline-scale));
+            letter-spacing: calc(1vw * var(--timeline-scale));
+            margin-left: calc(8.05vw * var(--timeline-scale));
+            margin-top: calc(2vw * var(--timeline-scale));
+        }
+
+        .timeline-text:nth-child(5) {
+            font-size: calc(100vw * 0.0125 * var(--timeline-scale));
+            letter-spacing: calc(1vw * var(--timeline-scale));
+            margin-left: calc(9.75vw * var(--timeline-scale));
+            margin-top: calc(9.5vw * var(--timeline-scale));
+        }
+
+        .timeline-text:nth-child(6) {
+            font-size: calc(100vw * 0.024 * var(--timeline-scale));
+            letter-spacing: calc(1.7vw * var(--timeline-scale));
+            margin-left: calc(7.2vw * var(--timeline-scale));
+            margin-top: calc(1vw * var(--timeline-scale));
+        }
+
+        .timeline-text:nth-child(7) {
+            font-size: calc(100vw * 0.0375 * var(--timeline-scale));
+            letter-spacing: calc(4vw * var(--timeline-scale));
+            margin-left: calc(2vw * var(--timeline-scale));
+            margin-top: calc(0.3vw * var(--timeline-scale));
+        }
     }
 
     @media screen and (min-width: 768px) {
+      .cuboid-timeline-wrap { perspective: 120vmin; }
       .cuboid-static-wrap { margin-left: 13vmin; perspective: 120vmin; }
       .padded2 .content-wide { width: 70%; }
       .padded2 .content-narrow { width: 30%; }
@@ -238,9 +300,10 @@
       .win-icon              { width: 1.55rem; height: 1.55rem; }
       .win-icon-text         { font-size:calc((0.62 - 1) * calc(.012 * min(100vh, 900px)) + 1rem) }
       .cuboid-future-content { margin-top: 13rem; margin-bottom: 10rem; }
+      .cuboid-timeline-wrap  { margin-left: calc(9vw + 2rem); }
     }
 
-    @media screen and (min-width: 768px ) and (max-width:calc(1484px - 1px)) {
+    @media screen and (min-width: 768px) and (max-width:calc(1484px - 1px)) {
         .cuboid-wrap { margin-right: 30% !important; }
         h1 { font-size:calc((10 - 1) * 1.2vw + 1rem)  }
         h2 { font-size:calc((5.2 - 1) * 1.2vw + 1rem) }
@@ -253,9 +316,130 @@
         .demo-text-agent { margin-left: 20%; }
         .cuboid-agent-wrap  { margin-left: min(calc(var(--cuboid-agent-margin)*3%), 60%); }
         .win-icon-container { margin-right: 0; }
+        .timeline-wrap {
+            --timeline-scale: 0.9;
+            margin-left: calc(2vw + 2rem);
+        }
+
+        .timeline-content {
+          padding-top: 15vmin;
+        }
+
+        .cuboid-tiny-wrap {
+            margin-left: calc(7.8vw * var(--timeline-scale));
+            margin-top: calc(4.7vw * var(--timeline-scale));
+        }
+
+        .timeline-text:nth-child(1) {
+            font-size: calc(100vw * 0.0375 * var(--timeline-scale));
+            letter-spacing: calc(2.5vw * var(--timeline-scale));
+        }
+
+        .timeline-text:nth-child(2) {
+            font-size: calc(100vw * 0.024 * var(--timeline-scale));
+            letter-spacing: calc(1.7vw * var(--timeline-scale));
+            margin-left: calc(4.35vw * var(--timeline-scale));
+            margin-top: calc(0.7vw * var(--timeline-scale));
+        }
+
+        .timeline-text:nth-child(3) {
+            font-size: calc(100vw * 0.0125 * var(--timeline-scale));
+            letter-spacing: calc(1vw * var(--timeline-scale));
+            margin-left: calc(8.05vw * var(--timeline-scale));
+            margin-top: calc(2vw * var(--timeline-scale));
+        }
+
+        .timeline-text:nth-child(5) {
+            font-size: calc(100vw * 0.0125 * var(--timeline-scale));
+            letter-spacing: calc(1vw * var(--timeline-scale));
+            margin-left: calc(9.75vw * var(--timeline-scale));
+            margin-top: calc(9.5vw * var(--timeline-scale));
+        }
+
+        .timeline-text:nth-child(6) {
+            font-size: calc(100vw * 0.024 * var(--timeline-scale));
+            letter-spacing: calc(1.7vw * var(--timeline-scale));
+            margin-left: calc(7.2vw * var(--timeline-scale));
+            margin-top: calc(1vw * var(--timeline-scale));
+        }
+
+        .timeline-text:nth-child(7) {
+            font-size: calc(100vw * 0.0375 * var(--timeline-scale));
+            letter-spacing: calc(4vw * var(--timeline-scale));
+            margin-left: calc(2vw * var(--timeline-scale));
+            margin-top: calc(0.3vw * var(--timeline-scale));
+        }
+    }
+
+    @media screen and (max-width:calc(1484px - 1px)) {
+      .side-tiny {
+          --cuboid-tiny-width: calc(3.2vw * var(--timeline-scale));
+          --cuboid-tiny-height: calc(5vw * var(--timeline-scale));
+          --cuboid-tiny-depth: calc(0.5vw * var(--timeline-scale));
+        }
     }
 
     @media screen and (min-width: 1484px) {
+        .timeline-wrap {
+          --timeline-scale: 0.8;
+          margin-left: calc(2vw + 3.5rem);
+        }
+
+        .timeline-content {
+          padding-top: 7vmin;
+        }
+
+        .cuboid-tiny-wrap {
+            margin-left: calc(122.53px * var(--timeline-scale));
+            margin-top: calc(69.75px * var(--timeline-scale));
+        }
+
+        .side-tiny {
+            --cuboid-tiny-width: calc(47.492px * var(--timeline-scale));
+            --cuboid-tiny-height: calc(74.2px * var(--timeline-scale));
+            --cuboid-tiny-depth: calc(7.42px * var(--timeline-scale));
+        }
+
+        .timeline-text:nth-child(1) {
+            font-size: calc(1484px * 0.0375 * var(--timeline-scale));
+            letter-spacing: calc(37.1px * var(--timeline-scale));
+        }
+
+        .timeline-text:nth-child(2) {
+            font-size: calc(1484px * 0.024 * var(--timeline-scale));
+            letter-spacing: calc(25.23px * var(--timeline-scale));
+            margin-left: calc(64.55px * var(--timeline-scale));
+            margin-top: calc(10.39px * var(--timeline-scale));
+        }
+
+        .timeline-text:nth-child(3) {
+            font-size: calc(1484px * 0.0125 * var(--timeline-scale));
+            letter-spacing: calc(14.84px * var(--timeline-scale));
+            margin-left: calc(119.46px * var(--timeline-scale));
+            margin-top: calc(29.68px * var(--timeline-scale));
+        }
+
+        .timeline-text:nth-child(5) {
+            font-size: calc(1484px * 0.0125 * var(--timeline-scale));
+            letter-spacing: calc(14.84px * var(--timeline-scale));
+            margin-left: calc(144.67px * var(--timeline-scale));
+            margin-top: calc(140.98px * var(--timeline-scale));
+        }
+
+        .timeline-text:nth-child(6) {
+            font-size: calc(1484px * 0.024 * var(--timeline-scale));
+            letter-spacing: calc(25.23px * var(--timeline-scale));
+            margin-left: calc(105px * var(--timeline-scale));
+            margin-top: calc(14.84px * var(--timeline-scale));
+        }
+
+        .timeline-text:nth-child(7) {
+            font-size: calc(1484px * 0.0375 * var(--timeline-scale));
+            letter-spacing: calc(59.36px * var(--timeline-scale));
+            margin-left: calc(29.68px * var(--timeline-scale));
+            margin-top: calc(4.45px * var(--timeline-scale));
+        }
+
         h1 { font-size:calc(10 * 1rem)   }
         h2 { font-size:calc(5.2 * 1rem)  }
         h3 { font-size:calc(3.6 * 1rem)  }
@@ -279,6 +463,7 @@
     .cuboid-content { font-weight: 200; }
 
     .glow-dark::before, .glow-dark::after   { background: linear-gradient(45deg, #746a69, #222020 ); }
+    .glow-tiny-dark::before, .glow-tiny-dark::after   { background: linear-gradient(45deg, #34302f, #222020 ); }
     .glow-agent::before, .glow-agent::after { background: linear-gradient(45deg, #e75345, #ff0000 ); }
 
     .glow-future::before, .glow-future::after {
@@ -287,11 +472,19 @@
         #ff0055, #746a69, #222020, #00ff00, #0099ff, #001aff, #a200ff
       );
     }
+
+    .glow-tiny::before,
+    .glow-tiny::after {
+      content: ''; position: absolute; top: 0px; left: 0px; z-index: -1; width: calc(100%); height: calc(100%);
+      opacity: 1; background-size: 200%; -webkit-background-size: 200%;
+    }
+    .glow-tiny::after { filter: blur(35px); -webkit-filter: blur(35px); }
+
     .glow::before,
     .glow::after {
       content: ''; position: absolute; top: 0px; left: 0px; z-index: -1; width: calc(100%); height: calc(100%);
       opacity: 1; background-size: 300%; -webkit-background-size: 300%;
-      animation: border 22s linear infinite; -webkit-animation: border 22s linear infinite;
+      /* animation: border 22s linear infinite; -webkit-animation: border 22s linear infinite; */
     }
     .glow::after { filter: blur(50px); -webkit-filter: blur(50px); }
     @keyframes border {
@@ -350,13 +543,22 @@
       animation-iteration-count: 1; animation-fill-mode: both;
       -webkit-animation-iteration-count: 1; -webkit-animation-fill-mode: both;
     }
+    .cuboid-tiny-wrap {
+      --cuboid-tiny-margin: 0;
+      perspective: 12vw; -webkit-perspective: 12vw;
+    }
+    .cuboid-tiny {
+      transform-style: preserve-3d;
+      transform: rotateX(0deg) rotateZ(0deg) rotateY(-40deg);
+      -webkit-transform-style: preserve-3d;
+       -webkit-transform: rotateX(0deg) rotateZ(0deg) rotateY(-40deg);
+    }
+    .cuboid-timeline-wrap {
+      position: absolute;
+    }
     .cuboid-future {
-      transform-style: preserve-3d; transform: rotateX(0deg) rotateZ(0deg) rotateY(0); animation: cuboid-future 1s linear;
-      animation-play-state: paused; animation-delay: 0;
-      -webkit-transform-style: preserve-3d; -webkit-transform: rotateX(0deg) rotateZ(0deg) rotateY(0); -webkit-animation: cuboid-future 1s linear;
-      -webkit-animation-play-state: paused; -webkit-animation-delay: 0;
-      animation-iteration-count: 1; animation-fill-mode: both;
-      -webkit-animation-iteration-count: 1; -webkit-animation-fill-mode: both;
+      transform-style: preserve-3d; transform: rotateX(0deg) rotateZ(0deg) rotateY(0);
+      -webkit-transform-style: preserve-3d; -webkit-transform: rotateX(0deg) rotateZ(0deg) rotateY(0);
     }
     .cuboid-agent-wrap {
       --cuboid-agent-margin: 0;
@@ -433,6 +635,44 @@
       transform: translate(-50%, -50%) rotateY(180deg) translateZ(calc(var(--cuboid-depth)/2));
       -webkit-transform: translate(-50%, -50%) rotateY(180deg) translateZ(calc(var(--cuboid-depth)/2));
     }
+    .side-tiny {
+      position: absolute; background-color: #070707; 
+    }
+    .side-tiny.top {
+      width: var(--cuboid-tiny-width); height: var(--cuboid-tiny-depth);
+      transform: translate(-50%, -50%) rotateX(90deg) translateZ(calc(var(--cuboid-tiny-height)/2));
+      -webkit-transform: translate(-50%, -50%) rotateX(90deg) translateZ(calc(var(--cuboid-tiny-height)/2));
+    }
+    .side-tiny.bottom {
+      width: var(--cuboid-tiny-width); height: var(--cuboid-tiny-depth);
+      transform: translate(-50%, -50%) rotateX(-90deg) translateZ(calc(var(--cuboid-tiny-height)/2));
+      -webkit-transform: translate(-50%, -50%) rotateX(-90deg) translateZ(calc(var(--cuboid-tiny-height)/2));
+    }
+    .side-tiny.left {
+      width: var(--cuboid-tiny-depth); height: var(--cuboid-tiny-height); background-color: #2A2A2A;
+      transform: translate(-50%, -50%) rotateY(90deg) translateZ(calc(var(--cuboid-tiny-width)/2));
+      -webkit-transform: translate(-50%, -50%) rotateY(90deg) translateZ(calc(var(--cuboid-tiny-width)/2));
+    }
+    .side-tiny.right {
+      width: var(--cuboid-tiny-depth); height: var(--cuboid-tiny-height); background-color: #2A2A2A;
+      transform: translate(-50%, -50%) rotateY(-90deg) translateZ(calc(var(--cuboid-tiny-width)/2));
+      -webkit-transform: translate(-50%, -50%) rotateY(-90deg) translateZ(calc(var(--cuboid-tiny-width)/2));
+    }
+    .side-tiny.front {
+      width: var(--cuboid-tiny-width); height: var(--cuboid-tiny-height);
+      transform: translate(-50%, -50%) rotateY(0deg) translateZ(calc(var(--cuboid-tiny-depth)/2));
+      -webkit-transform: translate(-50%, -50%) rotateY(0deg) translateZ(calc(var(--cuboid-tiny-depth)/2));
+    }
+    .side-tiny.lower-back {
+      width: var(--cuboid-tiny-width); height: var(--cuboid-tiny-height);
+      transform: translate(-50%, -50%) rotateY(180deg) translateZ(calc(var(--cuboid-tiny-depth)/2));
+      -webkit-transform: translate(-50%, -50%) rotateY(180deg) translateZ(calc(var(--cuboid-tiny-depth)/2));
+    }
+    .side-tiny.back {
+      width: var(--cuboid-tiny-width); height: var(--cuboid-tiny-height);
+      transform: translate(-50%, -50%) rotateY(180deg) translateZ(calc(var(--cuboid-tiny-depth)/2));
+      -webkit-transform: translate(-50%, -50%) rotateY(180deg) translateZ(calc(var(--cuboid-tiny-depth)/2));
+    }
 
     /* Holds labels and subscribe container */
     .subscribe-wrap {
@@ -479,6 +719,15 @@
     }
     #demo-text {
       opacity: 0;
+    }
+
+    .timeline-text {
+        font-family: 'Poppins';
+        font-weight: 400;
+        -webkit-font-smoothing: antialiased;
+        white-space: nowrap;
+        color: grey;
+        width: 100%;
     }
 
     /* Navigation */
@@ -636,7 +885,7 @@
       <div style="display:flex; flex-direction: row; overflow: hidden;">
         <div style="flex: 1 10000 0; width: 30%; overflow:hidden;"></div>
         <div style="flex: 10 0 auto; width: 40%; max-width: 40rem;">
-          <h5 class="hidden delay0_5 duration0_75" style="text-align: center; white-space: pre-wrap; margin: 1rem;">NotAI is a virtually embodied personal assistant<br>It makes your computer work with you
+          <h5 class="hidden delay0_5 duration0_75" style="text-align: center; white-space: pre-wrap; margin: 1rem;">NotAI is a fully local personal assistant<br>It makes <b>your computer</b> work with you
           </h5>
           <form method="POST" action="https://searchpad.ai/.netlify/functions/subscribe" name="subscribe" id="subscribe-form">
             <div class="subscribe-wrap" style="margin-top: 5rem; margin-bottom: 16rem;">
@@ -804,6 +1053,71 @@
         </div>
       </div>
 
+      <div class="padded2 reverse" style="margin-top: 10rem;">
+        <div class="content-wide" style="display: flex; flex-direction: column;">
+          <!-- <div style="display: flex; "> -->
+            <h3 class="bottom-demo-heading hidden delay0_5"
+                style="margin-left: 0; margin-top: 0;">Links past to future<br>By predicting</h3>
+            <div class="bottom-demo padded2" style="margin-left: 0; padding-right: 3rem; margin-top: 0;">
+              <div class="column" style="padding-top: 3vmin;">
+                  <h4 class="heading hidden delay1 duration0_75">Automated search</h4>
+                  <div class="content hidden delay1 duration0_75">
+                    NotAI works side-by-side with you. When it sees a name on screen, you'll get relevant context automatically: documents, messages, emails related to the contact. No more interruptions and manual typing!
+                  </div>
+              </div>
+              <div class="column">
+                  <h4 class="heading hidden delay1 duration0_75">In-meeting assistance</h4>
+                  <div class="content hidden delay1 duration0_75">
+                    As your meeting goes, NotAI will suggest items from your timeline that are relevant to the conversation. You won't need to spend time on switching windows and searching.
+                  </div>
+              </div>
+            </div>
+          <!-- </div> -->
+        </div>
+        <div class="content-narrow timeline-content"
+             style="display: flex; flex-direction: column;
+             justify-content: center;">
+
+              <div style="mix-blend-mode: difference;">
+                <div class="cuboid-timeline-wrap">
+                  <div class="cuboid-static">
+                    <div class="side top"></div>
+                    <div class="side bottom"></div>
+                    <div class="side front glow glow-dark"></div>
+                    <div class="side lower-back"
+                        style="background: linear-gradient(to right, #070707, #060606) !important;"></div>
+                    <div class="side left"
+                    style="background: #090909;"></div>
+                    <div class="side right"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="timeline-wrap" id="timeline-wrap"
+                   style="z-index: 1; position: absolute;
+                          margin-top: -2vw; overflow: hidden;">
+                <div class="timeline-text">FUTURE</div>
+                <div class="timeline-text">FUTURE</div>
+                <div class="timeline-text">FUTURE</div>
+                <div class="cuboid-tiny-wrap">
+                  <div class="cuboid-tiny">
+                    <div class="side-tiny top"></div>
+                    <div class="side-tiny bottom"></div>
+                    <div class="side-tiny front"></div>
+                    <div class="side-tiny back"></div>
+                    <div class="side-tiny left"></div>
+                    <div class="side-tiny right"></div>
+                  </div>
+                </div>
+                <div class="timeline-text">PAST</div>
+                <div class="timeline-text">PAST</div>
+                <div class="timeline-text">PAST</div>
+              </div>
+
+        </div>
+      </div>
+
+
       <div class="padded2" style="margin-top: 10rem;">
         <div class="content-narrow">
           <div style="display: flex; flex-direction: row;">
@@ -822,24 +1136,47 @@
         </div>
         <div class="content-wide" style="display: flex; flex-direction: column;">
           <!-- <div style="display: flex; "> -->
-            <h3 class="bottom-demo-heading hidden delay0_5">Your data<br>grows safely</h3>
+            <h3 class="bottom-demo-heading hidden delay0_5">Extreme<br>privacy</h3>
             <div class="bottom-demo padded2">
               <div class="column" style="padding-top: 3vmin;">
                   <h4 class="heading hidden delay0_75 duration0_75">Privacy guarantees</h4>
                   <div class="content hidden delay0_75 duration0_75">
-                    We provide the strongest possible privacy guarantees. No data is sent behind your back. Zero bytes. For additional safety, NotAI can be blocked from network independently on OS level. Instructions are provided during installation.
+                    We provide the strongest possible privacy guarantees. No data is sent behind your back. Zero bytes. For additional safety, NotAI can be blocked from network independently using a firewall. Instructions are provided during the installation.
                   </div>
               </div>
               <div class="column">
                   <h4 class="heading hidden delay0_75 duration0_75">Unique way of capturing</h4>
                   <div class="content hidden delay0_75 duration0_75">
-                    NotAI accesses only relevant text data and never captures the video stream from screen. In the same way, it captures meeting transcripts only when automated captions are enabled: the audio stream is processed by meeting software you already trust. 
+                    NotAI accesses only relevant text data and never captures the video stream from screen. In the same way, it captures meeting transcripts only when automated captions are enabled: the audio stream is processed by the meeting software you already trust. 
                   </div>
               </div>
             </div>
           <!-- </div> -->
         </div>
       </div>
+
+
+      <div class="padded3 hidden" style="margin-top: 8rem;">
+        <div class="column">
+            <h4 class="heading">Encrypted independently</h4>
+            <div class="content">
+              The database is protected with industrial-grade AES encryption and tamper-resistant software design that is fully independent from Windows user accounts.
+            </div>
+        </div>
+        <div class="column">
+            <h4 class="heading">Off by default</h4>
+            <div class="content">
+              NotAI never watches screen on its own. You're in full control of whether and when to enable it.
+            </div>
+        </div>
+        <div class="column" id="right-column">
+            <h4 class="heading">Skips private tabs</h4>
+            <div class="content">
+              The contents of private tabs and password fields is excluded automatically.
+            </div>
+        </div>
+      </div>
+
 
       <h4 class="heading" style="text-align: center; width: 100%; color: #070707; margin-top: 18rem; margin-bottom: 2rem;">New language</h4>
 
@@ -1056,11 +1393,6 @@
 	</div>
 
   <script>
-    // const lastDiv = document.body.querySelector('body > div[data-netlify-deploy-id]');
-    // if (lastDiv) {
-    //   lastDiv.remove();
-    //   console.log('last div removed');
-    // }
     let navigation_bar = document.getElementById('navigation-bar');
     let vw = window.innerWidth || document.documentElement.clientWidth;
     let vh = window.innerHeight || document.documentElement.clientHeight;
@@ -1128,6 +1460,7 @@
     const right_column = document.getElementById('right-column');
     let cuboid_front = document.getElementById('cuboid-front');
     let cuboid_wrap = document.getElementById('cuboid-wrap');
+    let timeline_wrap = document.getElementById('timeline-wrap');
     let win_icon_container = document.getElementById('win-icon-container');
     let cuboid_agent_wrap = document.getElementById('cuboid-agent-wrap');
 
@@ -1139,8 +1472,15 @@
       return (5-aspect)*(3.8-aspect);
     }
 
+    function calc_timeline_scale() {
+      return 0.8 + ((vw-1920) * (0.13/640));
+    }
+
     cuboid_wrap.style.setProperty('--cuboid-margin', calc_cuboid_margin());
     win_icon_container.style.setProperty('--margin', calc_cuboid_margin());
+    if (vw >= 1920) {
+      timeline_wrap.style.setProperty('--timeline-scale', calc_timeline_scale());
+    }
     const demo_text = document.getElementById('demo-text');
 
     let demo_text_cursor_offset = calc_text_cursor_offset();
@@ -1369,8 +1709,6 @@
       if (current_page_id === 'page-notai') {
         cuboid_range = calculate_viewport_range(cuboid, 0.8, 0.9, 0.125);
         tree_range = calculate_viewport_range(tree, 0.4, 0.85, 0);
-        console.log('cuboid range: ', cuboid_range);
-        console.log('tree range: ', tree_range);
         animate_cuboid(cuboid_range.init_pos);
         animate_tree(tree_range.init_pos);
       }
@@ -1406,7 +1744,6 @@
     }, false);
 
     window.addEventListener('hashchange', () => {
-      console.log('hashchange');
       if (window.location.hash) {
         navigateTo('page-'+window.location.hash.substring(1));
       }
@@ -1548,6 +1885,9 @@
         const margin = calc_cuboid_margin();
         cuboid_wrap.style.setProperty('--cuboid-margin', margin);
         win_icon_container.style.setProperty('--margin', margin);
+        if (vw >= 1920) {
+          timeline_wrap.style.setProperty('--timeline-scale', calc_timeline_scale());
+        }
       });
 
     }); // Page "load" event handler.
